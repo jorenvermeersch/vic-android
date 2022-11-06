@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/customerListFragment">
+
+    <fragment
+        android:id="@+id/customerListFragment"
+        android:name="com.example.vic.screens.customerlist.CustomerListFragment"
+        android:label="CustomerListFragment" >
+        <action
+            android:id="@+id/action_customerListFragment_to_customerDetailsFragment"
+            app:destination="@id/customerDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerDetailsFragment"
+        android:name="com.example.vic.screens.customerdetails.CustomerDetailsFragment"
+        android:label="CustomerDetailsFragment" >
+        <action
+            android:id="@+id/action_customerDetailsFragment_to_virtualMachineDetailsFragment"
+            app:destination="@id/virtualMachineDetailsFragment" />
+        <action
+            android:id="@+id/action_customerDetailsFragment_to_customerListFragment"
+            app:destination="@id/customerListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/virtualMachineDetailsFragment"
+        android:name="com.example.vic.screens.virtualmachinedetails.VirtualMachineDetailsFragment"
+        android:label="VirtualMachineDetailsFragment" >
+        <action
+            android:id="@+id/action_virtualMachineDetailsFragment_to_customerDetailsFragment"
+            app:destination="@id/customerDetailsFragment" />
+    </fragment>
+</navigation>
