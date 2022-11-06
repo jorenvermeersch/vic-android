@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.vic.R
 import com.example.vic.databinding.FragmentCustomerDetailsBinding
 
@@ -20,6 +21,18 @@ class CustomerDetailsFragment : Fragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_details, container, false)
+
+        // TODO: Add SafeArgs.
+        binding.apply {
+            this.customerListButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(R.id.action_customerDetailsFragment_to_customerListFragment)
+            )
+
+            this.virtualMachineDetailsButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(R.id.action_customerDetailsFragment_to_virtualMachineDetailsFragment)
+            )
+        }
+
         return binding.root
     }
 }
