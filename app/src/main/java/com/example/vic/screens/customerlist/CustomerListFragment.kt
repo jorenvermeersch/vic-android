@@ -23,9 +23,16 @@ class CustomerListFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
 
         // TODO: Add SafeArgs.
-        binding.toCustomerDetailsButton.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_customerListFragment_to_customerDetailsFragment)
-        )
+        binding.apply {
+            this.toCustomerDetailsButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(R.id.action_customerListFragment_to_customerDetailsFragment)
+            )
+
+            this.createCustomerButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(R.id.action_customerListFragment_to_createCustomerFragment)
+            )
+        }
+
 
         return binding.root
     }

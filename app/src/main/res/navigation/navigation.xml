@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_customerListFragment_to_customerDetailsFragment"
             app:destination="@id/customerDetailsFragment" />
+        <action
+            android:id="@+id/action_customerListFragment_to_createCustomerFragment"
+            app:destination="@id/createCustomerFragment" />
     </fragment>
     <fragment
         android:id="@+id/customerDetailsFragment"
@@ -30,5 +33,13 @@
         <action
             android:id="@+id/action_virtualMachineDetailsFragment_to_customerDetailsFragment"
             app:destination="@id/customerDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCustomerFragment"
+        android:name="com.example.vic.screens.createcustomer.CreateCustomerFragment"
+        android:label="CreateCustomerFragment" >
+        <action
+            android:id="@+id/action_createCustomerFragment_to_customerListFragment"
+            app:destination="@id/customerListFragment" />
     </fragment>
 </navigation>

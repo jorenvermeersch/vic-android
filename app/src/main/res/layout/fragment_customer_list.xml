@@ -31,6 +31,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+        <Button
+            android:id="@+id/create_customer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CreateCustomer"
+            app:layout_constraintBottom_toTopOf="@+id/to_customer_details_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
