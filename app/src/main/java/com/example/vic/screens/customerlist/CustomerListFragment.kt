@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.databinding.FragmentCustomerListBinding
 
+private val PLACEHOLDER_ID = 1L
+
 class CustomerListFragment : Fragment() {
 
     private lateinit var binding: FragmentCustomerListBinding
@@ -25,7 +27,7 @@ class CustomerListFragment : Fragment() {
 
         binding.apply {
             this.toCustomerDetailsButton.setOnClickListener {
-                findNavController().navigate(CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment())
+                findNavController().navigate(CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(PLACEHOLDER_ID))
             }
 
             this.createCustomerButton.setOnClickListener {

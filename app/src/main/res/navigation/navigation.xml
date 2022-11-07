@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_customerDetailsFragment_to_customerListFragment"
             app:destination="@id/customerListFragment" />
+        <argument
+            android:name="customerId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/virtualMachineDetailsFragment"
@@ -33,6 +36,9 @@
         <action
             android:id="@+id/action_virtualMachineDetailsFragment_to_customerDetailsFragment"
             app:destination="@id/customerDetailsFragment" />
+        <argument
+            android:name="machineId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/createCustomerFragment"
