@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.databinding.FragmentVirtualMachineDetailsBinding
 
+private val PLACEHOLDER_ID = 1L
+
 class VirtualMachineDetailsFragment : Fragment() {
 
     private lateinit var binding : FragmentVirtualMachineDetailsBinding
@@ -23,7 +25,7 @@ class VirtualMachineDetailsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_virtual_machine_details, container, false)
 
         binding.backCustomerDetailsButton.setOnClickListener {
-            findNavController().navigate(VirtualMachineDetailsFragmentDirections.actionVirtualMachineDetailsFragmentToCustomerDetailsFragment())
+            findNavController().navigate(VirtualMachineDetailsFragmentDirections.actionVirtualMachineDetailsFragmentToCustomerDetailsFragment(PLACEHOLDER_ID))
         }
 
         return binding.root
