@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.databinding.FragmentVirtualMachineDetailsBinding
 
@@ -21,10 +22,9 @@ class VirtualMachineDetailsFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_virtual_machine_details, container, false)
 
-        // TODO: Add SafeArgs.
-        binding.backCustomerDetailsButton.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_virtualMachineDetailsFragment_to_customerDetailsFragment)
-        )
+        binding.backCustomerDetailsButton.setOnClickListener {
+            findNavController().navigate(VirtualMachineDetailsFragmentDirections.actionVirtualMachineDetailsFragmentToCustomerDetailsFragment())
+        }
 
         return binding.root
     }
