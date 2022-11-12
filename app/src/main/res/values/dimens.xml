@@ -2,4 +2,6 @@
 <resources>
     <dimen name="nav_height">72dp</dimen>
     <dimen name="text_md">16sp</dimen>
+    <dimen name="padding_md">16dp</dimen>
+    <dimen name="font_weight_semibold">600</dimen>
 </resources>
