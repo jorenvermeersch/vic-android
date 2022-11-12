@@ -1,19 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.VIC" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryVariant">@color/dark_blue</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/black</item>
-
+    <style name="Theme.VIC" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Colors -->
+        <item name="backgroundColor">@color/white</item>
+        <item name="textColor">@color/black</item>
+        <item name="navigationBackgroundColor">@color/white</item>
+        <item name="navigationTextColor">@color/dark_blue</item>
+        <item name="navigationIconColor">@color/blue</item>
+        <item name="cardBackgroundColor">@color/light_gray</item>
+        <item name="titleAccentColor">@color/dark_blue</item>
 
         <!-- Font -->
         <item name="android:fontFamily">@font/graphik</item>
 
-        <!--No action bar -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/black</item>
+
+        <item name="android:background">?attr/backgroundColor</item>
     </style>
 </resources>
