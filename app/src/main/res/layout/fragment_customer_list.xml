@@ -12,15 +12,6 @@
         android:layout_height="match_parent"
         android:background="@color/light_blue">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView2"
-            android:name="com.example.vic.screens.components.NavigationBarFragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout="@layout/fragment_navigation_bar" />
 
         <TextView
             android:id="@+id/textView2"
