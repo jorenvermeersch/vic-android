@@ -6,6 +6,7 @@
         <attr name="navigationBackgroundColor" format="color" />
         <attr name="navigationTextColor" format="color" />
         <attr name="navigationIconColor" format="color" />
+        <attr name="navigationMenuIconColor" format="color"/>
         <attr name="cardBackgroundColor" format="color" />
         <attr name="titleAccentColor" format="color" />
     </declare-styleable>

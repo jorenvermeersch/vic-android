@@ -2,13 +2,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/createCustomerFragment"
-        android:title="@string/add_customer"
-        app:showAsAction="never"/>
+    <!--    <item-->
+    <!--        android:id="@+id/createCustomerFragment"-->
+    <!--        android:icon="@drawable/add_customer_icon"-->
+    <!--        android:title="@string/add_customer"-->
+    <!--        app:showAsAction="never" />-->
+
+    <!--    <item-->
+    <!--        android:id="@+id/customerListFragment"-->
+    <!--        android:icon="@drawable/customer_list_icon"-->
+    <!--        android:title="@string/customer_list"-->
+    <!--        app:showAsAction="never" />-->
 
     <item
-        android:id="@+id/customerListFragment"
-        android:title="@string/customer_list"
-        app:showAsAction="never" />
+        android:icon="@drawable/drawer_icon"
+        android:title=""
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/createCustomerFragment"
+                android:icon="@drawable/add_customer_icon"
+                android:title="@string/add_customer"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/customerListFragment"
+                android:icon="@drawable/customer_list_icon"
+                android:title="@string/customer_list"
+                app:showAsAction="never" />
+        </menu>
+    </item>
 </menu>
