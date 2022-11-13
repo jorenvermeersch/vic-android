@@ -7,10 +7,14 @@
     <fragment
         android:id="@+id/customerListFragment"
         android:name="com.example.vic.screens.customerlist.CustomerListFragment"
-        android:label="CustomerListFragment" >
+        android:label="CustomerListFragment">
         <action
             android:id="@+id/action_customerListFragment_to_customerDetailsFragment"
-            app:destination="@id/customerDetailsFragment" />
+            app:destination="@id/customerDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_customerListFragment_to_createCustomerFragment"
             app:destination="@id/createCustomerFragment" />
@@ -18,13 +22,21 @@
     <fragment
         android:id="@+id/customerDetailsFragment"
         android:name="com.example.vic.screens.customerdetails.CustomerDetailsFragment"
-        android:label="CustomerDetailsFragment" >
+        android:label="CustomerDetailsFragment">
         <action
             android:id="@+id/action_customerDetailsFragment_to_virtualMachineDetailsFragment"
-            app:destination="@id/virtualMachineDetailsFragment" />
+            app:destination="@id/virtualMachineDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_customerDetailsFragment_to_customerListFragment"
-            app:destination="@id/customerListFragment" />
+            app:destination="@id/customerListFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <argument
             android:name="customerId"
             app:argType="long" />
@@ -32,10 +44,14 @@
     <fragment
         android:id="@+id/virtualMachineDetailsFragment"
         android:name="com.example.vic.screens.virtualmachinedetails.VirtualMachineDetailsFragment"
-        android:label="VirtualMachineDetailsFragment" >
+        android:label="VirtualMachineDetailsFragment">
         <action
             android:id="@+id/action_virtualMachineDetailsFragment_to_customerDetailsFragment"
-            app:destination="@id/customerDetailsFragment" />
+            app:destination="@id/customerDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <argument
             android:name="machineId"
             app:argType="long" />
@@ -43,7 +59,7 @@
     <fragment
         android:id="@+id/createCustomerFragment"
         android:name="com.example.vic.screens.createcustomer.CreateCustomerFragment"
-        android:label="CreateCustomerFragment" >
+        android:label="CreateCustomerFragment">
         <action
             android:id="@+id/action_createCustomerFragment_to_customerListFragment"
             app:destination="@id/customerListFragment" />
