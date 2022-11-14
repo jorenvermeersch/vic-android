@@ -16,7 +16,7 @@ data class VirtualMachine(
     val status: Status,
     val reason: String,
     val ports: List<Port>,
-    // TODO: Host
+    val host: Host,
     val credentials: List<Credentials>,
     val account: Account,
     val request: Customer,
