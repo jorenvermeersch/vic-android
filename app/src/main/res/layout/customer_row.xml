@@ -6,6 +6,7 @@
     android:background="@drawable/rounded_corners_background">
 
     <ImageView
+        android:id="@+id/indicator_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/padding_md"

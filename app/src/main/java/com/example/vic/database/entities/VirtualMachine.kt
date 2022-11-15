@@ -1,7 +1,7 @@
 package com.example.vic.database.entities
 
 import com.example.vic.database.enums.*
-import java.util.Date
+import java.util.*
 
 data class VirtualMachine(
     val id: Long,

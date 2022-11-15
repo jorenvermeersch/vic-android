@@ -1,4 +1,4 @@
-package com.example.vic.screens.components
+package com.example.vic.screens.navigation
 
 import android.os.Bundle
 import android.view.LayoutInflater
