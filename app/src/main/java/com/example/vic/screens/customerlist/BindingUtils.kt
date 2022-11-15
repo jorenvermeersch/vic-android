@@ -15,6 +15,7 @@ fun TextView.setName(item: CustomerIndex?) {
 
 @BindingAdapter("indicator")
 fun ImageView.setIndicator(item: CustomerIndex?) {
+    // TODO: Does not work. Does not support themes with R.attr.
     item?.let {
         if (item.isActive) {
             setColorFilter(R.color.blue)
