@@ -7,7 +7,6 @@ import com.example.vic.database.entities.Customer
 import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.database.entities.VirtualMachine
 import com.example.vic.database.entities.VirtualMachineIndex
-import timber.log.Timber
 
 class ApplicationViewModel : ViewModel() {
 
@@ -30,7 +29,6 @@ class ApplicationViewModel : ViewModel() {
 
     init {
         populateCustomers() // Mock data.
-        Timber.i("New version")
     }
 
     fun onCustomerClicked(customerId: Long) {
@@ -46,11 +44,9 @@ class ApplicationViewModel : ViewModel() {
         val mockCustomers = mutableListOf<CustomerIndex>()
 
         for (customerId in 1..10) {
-            val c = CustomerIndex(customerId.toLong(), "customer-${customerId}", true)
+            val c = CustomerIndex(customerId.toLong(), "customer-${customerId}", customerId in 2..6)
             mockCustomers.add(c)
         }
-
-
 
         _customers.value = mockCustomers
 

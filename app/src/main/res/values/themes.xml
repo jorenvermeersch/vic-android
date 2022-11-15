@@ -33,4 +33,10 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:fontFamily">@font/graphik</item>
+    </style>
+
+
 </resources>

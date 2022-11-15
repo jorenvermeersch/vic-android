@@ -8,12 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.databinding.FragmentCustomerListBinding
 import com.example.vic.screens.models.ApplicationViewModel
-import timber.log.Timber
 
 private val PLACEHOLDER_ID = 1L
 
@@ -39,7 +37,6 @@ class CustomerListFragment : Fragment() {
             customers?.let {
                 adapter.submitList(customers)
             }
-            Timber.i("Customers changed")
         })
 
 

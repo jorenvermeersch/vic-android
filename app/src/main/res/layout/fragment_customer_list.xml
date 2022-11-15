@@ -20,7 +20,7 @@
             style="@style/TitleContainerStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/customer_search">
 
             <TextView
                 android:id="@+id/customer_list_title_underline"
@@ -39,21 +39,18 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/customer_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="@dimen/padding_sm"
+            android:layout_marginTop="@dimen/padding_md"
+            android:layout_marginEnd="@dimen/padding_sm"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/create_customer_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_list_title_container"
-            app:layout_constraintVertical_bias="0.0">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toBottomOf="@+id/customer_list_title_container" />
 
         <Button
             android:id="@+id/to_customer_details_button"
@@ -72,8 +69,22 @@
             android:text="CreateCustomer"
             app:layout_constraintBottom_toTopOf="@+id/to_customer_details_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <SearchView
+            android:theme="@style/SearchViewStyle"
+            android:id="@+id/customer_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_height"
+            android:layout_marginStart="@dimen/padding_sm"
+            android:layout_marginTop="@dimen/padding_md"
+            android:layout_marginEnd="@dimen/padding_sm"
+            android:background="@drawable/rounded_corners_background"
+            android:queryBackground="@android:color/transparent"
+            android:queryHint="@string/customer_search_prompt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

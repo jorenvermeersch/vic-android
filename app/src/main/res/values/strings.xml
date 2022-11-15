@@ -7,4 +7,5 @@
     <string name="add_customer">Add customer</string>
     <string name="indicator_icon">Indicator icon</string>
     <string name="name_placeholder">No name</string>
+    <string name="customer_search_prompt">Who are you looking for?</string>
 </resources>
