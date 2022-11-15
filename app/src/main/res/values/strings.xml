@@ -5,4 +5,6 @@
     <string name="company_logo_description">Logo of the company</string>
     <string name="customer_list">Klanten</string>
     <string name="add_customer">Klant toevoegen</string>
+    <string name="indicator_icon">Indicator icon</string>
+    <string name="name_placeholder">No name</string>
 </resources>
