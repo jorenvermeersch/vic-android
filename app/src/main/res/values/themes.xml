@@ -12,6 +12,8 @@
         <item name="navigationMenuIconColor">@color/dark_blue</item>
 
         <item name="cardBackgroundColor">@color/light_gray</item>
+        <item name="activeIndicatorColor">@color/blue</item>
+        <item name="inactiveIndicatorColor">@color/dark_gray</item>
         <item name="titleAccentColor">@color/dark_blue</item>
 
         <!-- Font -->

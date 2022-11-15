@@ -30,6 +30,7 @@ class ApplicationViewModel : ViewModel() {
 
     init {
         populateCustomers() // Mock data.
+        Timber.i("New version")
     }
 
     fun onCustomerClicked(customerId: Long) {
@@ -45,12 +46,13 @@ class ApplicationViewModel : ViewModel() {
         val mockCustomers = mutableListOf<CustomerIndex>()
 
         for (customerId in 1..10) {
-            val c = CustomerIndex(customerId.toLong(), "customer-${customerId}", customerId in 2..6)
+            val c = CustomerIndex(customerId.toLong(), "customer-${customerId}", true)
             mockCustomers.add(c)
         }
 
+
+
         _customers.value = mockCustomers
 
-    // TODO: Generate some mock data for display testing.
     }
 }
