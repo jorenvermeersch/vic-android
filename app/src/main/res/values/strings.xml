@@ -3,8 +3,8 @@
     <string name="company_name">Virtual IT Company</string>
     <string name="company_name_description">Name of the company</string>
     <string name="company_logo_description">Logo of the company</string>
-    <string name="customer_list">Klanten</string>
-    <string name="add_customer">Klant toevoegen</string>
+    <string name="customer_list">Customers</string>
+    <string name="add_customer">Add customer</string>
     <string name="indicator_icon">Indicator icon</string>
     <string name="name_placeholder">No name</string>
 </resources>
