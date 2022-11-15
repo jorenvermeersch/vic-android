@@ -17,10 +17,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/customer_list_title_container"
+            style="@style/TitleContainerStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/TitleContainerStyle">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/customer_list_title_underline"

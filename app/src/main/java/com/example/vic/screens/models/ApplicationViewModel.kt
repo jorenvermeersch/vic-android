@@ -7,29 +7,29 @@ import com.example.vic.database.entities.Customer
 import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.database.entities.VirtualMachine
 import com.example.vic.database.entities.VirtualMachineIndex
+import timber.log.Timber
 
 class ApplicationViewModel : ViewModel() {
 
     // All customers.
-    private val _customers = MutableLiveData<List<CustomerIndex>>()
+    private val _customers = MutableLiveData<List<CustomerIndex>>(listOf())
     val customers: LiveData<List<CustomerIndex>> get() = _customers
 
     // All virtual machines of chosen customer.
-    private val _customerVirtualMachines = MutableLiveData<List<VirtualMachineIndex>>()
+    private val _customerVirtualMachines = MutableLiveData<List<VirtualMachineIndex>>(listOf())
     val customerVirtualMachines: LiveData<List<VirtualMachineIndex>> get() = _customerVirtualMachines
 
     // Customer selected by user.
-    private val _chosenCustomer = MutableLiveData<Customer>()
+    private val _chosenCustomer = MutableLiveData<Customer>(null)
     val chosenCustomer: LiveData<Customer> get() = _chosenCustomer
 
     // Virtual machine selected by user.
-    private val _chosenVirtualMachine = MutableLiveData<VirtualMachine>()
+    private val _chosenVirtualMachine = MutableLiveData<VirtualMachine>(null)
     val chosenVirtualMachine: LiveData<VirtualMachine> get() = _chosenVirtualMachine
 
 
     init {
-        _customers.value = listOf()
-        _customerVirtualMachines.value = listOf()
+        populateCustomers() // Mock data.
     }
 
     fun onCustomerClicked(customerId: Long) {
@@ -41,7 +41,16 @@ class ApplicationViewModel : ViewModel() {
         // TODO: Fetch virtual machine with given id from database. Set as chosenVirtualMachine.
     }
 
-    private fun populate() {
-        // TODO: Generate some mock data for display testing.
+    private fun populateCustomers() {
+        val mockCustomers = mutableListOf<CustomerIndex>()
+
+        for (customerId in 1..10) {
+            val c = CustomerIndex(customerId.toLong(), "customer-${customerId}", customerId in 2..6)
+            mockCustomers.add(c)
+        }
+
+        _customers.value = mockCustomers
+
+    // TODO: Generate some mock data for display testing.
     }
 }
