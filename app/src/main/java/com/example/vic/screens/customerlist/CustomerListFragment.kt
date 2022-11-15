@@ -6,16 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.databinding.FragmentCustomerListBinding
+import com.example.vic.screens.models.ApplicationViewModel
 
 private val PLACEHOLDER_ID = 1L
 
 class CustomerListFragment : Fragment() {
 
     private lateinit var binding: FragmentCustomerListBinding
+    private val viewModel : ApplicationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +27,7 @@ class CustomerListFragment : Fragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
+        binding.viewModel = viewModel
 
         binding.apply {
             this.toCustomerDetailsButton.setOnClickListener {

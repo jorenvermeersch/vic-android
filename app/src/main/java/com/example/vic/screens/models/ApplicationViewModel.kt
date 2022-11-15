@@ -15,8 +15,8 @@ class ApplicationViewModel : ViewModel() {
     val customers: LiveData<List<CustomerIndex>> get() = _customers
 
     // All virtual machines of chosen customer.
-    private val _customerMachines = MutableLiveData<List<VirtualMachineIndex>>()
-    val customerMachines: LiveData<List<VirtualMachineIndex>> get() = _customerMachines
+    private val _customerVirtualMachines = MutableLiveData<List<VirtualMachineIndex>>()
+    val customerVirtualMachines: LiveData<List<VirtualMachineIndex>> get() = _customerVirtualMachines
 
     // Customer selected by user.
     private val _chosenCustomer = MutableLiveData<Customer>()
@@ -29,15 +29,15 @@ class ApplicationViewModel : ViewModel() {
 
     init {
         _customers.value = listOf()
-        _customerMachines.value = listOf()
+        _customerVirtualMachines.value = listOf()
     }
 
-    fun showCustomer(customerId: Long) {
+    fun onCustomerClicked(customerId: Long) {
         // TODO: Fetch customer with given id from database. Set as chosenCustomer.
         // TODO: Don't forget to fetch virtual machines of customer.
     }
 
-    fun showVirtualMachine(machineId: Long) {
+    fun onVirtualMachineClicked(machineId: Long) {
         // TODO: Fetch virtual machine with given id from database. Set as chosenVirtualMachine.
     }
 

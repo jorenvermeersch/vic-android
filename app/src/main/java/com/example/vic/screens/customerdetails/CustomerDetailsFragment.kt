@@ -6,16 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.databinding.FragmentCustomerDetailsBinding
+import com.example.vic.screens.models.ApplicationViewModel
 
 private val PLACEHOLDER_ID = 1L
 
 class CustomerDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentCustomerDetailsBinding
+    private val viewModel: ApplicationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +27,7 @@ class CustomerDetailsFragment : Fragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_details, container, false)
+        binding.viewModel = viewModel
 
         binding.apply {
             this.customerListButton.setOnClickListener {
@@ -31,7 +35,11 @@ class CustomerDetailsFragment : Fragment() {
             }
 
             this.virtualMachineDetailsButton.setOnClickListener {
-                findNavController().navigate(CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(PLACEHOLDER_ID))
+                findNavController().navigate(
+                    CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
+                        PLACEHOLDER_ID
+                    )
+                )
             }
         }
 

@@ -1,4 +1,4 @@
 package com.example.vic.database
 
-class Database {
+class VicDatabase {
 }
