@@ -8,4 +8,11 @@
     <string name="indicator_icon">Indicator icon</string>
     <string name="name_placeholder">No name</string>
     <string name="customer_search_prompt">Who are you looking for?</string>
+    <string name="contact_information">Contact information</string>
+    <string name="label_name">Name</string>
+    <string name="label_email">Email</string>
+    <string name="label_phone_number">Phone number</string>
+    <string name="customer_name_placeholder">Name</string>
+    <string name="customer_email_placeholder">user.name@example.com</string>
+    <string name="phone_number_placeholder">701-780-3569</string>
 </resources>

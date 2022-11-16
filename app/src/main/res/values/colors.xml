@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#343A40</color>
-    <color name="dark_gray">#6C757D</color>
+<!--    <color name="black">#343A40</color>-->
+<!--    <color name="dark_gray">#6C757D</color>-->
+    <color name="black">#0F0F0F</color>
+    <color name="dark_gray">#343A40</color>
     <color name="light_gray">#f4f5f7</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_blue">#F2F7FB</color>

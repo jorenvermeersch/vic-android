@@ -23,4 +23,38 @@
         <item name="android:layout_marginTop">@dimen/padding_md</item>
         <item name="android:layout_marginEnd">@dimen/padding_sm</item>
     </style>
+
+    <style name="TableLayoutStyle">
+        <item name="android:layout_marginStart">@dimen/padding_sm</item>
+        <item name="android:layout_marginEnd">@dimen/padding_sm</item>
+        <item name="android:background">@drawable/rounded_corners_background</item>
+        <item name="android:paddingStart">@dimen/padding_sm</item>
+        <item name="android:paddingEnd">@dimen/padding_sm</item>
+        <item name="android:paddingTop">@dimen/padding_sm</item>
+        <item name="android:paddingBottom">@dimen/padding_sm</item>
+        <item name="android:stretchColumns">*</item>
+    </style>
+
+    <style name="TableRowStyle">
+        <item name="android:layout_marginBottom">@dimen/padding_sm</item>
+    </style>
+
+    <style name="LastTableRowStyle">
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+    <style name="TableRowLabelStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textFontWeight">600</item>
+        <item name="android:textSize">@dimen/text_sm</item>
+    </style>
+
+    <style name="TableRowItemStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textSize">@dimen/text_sm</item>
+    </style>
 </resources>

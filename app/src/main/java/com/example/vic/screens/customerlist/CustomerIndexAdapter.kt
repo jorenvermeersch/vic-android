@@ -48,5 +48,8 @@ class CustomerIndexDiffCallback : DiffUtil.ItemCallback<CustomerIndex>() {
     override fun areContentsTheSame(oldItem: CustomerIndex, newItem: CustomerIndex): Boolean {
         return oldItem == newItem
     }
+}
 
+class CustomerIndexListener(val clickListener: (customerId: Long) -> Unit) {
+    fun onClick(customerIndex: CustomerIndex) = clickListener(customerIndex.id)
 }
