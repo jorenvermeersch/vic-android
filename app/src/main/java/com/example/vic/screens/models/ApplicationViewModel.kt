@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.vic.database.MockVicDatabase
 import com.example.vic.database.entities.Customer
 import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.database.entities.VirtualMachine
@@ -11,9 +12,9 @@ import com.example.vic.database.entities.VirtualMachineIndex
 
 class ApplicationViewModel : ViewModel() {
 
+    private val database = MockVicDatabase()
+
     private val _searchQuery = MutableLiveData<String?>(null)
-
-
 
     // All customers.
     private val _customers = MutableLiveData<List<CustomerIndex>>(listOf())
@@ -37,7 +38,7 @@ class ApplicationViewModel : ViewModel() {
 
 
     init {
-        populateCustomers() // Mock data.
+        _customers.value = database.getCustomers().value
     }
 
     fun onCustomerSearch(query: String) {
@@ -49,23 +50,13 @@ class ApplicationViewModel : ViewModel() {
     }
 
     fun onCustomerClicked(customerId: Long) {
-        // TODO: Fetch customer with given id from database. Set as chosenCustomer.
-        // TODO: Don't forget to fetch virtual machines of customer.
+        // TODO: Fetch customer from database or API.
+        val result = database.getCustomerById(customerId)
+        _chosenCustomer.value = result.value
     }
 
     fun onVirtualMachineClicked(machineId: Long) {
-        // TODO: Fetch virtual machine with given id from database. Set as chosenVirtualMachine.
-    }
-
-    private fun populateCustomers() {
-        val mockCustomers = mutableListOf<CustomerIndex>()
-
-        for (customerId in 1..10) {
-            val c = CustomerIndex(customerId.toLong(), "customer-${customerId}", customerId in 2..6)
-            mockCustomers.add(c)
-        }
-
-        _customers.value = mockCustomers
+        // TODO: Fetch virtual machine from database or API.
     }
 
     private fun filterCustomers(query: String?): LiveData<List<CustomerIndex>> {
@@ -73,11 +64,11 @@ class ApplicationViewModel : ViewModel() {
             return customers
         }
 
-        val container = MutableLiveData<List<CustomerIndex>>()
-        val values = _customers.value?.filter { it -> it.name.contains(query) }
-        container.value = values ?: listOf()
+        val resultContainer = MutableLiveData<List<CustomerIndex>>()
+        val results = _customers.value?.filter { it -> it.name.contains(query) }
+        resultContainer.value = results ?: listOf()
 
-        return container
+        return resultContainer
     }
 
     fun resetCustomerSearch() {

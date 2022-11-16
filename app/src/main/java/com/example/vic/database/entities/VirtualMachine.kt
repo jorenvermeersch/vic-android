@@ -18,9 +18,9 @@ data class VirtualMachine(
     val ports: List<Port>,
     val host: Host,
     val credentials: List<Credentials>,
-    val account: Account,
-    val request: Customer,
-    val user: Customer,
+    val account: Account?, // TODO: Change to required fields.
+    val requester: Customer?,
+    val user: Customer?,
 ) {
 }
 

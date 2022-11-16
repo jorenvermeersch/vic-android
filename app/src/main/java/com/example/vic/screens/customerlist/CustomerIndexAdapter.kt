@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.databinding.CustomerRowBinding
 
-class CustomerIndexAdapter :
+class CustomerIndexAdapter(val clickListener: CustomerIndexListener) :
     ListAdapter<CustomerIndex, CustomerIndexAdapter.ViewHolder>(CustomerIndexDiffCallback()) {
 
     class ViewHolder private constructor(private val binding: CustomerRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: CustomerIndex) {
+        fun bind(item: CustomerIndex, clickListener: CustomerIndexListener) {
             binding.customerIndex = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -35,7 +36,7 @@ class CustomerIndexAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, clickListener)
     }
 }
 

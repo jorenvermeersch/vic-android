@@ -31,8 +31,16 @@ class CustomerListFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
         binding.viewModel = viewModel
 
-        // Binding adapter for RecyclerView.
-        val adapter = CustomerIndexAdapter()
+        // Binding adapter for RecyclerView with onClickListener.
+        val adapter = CustomerIndexAdapter(CustomerIndexListener { customerId ->
+            viewModel.onCustomerClicked(customerId)
+
+            findNavController().navigate(
+                CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
+                    customerId
+                )
+            )
+        })
         binding.customerList.adapter = adapter
 
         // Display customers in RecyclerView.
@@ -61,6 +69,21 @@ class CustomerListFragment : Fragment() {
             viewModel.resetCustomerSearch()
             false
         }
+
+
+        // TODO: Should this be called in adapter clickListener?
+        // Navigate to customer details.
+//        viewModel.navigateToCustomerDetails.observe(viewLifecycleOwner, Observer { customer ->
+//
+//            customer?.let {
+//                findNavController().navigate(
+//                    CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
+//                        PLACEHOLDER_ID
+//                    )
+//                )
+//            }
+//            viewModel.doneNavigatingToCustomerDetails()
+//        })
 
 
         binding.apply {
