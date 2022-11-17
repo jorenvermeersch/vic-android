@@ -65,4 +65,19 @@
         <item name="android:layout_marginTop">@dimen/padding_md</item>
         <item name="android:layout_marginEnd">@dimen/padding_sm</item>
     </style>
+
+    <style name="RowStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/card_height</item>
+        <item name="android:layout_marginBottom">@dimen/padding_sm</item>
+        <item name="android:background">@drawable/rounded_corners_background</item>
+    </style>
+
+    <style name="RowTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/padding_md</item>
+        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textSize">@dimen/text_sm</item>
+    </style>
 </resources>

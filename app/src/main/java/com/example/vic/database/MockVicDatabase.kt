@@ -15,8 +15,8 @@ class MockVicDatabase() : VicDatabaseDao {
 
 
     init {
-        populateCustomers()
         populateVirtualMachines()
+        populateCustomers()
     }
 
     private fun populateCustomers() {

@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.entities.Customer
 import com.example.vic.database.enums.CustomerType
 import com.example.vic.databinding.FragmentCustomerDetailsBinding
+import com.example.vic.screens.customerlist.CustomerIndexAdapter
+import com.example.vic.screens.customerlist.CustomerIndexListener
+import com.example.vic.screens.customerlist.CustomerListFragmentDirections
 import com.example.vic.screens.models.ApplicationViewModel
+import timber.log.Timber
 
 private val PLACEHOLDER_ID = 1L
 
@@ -31,23 +36,22 @@ class CustomerDetailsFragment : Fragment() {
         binding.viewModel = viewModel
 
 
-        viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
-            updateLayout(customer)
-        }
-
-
-        binding.apply {
-            this.customerListButton.setOnClickListener {
-                findNavController().navigate(CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToCustomerListFragment())
-            }
-
-            this.virtualMachineDetailsButton.setOnClickListener {
-                findNavController().navigate(
-                    CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
-                        PLACEHOLDER_ID
-                    )
+        val adapter = VirtualMachineIndexAdapter(VirtualMachineIndexListener { machineId ->
+            viewModel.onVirtualMachineClicked(machineId)
+            findNavController().navigate(
+                CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
+                    machineId
                 )
-            }
+            )
+        })
+
+        binding.virtualMachineList.adapter = adapter
+
+        viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
+            adapter.submitList(customer.virtualMachines)
+            updateLayout(customer)
+            Timber.i("Virtual machines of customers: ${customer.virtualMachines.isEmpty()}")
+
         }
 
         return binding.root
@@ -77,7 +81,7 @@ class CustomerDetailsFragment : Fragment() {
         }
 
         binding.customerBackupContactInformation.visibility =
-            if (customer.backupContactPerson == null) View.INVISIBLE else View.VISIBLE
+            if (customer.backupContactPerson == null) View.GONE else View.VISIBLE
 
     }
 }

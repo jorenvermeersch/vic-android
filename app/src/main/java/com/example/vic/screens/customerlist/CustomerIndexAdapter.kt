@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.databinding.CustomerRowBinding
 
-class CustomerIndexAdapter(val clickListener: CustomerIndexListener) :
+class CustomerIndexAdapter(private val clickListener: CustomerIndexListener) :
     ListAdapter<CustomerIndex, CustomerIndexAdapter.ViewHolder>(CustomerIndexDiffCallback()) {
 
     class ViewHolder private constructor(private val binding: CustomerRowBinding) :
@@ -29,7 +29,6 @@ class CustomerIndexAdapter(val clickListener: CustomerIndexListener) :
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
@@ -39,7 +38,6 @@ class CustomerIndexAdapter(val clickListener: CustomerIndexListener) :
         holder.bind(item, clickListener)
     }
 }
-
 
 class CustomerIndexDiffCallback : DiffUtil.ItemCallback<CustomerIndex>() {
     override fun areItemsTheSame(oldItem: CustomerIndex, newItem: CustomerIndex): Boolean {

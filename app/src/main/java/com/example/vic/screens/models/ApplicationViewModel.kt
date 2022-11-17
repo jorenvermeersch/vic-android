@@ -24,13 +24,14 @@ class ApplicationViewModel : ViewModel() {
         filterCustomers(_searchQuery.value)
     }
 
-    // All virtual machines of chosen customer.
-    private val _customerVirtualMachines = MutableLiveData<List<VirtualMachineIndex>>(listOf())
-    val customerVirtualMachines: LiveData<List<VirtualMachineIndex>> get() = _customerVirtualMachines
-
     // Customer selected by user.
     private val _chosenCustomer = MutableLiveData<Customer>(null)
     val chosenCustomer: LiveData<Customer> get() = _chosenCustomer
+
+    val chosenCustomerFullName = Transformations.map(chosenCustomer) {
+        customer -> "${customer.contactPerson.firstName} ${customer.contactPerson.lastName}"
+
+    }
 
     // Virtual machine selected by user.
     private val _chosenVirtualMachine = MutableLiveData<VirtualMachine>(null)
@@ -50,12 +51,13 @@ class ApplicationViewModel : ViewModel() {
     }
 
     fun onCustomerClicked(customerId: Long) {
-        val result = database.getCustomerById(customerId)
-        _chosenCustomer.value = result.value
+        val customer = database.getCustomerById(customerId)
+        _chosenCustomer.value = customer.value
     }
 
     fun onVirtualMachineClicked(machineId: Long) {
-        // TODO: Fetch virtual machine from database or API.
+        val virtualMachine = database.getVirtualMachineById(machineId)
+        _chosenVirtualMachine.value = virtualMachine.value
     }
 
     private fun filterCustomers(query: String?): LiveData<List<CustomerIndex>> {

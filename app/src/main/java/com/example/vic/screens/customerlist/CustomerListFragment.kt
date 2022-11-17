@@ -70,21 +70,6 @@ class CustomerListFragment : Fragment() {
             false
         }
 
-
-        binding.apply {
-            this.toCustomerDetailsButton.setOnClickListener {
-                findNavController().navigate(
-                    CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
-                        PLACEHOLDER_ID
-                    )
-                )
-            }
-
-            this.createCustomerButton.setOnClickListener {
-                findNavController().navigate(CustomerListFragmentDirections.actionCustomerListFragmentToCreateCustomerFragment())
-            }
-        }
-
         return binding.root
     }
 }

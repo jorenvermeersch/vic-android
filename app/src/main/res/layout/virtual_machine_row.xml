@@ -8,25 +8,24 @@
             name="virtualMachineIndex"
             type="com.example.vic.database.entities.VirtualMachineIndex" />
 
+        <variable
+            name="clickListener"
+            type="com.example.vic.screens.customerdetails.VirtualMachineIndexListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/card_height"
-        android:layout_marginBottom="@dimen/padding_sm"
-        android:background="@drawable/rounded_corners_background">
+        android:onClick="@{() -> clickListener.onClick(virtualMachineIndex)}"
+        style="@style/RowStyle">
 
         <TextView
             android:id="@+id/virtual_machine_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_md"
             android:text="@string/name_placeholder"
-            android:textColor="?attr/textColor"
-            android:textSize="@dimen/text_sm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:name="@{virtualMachineIndex}"
+            style="@style/RowTextStyle" />
 
         <ImageView
             android:id="@+id/indicator_icon"
@@ -35,6 +34,7 @@
             android:layout_marginEnd="@dimen/padding_md"
             android:contentDescription="@string/indicator_icon"
             android:src="@drawable/circle_icon"
+            app:indicator="@{virtualMachineIndex}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
