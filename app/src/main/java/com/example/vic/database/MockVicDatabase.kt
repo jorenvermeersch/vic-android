@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.vic.database.entities.*
 import com.example.vic.database.enums.*
 import com.example.vic.getCurrentDateTime
-import timber.log.Timber
+
 
 
 class MockVicDatabase() : VicDatabaseDao {
@@ -96,7 +96,6 @@ class MockVicDatabase() : VicDatabaseDao {
         val customers = _customers.value?.map { c ->
             CustomerIndex(c.id, c.contactPerson.firstName)
         }
-        Timber.i("customerIndexes is empty: ${customers?.isNotEmpty()}")
         return MutableLiveData(customers)
     }
 

@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.databinding.FragmentCustomerListBinding
 import com.example.vic.screens.models.ApplicationViewModel
-import timber.log.Timber
 
 private val PLACEHOLDER_ID = 1L
 

@@ -146,8 +146,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
         <!-- Table: Contact information -->
         <TableLayout
             android:id="@+id/customer_contact_information"
@@ -167,7 +165,7 @@
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="@{viewModel.chosenCustomerFullName}"
+                    android:text="@{viewModel.chosenCustomer.contactPerson.firstName + ` ` + viewModel.chosenCustomer.contactPerson.lastName}"
                     tools:text="@string/customer_name_placeholder" />
             </TableRow>
 
@@ -216,7 +214,7 @@
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="@{viewModel.chosenCustomer.backupContactPerson.firstName}"
+                    android:text="@{viewModel.chosenCustomer.backupContactPerson.firstName + ` ` + viewModel.chosenCustomer.backupContactPerson.lastName}"
                     tools:text="@string/customer_name_placeholder" />
             </TableRow>
 
@@ -270,6 +268,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- List of virtual machines -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/virtual_machine_list"
             style="@style/RecyclerViewStyle"

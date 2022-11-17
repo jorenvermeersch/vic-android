@@ -28,11 +28,6 @@ class ApplicationViewModel : ViewModel() {
     private val _chosenCustomer = MutableLiveData<Customer>(null)
     val chosenCustomer: LiveData<Customer> get() = _chosenCustomer
 
-    val chosenCustomerFullName = Transformations.map(chosenCustomer) {
-        customer -> "${customer.contactPerson.firstName} ${customer.contactPerson.lastName}"
-
-    }
-
     // Virtual machine selected by user.
     private val _chosenVirtualMachine = MutableLiveData<VirtualMachine>(null)
     val chosenVirtualMachine: LiveData<VirtualMachine> get() = _chosenVirtualMachine

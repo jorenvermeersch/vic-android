@@ -50,8 +50,6 @@ class CustomerDetailsFragment : Fragment() {
         viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
             adapter.submitList(customer.virtualMachines)
             updateLayout(customer)
-            Timber.i("Virtual machines of customers: ${customer.virtualMachines.isEmpty()}")
-
         }
 
         return binding.root

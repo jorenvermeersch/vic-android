@@ -15,31 +15,44 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:onClick="@{() -> clickListener.onClick(virtualMachineIndex)}"
-        style="@style/RowStyle">
+        style="@style/RowStyle"
+        android:onClick="@{() -> clickListener.onClick(virtualMachineIndex)}">
 
         <TextView
             android:id="@+id/virtual_machine_name"
+            style="@style/RowTextStyle"
             android:text="@string/name_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:name="@{virtualMachineIndex}"
-            style="@style/RowTextStyle" />
+            app:name="@{virtualMachineIndex}" />
 
-        <ImageView
+        <TextView
             android:id="@+id/indicator_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:layout_marginEnd="@dimen/padding_md"
-            android:contentDescription="@string/indicator_icon"
-            android:src="@drawable/circle_icon"
+            android:background="@drawable/indicator_icon"
             app:indicator="@{virtualMachineIndex}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/virtual_machine_name"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/indicator_icon"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="@dimen/padding_md"-->
+        <!--            android:contentDescription="@string/indicator_icon"-->
+        <!--            android:src="@drawable/circle_icon"-->
+        <!--            app:indicator="@{virtualMachineIndex}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="1.0"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/virtual_machine_name"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

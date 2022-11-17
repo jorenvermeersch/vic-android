@@ -22,4 +22,11 @@
     <string name="label_external_type">Type</string>
     <string name="label_company_name">Company Name</string>
     <string name="virtual_machines">Virtual machines</string>
+    <string name="label_fqdn">FQDN</string>
+    <string name="label_hostname">Hostname</string>
+    <string name="label_processors">vCPUs</string>
+    <string name="label_memory">Memory</string>
+    <string name="label_storage">Storage</string>
+    <string name="specifications_and_configuration">Specifications and configuration</string>
+    <string name="gb_format">%d GB</string>
 </resources>
