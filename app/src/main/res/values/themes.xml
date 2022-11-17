@@ -22,15 +22,18 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/dark_blue</item>
         <item name="actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
-        <item name="android:actionBarPopupTheme">@style/PopUpMenuStyle</item>
+        <item name="android:actionBarPopupTheme">@style/OverflowMenuStyle</item>
     </style>
 
     <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="tint">@color/dark_blue</item>
     </style>
 
-    <style name="PopUpMenuStyle" parent="Widget.AppCompat.PopupMenu">
+
+    <style name="OverflowMenuStyle" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textSize">14sp</item>
+        <item name="android:colorBackground">@color/light_gray</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">

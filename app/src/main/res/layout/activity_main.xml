@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/overflow_menu"
             android:background="?attr/navigationBackgroundColor"
-            app:popupTheme="@style/PopUpMenuStyle">
+            app:popupTheme="@style/OverflowMenuStyle">
 
             <include
                 layout="@layout/fragment_navigation_bar"

@@ -29,4 +29,5 @@
     <string name="label_storage">Storage</string>
     <string name="specifications_and_configuration">Specifications and configuration</string>
     <string name="gb_format">%d GB</string>
+    <string name="availability_and_back_ups">Availability and back-ups</string>
 </resources>

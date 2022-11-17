@@ -198,13 +198,30 @@
             </TableRow>
         </TableLayout>
 
-        <Button
-            android:id="@+id/back_customer_details_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CustomerDetails"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <!-- Label: Specifications and configuration -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/virtual_machine_availability_label"
+            style="@style/TitleContainerStyle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/virtual_machine_config_table">
+
+            <TextView
+                android:id="@+id/virtual_machine_availability_title"
+                style="@style/TitleTextStyle"
+                android:text="@string/availability_and_back_ups"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/virtual_machine_availability_title_underline"
+                style="@style/TitleUnderlineStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_availability_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
