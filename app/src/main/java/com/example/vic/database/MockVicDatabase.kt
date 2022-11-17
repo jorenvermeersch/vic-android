@@ -28,7 +28,7 @@ class MockVicDatabase() : VicDatabaseDao {
                 "firstname-$id",
                 "lastname-$id",
                 "customer-$id.example@devops.com",
-                "phone-number-$id"
+                if (id % 3 != 0) "phone-number-$id" else null
             )
 
             val internal = id in 2..6
