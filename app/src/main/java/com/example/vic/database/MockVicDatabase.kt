@@ -30,7 +30,24 @@ class MockVicDatabase() : VicDatabaseDao {
                 "customer-$id.example@devops.com",
                 "phone-number-$id"
             )
-            val mock = Customer(id.toLong(), contact, contact)
+
+            val internal = id in 2..6
+
+            val machines = (_virtualMachines.value ?: listOf())
+                .filter { it.id == id.toLong() }
+                .map { VirtualMachineIndex(it.id, it.name, it.status) }
+
+            val mock = Customer(
+                id.toLong(),
+                if (internal) CustomerType.Internal else CustomerType.External,
+                contact,
+                contact,
+                if (internal) "institution-$id" else null,
+                if (!internal) "type-$id" else null,
+                if (!internal) "company-name-$id" else null,
+                machines
+            )
+
             mockCustomers.add(mock)
         }
 
@@ -39,8 +56,6 @@ class MockVicDatabase() : VicDatabaseDao {
 
     private fun populateVirtualMachines() {
         val mockVirtualMachines = mutableListOf<VirtualMachine>()
-
-
 
         for (id in 1..20) {
             val specifications = Specifications(id + 1, id + 1, id + 1)
@@ -76,8 +91,8 @@ class MockVicDatabase() : VicDatabaseDao {
     }
 
     override fun getCustomers(): LiveData<List<CustomerIndex>> {
-        val customers = _customers.value?.map {
-                c -> CustomerIndex(c.id, c.contactPerson.firstName, true)
+        val customers = _customers.value?.map { c ->
+            CustomerIndex(c.id, c.contactPerson.firstName)
         }
         Timber.i("customerIndexes is empty: ${customers?.isNotEmpty()}")
         return MutableLiveData(customers)

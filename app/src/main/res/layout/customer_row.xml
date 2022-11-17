@@ -21,7 +21,7 @@
         android:onClick="@{() -> clickListener.onClick(customerIndex)}">
 
         <TextView
-            android:id="@+id/entity_name"
+            android:id="@+id/customer_name"
             android:textColor="?attr/textColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,21 +32,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:name="@{customerIndex}" />
-
-        <ImageView
-            android:id="@+id/indicator_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/padding_md"
-            android:contentDescription="@string/indicator_icon"
-            android:src="@drawable/circle_icon"
-            app:indicator="@{customerIndex}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@id/entity_name"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

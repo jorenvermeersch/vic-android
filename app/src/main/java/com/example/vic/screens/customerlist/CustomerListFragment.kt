@@ -71,21 +71,6 @@ class CustomerListFragment : Fragment() {
         }
 
 
-        // TODO: Should this be called in adapter clickListener?
-        // Navigate to customer details.
-//        viewModel.navigateToCustomerDetails.observe(viewLifecycleOwner, Observer { customer ->
-//
-//            customer?.let {
-//                findNavController().navigate(
-//                    CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
-//                        PLACEHOLDER_ID
-//                    )
-//                )
-//            }
-//            viewModel.doneNavigatingToCustomerDetails()
-//        })
-
-
         binding.apply {
             this.toCustomerDetailsButton.setOnClickListener {
                 findNavController().navigate(
