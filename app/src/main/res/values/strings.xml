@@ -15,4 +15,11 @@
     <string name="customer_name_placeholder">Name</string>
     <string name="customer_email_placeholder">user.name@example.com</string>
     <string name="phone_number_placeholder">701-780-3569</string>
+    <string name="general">General</string>
+    <string name="label_institution">Institution</string>
+    <string name="label_department">Department</string>
+    <string name="label_education">Education</string>
+    <string name="label_external_type">Type</string>
+    <string name="label_company_name">Company Name</string>
+    <string name="virtual_machines">Virtual machines</string>
 </resources>

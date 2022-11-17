@@ -42,15 +42,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/customer_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_sm"
-            android:layout_marginTop="@dimen/padding_md"
-            android:layout_marginEnd="@dimen/padding_sm"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_list_title_container" />
+            app:layout_constraintTop_toBottomOf="@+id/customer_list_title_container"
+            style="@style/RecyclerViewStyle" />
 
         <Button
             android:id="@+id/to_customer_details_button"

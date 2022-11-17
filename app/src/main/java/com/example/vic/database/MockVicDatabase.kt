@@ -41,8 +41,10 @@ class MockVicDatabase() : VicDatabaseDao {
                 id.toLong(),
                 if (internal) CustomerType.Internal else CustomerType.External,
                 contact,
-                contact,
+                if (id % 2 == 0) contact else null,
                 if (internal) "institution-$id" else null,
+                if (internal) "department-$id" else null,
+                if (internal) "education-$id" else null,
                 if (!internal) "type-$id" else null,
                 if (!internal) "company-name-$id" else null,
                 machines
@@ -103,7 +105,8 @@ class MockVicDatabase() : VicDatabaseDao {
         return MutableLiveData(customer)
     }
 
-    override fun getVirtualMachineById(): LiveData<VirtualMachine> {
-        TODO("Not yet implemented")
+    override fun getVirtualMachineById(machineId: Long): LiveData<VirtualMachine> {
+        val machine = _virtualMachines.value?.find { it -> it.id == machineId }
+        return MutableLiveData(machine)
     }
 }

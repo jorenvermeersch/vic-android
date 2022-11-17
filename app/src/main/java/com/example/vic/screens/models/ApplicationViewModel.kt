@@ -50,7 +50,6 @@ class ApplicationViewModel : ViewModel() {
     }
 
     fun onCustomerClicked(customerId: Long) {
-        // TODO: Fetch customer from database or API.
         val result = database.getCustomerById(customerId)
         _chosenCustomer.value = result.value
     }

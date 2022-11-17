@@ -15,5 +15,5 @@ interface VicDatabaseDao {
 
     fun getCustomerById(customerId : Long) : LiveData<Customer>
 
-    fun getVirtualMachineById() : LiveData<VirtualMachine>
+    fun getVirtualMachineById(machineId : Long) : LiveData<VirtualMachine>
 }

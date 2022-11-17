@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,13 +14,120 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Contact information label -->
+        <!-- Label: General information -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/customer_general_title_container"
+            style="@style/TitleContainerStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/customer_general_title"
+                style="@style/TitleTextStyle"
+                android:text="@string/general"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/customer_general_title_underline"
+                style="@style/TitleUnderlineStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/customer_general_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Table: General information -->
+        <TableLayout
+            android:id="@+id/customer_general_information"
+            style="@style/TableLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_md"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customer_general_title_container">
+
+            <TableRow
+                android:id="@+id/institution"
+                style="@style/TableRowStyle">
+
+                <TextView
+                    style="@style/TableRowLabelStyle"
+                    android:text="@string/label_institution" />
+
+                <TextView
+                    style="@style/TableRowItemStyle"
+                    android:text="@{viewModel.chosenCustomer.institution}"
+                    tools:text="@string/customer_name_placeholder" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/department"
+                style="@style/TableRowStyle">
+
+                <TextView
+                    style="@style/TableRowLabelStyle"
+                    android:text="@string/label_department" />
+
+                <TextView
+                    style="@style/TableRowItemStyle"
+                    android:text="@{viewModel.chosenCustomer.department}"
+                    tools:text="@string/customer_name_placeholder" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/education"
+                style="@style/LastTableRowStyle">
+
+                <TextView
+                    style="@style/TableRowLabelStyle"
+                    android:text="@string/label_education" />
+
+                <TextView
+                    style="@style/TableRowItemStyle"
+                    android:text="@{viewModel.chosenCustomer.education}"
+                    tools:text="@string/customer_name_placeholder" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/external_type"
+                style="@style/TableRowStyle">
+
+                <TextView
+                    style="@style/TableRowLabelStyle"
+                    android:text="@string/label_external_type" />
+
+                <TextView
+                    style="@style/TableRowItemStyle"
+                    android:text="@{viewModel.chosenCustomer.type}"
+                    tools:text="@string/customer_name_placeholder" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/companyName"
+                style="@style/LastTableRowStyle">
+
+                <TextView
+                    style="@style/TableRowLabelStyle"
+                    android:text="@string/label_company_name" />
+
+                <TextView
+                    style="@style/TableRowItemStyle"
+                    android:text="@{viewModel.chosenCustomer.companyName}"
+                    tools:text="@string/customer_name_placeholder" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- Label: Contact information -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/customer_contact_info_title_container"
             style="@style/TitleContainerStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/customer_general_information">
 
             <TextView
                 android:id="@+id/customer_contact_title"
@@ -38,7 +146,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Contact information table -->
+        <!-- Table: Contact information -->
         <TableLayout
             android:id="@+id/customer_contact_information"
             style="@style/TableLayoutStyle"
@@ -57,7 +165,8 @@
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="@string/customer_name_placeholder" />
+                    android:text="@{viewModel.chosenCustomer.contactPerson.firstName}"
+                    tools:text="@string/customer_name_placeholder" />
             </TableRow>
 
             <TableRow style="@style/TableRowStyle">
@@ -68,7 +177,8 @@
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="@string/customer_email_placeholder" />
+                    android:text="@{viewModel.chosenCustomer.contactPerson.email}"
+                    tools:text="@string/customer_email_placeholder" />
             </TableRow>
 
             <TableRow style="@style/LastTableRowStyle">
@@ -79,14 +189,16 @@
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="@string/phone_number_placeholder" />
+                    android:text="@{viewModel.chosenCustomer.contactPerson.phoneNumber}"
+                    tools:text="@string/phone_number_placeholder" />
             </TableRow>
         </TableLayout>
 
-        <!-- Back-up contact information table -->
+        <!-- Table: Back-up contact information -->
         <TableLayout
             android:id="@+id/customer_backup_contact_information"
             style="@style/TableLayoutStyle"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_md"
@@ -102,7 +214,8 @@
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="@string/customer_name_placeholder" />
+                    android:text="@{viewModel.chosenCustomer.backupContactPerson.firstName}"
+                    tools:text="@string/customer_name_placeholder" />
             </TableRow>
 
             <TableRow style="@style/TableRowStyle">
@@ -113,7 +226,8 @@
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="@string/customer_email_placeholder" />
+                    android:text="@{viewModel.chosenCustomer.backupContactPerson.email}"
+                    tools:text="@string/customer_email_placeholder" />
             </TableRow>
 
             <TableRow style="@style/LastTableRowStyle">
@@ -124,10 +238,44 @@
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="@string/phone_number_placeholder" />
+                    android:text="@{viewModel.chosenCustomer.backupContactPerson.phoneNumber}"
+                    tools:text="@string/phone_number_placeholder" />
             </TableRow>
         </TableLayout>
 
+        <!-- Label: Virtual machines -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/customer_machines_title_container"
+            style="@style/TitleContainerStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customer_backup_contact_information">
+
+            <TextView
+                android:id="@+id/customer_machines_title"
+                style="@style/TitleTextStyle"
+                android:text="@string/virtual_machines"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/customer_contact_machines_title_underline"
+                style="@style/TitleUnderlineStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/customer_machines_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            style="@style/RecyclerViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customer_machines_title_container" />
 
         <Button
             android:id="@+id/virtual_machine_details_button"

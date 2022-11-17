@@ -1,5 +1,6 @@
 package com.example.vic
 
+import com.example.vic.database.entities.ContactPerson
 import java.text.SimpleDateFormat
 import java.util.*
 

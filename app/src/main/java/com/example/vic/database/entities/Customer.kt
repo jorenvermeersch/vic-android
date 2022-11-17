@@ -7,9 +7,11 @@ data class Customer(
     val customerType: CustomerType,
     val contactPerson: ContactPerson,
     val backupContactPerson: ContactPerson?,
-    val institution: String?,
-    val type: String?,
-    val companyName: String?,
+    val institution: String?, // Internal.
+    val department : String?, // Internal.
+    val education : String?, // Internal.
+    val type: String?, // External.
+    val companyName: String?, // External.
     val virtualMachines: List<VirtualMachineIndex>
 ) {
 
