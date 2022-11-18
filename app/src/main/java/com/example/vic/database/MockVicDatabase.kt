@@ -18,6 +18,7 @@ class MockVicDatabase() : VicDatabaseDao {
         populateCustomers()
     }
 
+
     private fun populateCustomers() {
         val mockCustomers = mutableListOf<Customer>()
 

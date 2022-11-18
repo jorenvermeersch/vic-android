@@ -49,5 +49,7 @@
     <string name="backup_weekly">Weekly</string>
     <string name="backup_monthly">Monthly</string>
     <string name="label_back_ups">Back-ups</string>
+    <string name="label_username">Username</string>
+    <string name="label_role">Role</string>
 
 </resources>

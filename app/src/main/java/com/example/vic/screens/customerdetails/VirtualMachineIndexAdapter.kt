@@ -10,7 +10,7 @@ import com.example.vic.databinding.VirtualMachineRowBinding
 
 class VirtualMachineIndexAdapter(private val clickListener: VirtualMachineIndexListener) :
     ListAdapter<VirtualMachineIndex, VirtualMachineIndexAdapter.ViewHolder>(
-        CustomerIndexDiffCallback()
+        VirtualMachineIndexDiffCallback()
     ) {
 
     class ViewHolder private constructor(private val binding: VirtualMachineRowBinding) :
@@ -41,7 +41,7 @@ class VirtualMachineIndexAdapter(private val clickListener: VirtualMachineIndexL
     }
 }
 
-class CustomerIndexDiffCallback : DiffUtil.ItemCallback<VirtualMachineIndex>() {
+class VirtualMachineIndexDiffCallback : DiffUtil.ItemCallback<VirtualMachineIndex>() {
     override fun areItemsTheSame(
         oldItem: VirtualMachineIndex,
         newItem: VirtualMachineIndex
