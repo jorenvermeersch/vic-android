@@ -18,6 +18,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- Indicator -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/virtual_machine_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_md"
+                android:layout_marginEnd="@dimen/padding_sm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/indicator"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/indicator_icon"
+                    android:backgroundTint="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:textColor="?attr/textColor"
+
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/text_md"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/indicator"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:text="@{viewModel.chosenVirtualMachine.status}" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <!-- Table: General information -->
             <TableLayout
                 android:id="@+id/virtual_machine_general_table"
@@ -27,7 +63,7 @@
                 android:layout_marginTop="@dimen/padding_md"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_indicator">
 
                 <TableRow style="@style/TableRowStyle">
 
@@ -323,6 +359,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- List: Credentials -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/credentials_list"
                 style="@style/RecyclerViewStyle"
@@ -331,6 +368,127 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/virtual_machine_credentials_label" />
 
+            <!-- Label: Requester -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/virtual_machine_requester_label"
+                style="@style/TitleContainerStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/credentials_list">
+
+                <TextView
+                    android:id="@+id/virtual_machine_requester_title"
+                    style="@style/TitleTextStyle"
+                    android:text="@string/requester"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/virtual_machine_requester_title_underline"
+                    style="@style/TitleUnderlineStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/virtual_machine_requester_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Table: Requester -->
+            <TableLayout
+                android:id="@+id/virtual_machine_requester_table"
+                style="@style/TableLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_md"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/virtual_machine_requester_label">
+
+                <TableRow style="@style/TableRowStyle">
+
+                    <TextView
+                        style="@style/TableRowLabelStyle"
+                        android:text="@string/label_name" />
+
+                    <TextView
+                        style="@style/TableRowItemStyle"
+                        android:text="Name"
+                        tools:text="@string/name_placeholder" />
+                </TableRow>
+
+                <TableRow style="@style/LastTableRowStyle">
+
+                    <TextView
+                        style="@style/TableRowLabelStyle"
+                        android:text="@string/label_email" />
+
+                    <TextView
+                        style="@style/TableRowItemStyle"
+                        android:text="Email"
+                        tools:text="@string/customer_email_placeholder" />
+                </TableRow>
+            </TableLayout>
+
+            <!-- Label: User -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/virtual_machine_user_label"
+                style="@style/TitleContainerStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_requester_table">
+
+                <TextView
+                    android:id="@+id/virtual_machine_user_title"
+                    style="@style/TitleTextStyle"
+                    android:text="@string/user"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/virtual_machine_user_title_underline"
+                    style="@style/TitleUnderlineStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/virtual_machine_user_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Table: User -->
+            <TableLayout
+                android:id="@+id/virtual_machine_user_table"
+                style="@style/TableLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_md"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/virtual_machine_user_label">
+
+                <TableRow style="@style/TableRowStyle">
+
+                    <TextView
+                        style="@style/TableRowLabelStyle"
+                        android:text="@string/label_name" />
+
+                    <TextView
+                        style="@style/TableRowItemStyle"
+                        android:text="Name"
+                        tools:text="@string/name_placeholder" />
+                </TableRow>
+
+                <TableRow style="@style/LastTableRowStyle">
+
+                    <TextView
+                        style="@style/TableRowLabelStyle"
+                        android:text="@string/label_email" />
+
+                    <TextView
+                        style="@style/TableRowItemStyle"
+                        android:text="Email"
+                        tools:text="@string/customer_email_placeholder" />
+                </TableRow>
+            </TableLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

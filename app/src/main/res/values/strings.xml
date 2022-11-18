@@ -52,5 +52,12 @@
     <string name="label_username">Username</string>
     <string name="label_role">Role</string>
     <string name="credentials">Credentials</string>
+    <string name="requester">Requester</string>
+    <string name="user">User</string>
+    <string name="status_requested">Requested</string>
+    <string name="status_in_progress">In Progress</string>
+    <string name="status_ready_to_deploy">Ready To Deploy</string>
+    <string name="status_deployed">Deployed</string>
+
 
 </resources>

@@ -78,5 +78,21 @@ fun TextView.setBackupFrequency(backupFrequency: BackupFrequency?) {
     }
 }
 
+@BindingAdapter("text")
+fun TextView.setStatus(status: Status?) {
+    status?.let {
+        text = context.getString(translateStatus(status))
+    }
+}
+
+@BindingAdapter("indicator")
+fun TextView.setIndicator(item: VirtualMachine?) {
+    item?.let {
+        var color =
+            if (item.status == Status.Deployed) R.attr.activeIndicatorColor else R.attr.inactiveIndicatorColor
+        DrawableCompat.setTint(background, color)
+    }
+}
+
 
 

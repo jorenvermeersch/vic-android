@@ -3,6 +3,7 @@ package com.example.vic
 import com.example.vic.database.entities.ContactPerson
 import com.example.vic.database.enums.BackupFrequency
 import com.example.vic.database.enums.Mode
+import com.example.vic.database.enums.Status
 import com.example.vic.database.enums.Template
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,7 +26,7 @@ fun translateMode(mode: Mode): Int {
     }
 }
 
-fun translateTemplate(template: Template) : Int {
+fun translateTemplate(template: Template): Int {
     return when (template) {
         Template.NoTemplate -> R.string.template_no_template
         Template.AI -> R.string.template_ai
@@ -33,12 +34,22 @@ fun translateTemplate(template: Template) : Int {
     }
 }
 
-fun translateBackupFrequency(backupFrequency: BackupFrequency) : Int {
-    return when(backupFrequency) {
+fun translateBackupFrequency(backupFrequency: BackupFrequency): Int {
+    return when (backupFrequency) {
         BackupFrequency.NoBackup -> R.string.backup_no_backup
         BackupFrequency.Daily -> R.string.backup_daily
         BackupFrequency.Weekly -> R.string.backup_weekly
         BackupFrequency.Monthly -> R.string.backup_monthly
 
     }
+}
+
+fun translateStatus(status: Status) : Int {
+    return when (status) {
+        Status.Requested -> R.string.status_requested
+        Status.InProgress -> R.string.status_in_progress
+        Status.ReadyToDeploy -> R.string.status_ready_to_deploy
+        Status.Deployed -> R.string.status_deployed
+    }
+
 }
