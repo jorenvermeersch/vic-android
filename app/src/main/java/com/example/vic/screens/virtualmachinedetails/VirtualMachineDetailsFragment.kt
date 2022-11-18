@@ -31,6 +31,18 @@ class VirtualMachineDetailsFragment : Fragment() {
         )
         binding.viewModel = viewModel
 
+        val adapter = CredentialsAdapter()
+        binding.credentialsList.adapter = adapter
+
+        viewModel.chosenVirtualMachine.observe(viewLifecycleOwner) {
+            adapter.submitList(it.credentials)
+        }
+
+
+
+
+
+
         return binding.root
     }
 }

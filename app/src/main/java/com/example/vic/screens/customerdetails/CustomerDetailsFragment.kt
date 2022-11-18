@@ -19,8 +19,6 @@ import com.example.vic.screens.customerlist.CustomerListFragmentDirections
 import com.example.vic.screens.models.ApplicationViewModel
 import timber.log.Timber
 
-private val PLACEHOLDER_ID = 1L
-
 class CustomerDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentCustomerDetailsBinding

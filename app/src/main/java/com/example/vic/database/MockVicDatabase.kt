@@ -79,7 +79,12 @@ class MockVicDatabase() : VicDatabaseDao {
                 "reason-$id",
                 listOf(Port(22, "SSH"), Port(443, "HTTPS")),
                 Host(id.toLong(), "host-$id", specifications),
-                listOf(),
+                listOf(
+                    Credentials("user-$id", "password-$id", "role-$id"),
+                    Credentials("user-$id", "password-$id", "role-$id"),
+                    Credentials("user-$id", "password-$id", "role-$id"),
+                    Credentials("user-$id", "password-$id", "role-$id")
+                ),
                 null,
                 null,
                 null

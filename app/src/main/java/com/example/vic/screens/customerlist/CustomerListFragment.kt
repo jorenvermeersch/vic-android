@@ -14,8 +14,6 @@ import com.example.vic.R
 import com.example.vic.databinding.FragmentCustomerListBinding
 import com.example.vic.screens.models.ApplicationViewModel
 
-private val PLACEHOLDER_ID = 1L
-
 class CustomerListFragment : Fragment() {
 
     private lateinit var binding: FragmentCustomerListBinding
@@ -43,11 +41,11 @@ class CustomerListFragment : Fragment() {
         binding.customerList.adapter = adapter
 
         // Display customers in RecyclerView.
-        viewModel.filteredCustomers.observe(viewLifecycleOwner, Observer { customers ->
+        viewModel.filteredCustomers.observe(viewLifecycleOwner) { customers ->
             customers?.let {
                 adapter.submitList(customers)
             }
-        })
+        }
 
         // Search bar.
         binding.customerSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

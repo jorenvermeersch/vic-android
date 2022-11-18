@@ -51,5 +51,6 @@
     <string name="label_back_ups">Back-ups</string>
     <string name="label_username">Username</string>
     <string name="label_role">Role</string>
+    <string name="credentials">Credentials</string>
 
 </resources>
