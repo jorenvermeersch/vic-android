@@ -75,7 +75,7 @@ class MockVicDatabase() : VicDatabaseDao {
                 today,
                 today,
                 today,
-                Status.InProgress,
+                Status.Deployed,
                 "reason-$id",
                 listOf(Port(22, "SSH"), Port(443, "HTTPS")),
                 Host(id.toLong(), "host-$id", specifications),

@@ -35,6 +35,7 @@
                     android:layout_height="12dp"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/indicator_icon"
+                    app:indicator="@{viewModel.chosenVirtualMachine}"
                     android:backgroundTint="@color/blue"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +46,6 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:textColor="?attr/textColor"
-
                     android:textFontWeight="600"
                     android:textSize="@dimen/text_md"
                     app:layout_constraintBottom_toBottomOf="parent"

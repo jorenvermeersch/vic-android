@@ -1,6 +1,7 @@
 package com.example.vic.screens
 
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
 import com.example.vic.*
@@ -36,6 +37,8 @@ fun TextView.setIndicator(item: VirtualMachineIndex?) {
         var color =
             if (item.status == Status.Deployed) R.attr.activeIndicatorColor else R.attr.inactiveIndicatorColor
         DrawableCompat.setTint(background, color)
+        // background.setTint(color)
+        Toast.makeText(context, "Got here!", Toast.LENGTH_LONG)
     }
 }
 // fragment_virtual_machine_details.xml.
@@ -88,9 +91,12 @@ fun TextView.setStatus(status: Status?) {
 @BindingAdapter("indicator")
 fun TextView.setIndicator(item: VirtualMachine?) {
     item?.let {
+
         var color =
             if (item.status == Status.Deployed) R.attr.activeIndicatorColor else R.attr.inactiveIndicatorColor
         DrawableCompat.setTint(background, color)
+
+
     }
 }
 
