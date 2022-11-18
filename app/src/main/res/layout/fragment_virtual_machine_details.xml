@@ -151,50 +151,49 @@
 
                 <TextView
                     style="@style/TableRowLabelStyle"
-                    android:text="Mode" />
+                    android:text="@string/label_mode" />
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="ModeString"
-                    tools:text="1" />
+                    app:text="@{viewModel.chosenVirtualMachine.mode}"
+                    tools:text="@string/name_placeholder" />
             </TableRow>
 
             <TableRow style="@style/TableRowStyle">
 
                 <TextView
                     style="@style/TableRowLabelStyle"
-                    android:text="Template" />
+                    android:text="@string/label_template" />
 
                 <TextView
                     style="@style/TableRowItemStyle"
-
-                    android:text="TemplateString"
-                    tools:text="1" />
+                    app:text="@{viewModel.chosenVirtualMachine.template}"
+                    tools:text="@string/name_placeholder" />
             </TableRow>
 
             <TableRow style="@style/TableRowStyle">
 
                 <TextView
                     style="@style/TableRowLabelStyle"
-                    android:text="Reason" />
+                    android:text="@string/label_reason" />
 
                 <TextView
                     style="@style/TableRowItemStyle"
 
-                    android:text="ReasonString"
-                    tools:text="1" />
+                    android:text="@{viewModel.chosenVirtualMachine.reason}"
+                    tools:text="@string/name_placeholder" />
             </TableRow>
 
             <TableRow style="@style/LastTableRowStyle">
 
                 <TextView
                     style="@style/TableRowLabelStyle"
-                    android:text="External access" />
+                    android:text="@string/label_external_access" />
 
                 <TextView
                     style="@style/TableRowItemStyle"
-                    android:text="AccessString"
-                    tools:text="1" />
+                    app:text="@{viewModel.chosenVirtualMachine.ports}"
+                    tools:text="@string/name_placeholder" />
             </TableRow>
         </TableLayout>
 
@@ -222,6 +221,78 @@
                 app:layout_constraintTop_toBottomOf="@+id/virtual_machine_availability_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Table: Availability -->
+        <TableLayout
+            android:id="@+id/virtual_machine_date_table"
+            style="@style/TableLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_md"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/virtual_machine_availability_label">
+
+            <TableRow style="@style/TableRowStyle">
+
+                <TextView
+                    style="@style/TableRowLabelStyle"
+                    android:text="@string/label_application_date" />
+
+                <TextView
+                    style="@style/TableRowItemStyle"
+                    app:text="@{viewModel.chosenVirtualMachine.applicationDate}"
+                    tools:text="@string/date_placeholder" />
+            </TableRow>
+
+            <TableRow style="@style/TableRowStyle">
+
+                <TextView
+                    style="@style/TableRowLabelStyle"
+                    android:text="@string/label_start_date" />
+
+                <TextView
+                    style="@style/TableRowItemStyle"
+                    app:text="@{viewModel.chosenVirtualMachine.startDate}"
+                    tools:text="@string/date_placeholder" />
+            </TableRow>
+
+            <TableRow style="@style/LastTableRowStyle">
+
+                <TextView
+                    style="@style/TableRowLabelStyle"
+                    android:text="@string/label_end_date" />
+
+                <TextView
+                    style="@style/TableRowItemStyle"
+                    app:text="@{viewModel.chosenVirtualMachine.endDate}"
+                    tools:text="@string/date_placeholder" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- Table: Back-ups -->
+        <TableLayout
+            android:id="@+id/virtual_machine_backup_table"
+            style="@style/TableLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_md"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/virtual_machine_date_table">
+
+            <TableRow style="@style/LastTableRowStyle">
+
+                <TextView
+                    style="@style/TableRowLabelStyle"
+                    android:text="@string/label_back_ups" />
+
+                <TextView
+                    style="@style/TableRowItemStyle"
+                    app:text="@{viewModel.chosenVirtualMachine.backupFrequency}"
+                    tools:text="@string/name_placeholder" />
+            </TableRow>
+        </TableLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

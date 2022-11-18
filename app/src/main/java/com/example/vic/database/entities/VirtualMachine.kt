@@ -13,6 +13,8 @@ data class VirtualMachine(
     val availabilities: List<Availability>,
     val backupFrequency: BackupFrequency,
     val applicationDate: Date,
+    val startDate: Date,
+    val endDate: Date,
     val status: Status,
     val reason: String,
     val ports: List<Port>,

@@ -7,7 +7,6 @@ import com.example.vic.database.enums.*
 import com.example.vic.getCurrentDateTime
 
 
-
 class MockVicDatabase() : VicDatabaseDao {
 
     private val _customers = MutableLiveData<List<Customer>>(listOf())
@@ -58,6 +57,7 @@ class MockVicDatabase() : VicDatabaseDao {
 
     private fun populateVirtualMachines() {
         val mockVirtualMachines = mutableListOf<VirtualMachine>()
+        val today = getCurrentDateTime()
 
         for (id in 1..20) {
             val specifications = Specifications(id + 1, id + 1, id + 1)
@@ -71,10 +71,12 @@ class MockVicDatabase() : VicDatabaseDao {
                 "devops-vm-$id",
                 listOf(Availability.Monday, Availability.Wednesday),
                 BackupFrequency.Weekly,
-                getCurrentDateTime(),
+                today,
+                today,
+                today,
                 Status.ReadyToDeploy,
                 "reason-$id",
-                listOf(Port(22, "SSH")),
+                listOf(Port(22, "SSH"), Port(443, "HTTPS")),
                 Host(id.toLong(), "host-$id", specifications),
                 listOf(),
                 null,

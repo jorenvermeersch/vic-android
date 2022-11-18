@@ -14,7 +14,7 @@
     <string name="label_phone_number">Phone number</string>
     <string name="customer_name_placeholder">Name</string>
     <string name="customer_email_placeholder">user.name@example.com</string>
-    <string name="phone_number_placeholder">701-780-3569</string>
+    <string name="phone_number_placeholder">701–780–3569</string>
     <string name="general">General</string>
     <string name="label_institution">Institution</string>
     <string name="label_department">Department</string>
@@ -30,4 +30,24 @@
     <string name="specifications_and_configuration">Specifications and configuration</string>
     <string name="gb_format">%d GB</string>
     <string name="availability_and_back_ups">Availability and back-ups</string>
+    <string name="mode_saas">SAAS</string>
+    <string name="mode_paas">PAAS</string>
+    <string name="mode_iaas">IAAS</string>
+    <string name="template_no_template">No template</string>
+    <string name="template_ai">Artificial Intelligence</string>
+    <string name="template_web_server">Web server</string>
+    <string name="label_mode">Mode</string>
+    <string name="label_template">Template</string>
+    <string name="label_reason">Reason</string>
+    <string name="label_external_access">External access</string>
+    <string name="label_application_date">Requested on</string>
+    <string name="label_start_date">Start</string>
+    <string name="label_end_date">End</string>
+    <string name="date_placeholder">2022–11–18</string>
+    <string name="backup_no_backup">No back-up</string>
+    <string name="backup_daily">Daily</string>
+    <string name="backup_weekly">Weekly</string>
+    <string name="backup_monthly">Monthly</string>
+    <string name="label_back_ups">Back-ups</string>
+
 </resources>
