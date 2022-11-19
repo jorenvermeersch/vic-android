@@ -14,15 +14,38 @@ class MockVicDatabase() : VicDatabaseDao {
 
 
     init {
-        populateVirtualMachines()
-        populateCustomers()
+        populate()
     }
 
 
-    private fun populateCustomers() {
+    private fun populate() {
+        val mockCustomers = generateMockCustomers()
+        val mockVirtualMachines = generateMockVirtualMachines()
+
+        for (index in mockCustomers.indices) {
+            val mockCustomer = mockCustomers[index]
+            val machine1 = mockVirtualMachines[index]
+            val machine2 = mockVirtualMachines[index + 1]
+
+            mockCustomer.virtualMachines =
+                listOf(machine1, machine2).map { VirtualMachineIndex(it.id, it.name, it.status) }
+            machine1.requester = mockCustomer
+            machine1.user = mockCustomer
+            machine2.requester = mockCustomer
+            machine2.user = mockCustomer
+        }
+
+        _customers.value = mockCustomers
+        _virtualMachines.value = mockVirtualMachines
+
+    }
+
+    private fun generateMockCustomers(): List<Customer> {
         val mockCustomers = mutableListOf<Customer>()
 
-        for (id in 1..20) {
+        for (id in 1..10) {
+            val internal = id in 2..6
+
             val contact = ContactPerson(
                 id.toLong(),
                 "firstname-$id",
@@ -30,12 +53,6 @@ class MockVicDatabase() : VicDatabaseDao {
                 "customer-$id.example@devops.com",
                 if (id % 3 != 0) "phone-number-$id" else null
             )
-
-            val internal = id in 2..6
-
-            val machines = (_virtualMachines.value ?: listOf())
-                .filter { it.id == id.toLong() }
-                .map { VirtualMachineIndex(it.id, it.name, it.status) }
 
             val mock = Customer(
                 id.toLong(),
@@ -47,18 +64,29 @@ class MockVicDatabase() : VicDatabaseDao {
                 if (internal) "education-$id" else null,
                 if (!internal) "type-$id" else null,
                 if (!internal) "company-name-$id" else null,
-                machines
+                listOf()
             )
-
             mockCustomers.add(mock)
         }
 
-        _customers.value = mockCustomers
+        return mockCustomers
     }
 
-    private fun populateVirtualMachines() {
+    private fun generateMockVirtualMachines(): List<VirtualMachine> {
         val mockVirtualMachines = mutableListOf<VirtualMachine>()
+
         val today = getCurrentDateTime()
+        val account = Account(
+            1,
+            "firstname-1",
+            "lastname-1",
+            "email-1",
+            Role.Admin,
+            "password-1",
+            true,
+            "department-1",
+            "education-1"
+        )
 
         for (id in 1..20) {
             val specifications = Specifications(id + 1, id + 1, id + 1)
@@ -75,7 +103,7 @@ class MockVicDatabase() : VicDatabaseDao {
                 today,
                 today,
                 today,
-                Status.Deployed,
+                if (id % 2 == 0) Status.Deployed else Status.InProgress,
                 "reason-$id",
                 listOf(Port(22, "SSH"), Port(443, "HTTPS")),
                 Host(id.toLong(), "host-$id", specifications),
@@ -85,15 +113,14 @@ class MockVicDatabase() : VicDatabaseDao {
                     Credentials("user-$id", "password-$id", "role-$id"),
                     Credentials("user-$id", "password-$id", "role-$id")
                 ),
-                null,
+                account,
                 null,
                 null
             )
-
             mockVirtualMachines.add(mock)
         }
 
-        _virtualMachines.value = mockVirtualMachines
+        return mockVirtualMachines
     }
 
     override fun insertCustomer(customer: Customer): LiveData<Customer> {

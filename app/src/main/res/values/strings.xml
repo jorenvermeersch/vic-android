@@ -58,6 +58,8 @@
     <string name="status_in_progress">In Progress</string>
     <string name="status_ready_to_deploy">Ready To Deploy</string>
     <string name="status_deployed">Deployed</string>
+    <string name="responsible_admin">Responsible administrator</string>
+    <string name="format_full_name">%s %s</string>
 
 
 </resources>

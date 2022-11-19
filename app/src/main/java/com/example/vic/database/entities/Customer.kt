@@ -12,7 +12,7 @@ data class Customer(
     val education : String?, // Internal.
     val type: String?, // External.
     val companyName: String?, // External.
-    val virtualMachines: List<VirtualMachineIndex>
+    var virtualMachines: List<VirtualMachineIndex>
 ) {
 
 }

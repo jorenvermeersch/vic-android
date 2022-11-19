@@ -35,8 +35,7 @@
                     android:layout_height="12dp"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/indicator_icon"
-                    app:indicator="@{viewModel.chosenVirtualMachine}"
-                    android:backgroundTint="@color/blue"
+                    android:backgroundTint="?attr/activeIndicatorColor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -412,7 +411,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        android:text="Name"
+                        app:fullName="@{viewModel.chosenVirtualMachine.requester.contactPerson}"
                         tools:text="@string/name_placeholder" />
                 </TableRow>
 
@@ -424,7 +423,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        android:text="Email"
+                        android:text="@{viewModel.chosenVirtualMachine.requester.contactPerson.email}"
                         tools:text="@string/customer_email_placeholder" />
                 </TableRow>
             </TableLayout>
@@ -473,7 +472,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        android:text="Name"
+                        app:fullName="@{viewModel.chosenVirtualMachine.user.contactPerson}"
                         tools:text="@string/name_placeholder" />
                 </TableRow>
 
@@ -485,7 +484,70 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        android:text="Email"
+                        android:text="@{viewModel.chosenVirtualMachine.user.contactPerson.email}"
+                        tools:text="@string/customer_email_placeholder" />
+                </TableRow>
+            </TableLayout>
+
+            <!-- Label: Responsible admin -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/virtual_machine_responsible_admin_label"
+                style="@style/TitleContainerStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_user_table">
+
+                <TextView
+                    android:id="@+id/virtual_machine_responsible_admin_title"
+                    style="@style/TitleTextStyle"
+                    android:text="@string/responsible_admin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/virtual_machine_responsible_admin_title_underline"
+                    style="@style/TitleUnderlineStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/virtual_machine_responsible_admin_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Table: Responsible admin -->
+            <TableLayout
+                android:id="@+id/virtual_machine_responsible_admin_table"
+                style="@style/TableLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_md"
+                android:layout_marginBottom="@dimen/padding_md"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/virtual_machine_responsible_admin_label">
+
+                <TableRow style="@style/TableRowStyle">
+
+                    <TextView
+                        style="@style/TableRowLabelStyle"
+                        android:text="@string/label_name" />
+
+                    <TextView
+                        style="@style/TableRowItemStyle"
+                        app:fullName="@{viewModel.chosenVirtualMachine.account}"
+                        tools:text="@string/name_placeholder" />
+                </TableRow>
+
+                <TableRow style="@style/LastTableRowStyle">
+
+                    <TextView
+                        style="@style/TableRowLabelStyle"
+                        android:text="@string/label_email" />
+
+                    <TextView
+                        style="@style/TableRowItemStyle"
+                        android:text="@{viewModel.chosenVirtualMachine.account.email}"
                         tools:text="@string/customer_email_placeholder" />
                 </TableRow>
             </TableLayout>

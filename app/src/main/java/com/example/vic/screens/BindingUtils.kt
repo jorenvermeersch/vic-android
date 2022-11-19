@@ -5,10 +5,7 @@ import android.widget.Toast
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
 import com.example.vic.*
-import com.example.vic.database.entities.CustomerIndex
-import com.example.vic.database.entities.Port
-import com.example.vic.database.entities.VirtualMachine
-import com.example.vic.database.entities.VirtualMachineIndex
+import com.example.vic.database.entities.*
 import com.example.vic.database.enums.BackupFrequency
 import com.example.vic.database.enums.Mode
 import com.example.vic.database.enums.Status
@@ -34,7 +31,7 @@ fun TextView.setName(item: VirtualMachineIndex?) {
 @BindingAdapter("indicator")
 fun TextView.setIndicator(item: VirtualMachineIndex?) {
     item?.let {
-        var color =
+        val color =
             if (item.status == Status.Deployed) R.attr.activeIndicatorColor else R.attr.inactiveIndicatorColor
         DrawableCompat.setTint(background, color)
         // background.setTint(color)
@@ -92,13 +89,25 @@ fun TextView.setStatus(status: Status?) {
 fun TextView.setIndicator(item: VirtualMachine?) {
     item?.let {
 
-        var color =
+        val color =
             if (item.status == Status.Deployed) R.attr.activeIndicatorColor else R.attr.inactiveIndicatorColor
         DrawableCompat.setTint(background, color)
-
-
     }
 }
 
+@BindingAdapter("fullName")
+fun TextView.setFullName(contactPerson: ContactPerson?) {
+    contactPerson?.let {
+        text =  String.format(resources.getString(R.string.format_full_name), it.firstName, it.lastName)
+    }
+}
+
+@BindingAdapter("fullName")
+fun TextView.setFullName(account: Account?) {
+    account?.let {
+        text =  String.format(resources.getString(R.string.format_full_name), it.firstName, it.lastName)
+
+    }
+}
 
 
