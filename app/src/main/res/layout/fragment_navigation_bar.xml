@@ -40,7 +40,7 @@
                 android:contentDescription="@string/company_name_description"
                 android:text="@string/company_name"
                 android:textColor="?attr/navigationTextColor"
-                android:textFontWeight="600"
+                android:fontFamily="@font/graphik_semibold"
                 android:textSize="@dimen/text_md"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/nav_icon"

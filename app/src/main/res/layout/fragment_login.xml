@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,14 +14,83 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:divider="@drawable/divider"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/padding_sm"
+            android:paddingEnd="@dimen/padding_sm"
+            android:showDividers="middle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Label: Login -->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/login_label"
+                style="@style/TitleContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="@dimen/padding_ty">
+
+                <TextView
+                    android:id="@+id/login_title"
+                    style="@style/TitleTextStyle"
+                    android:text="@string/label_login"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/login_title_underline"
+                    style="@style/TitleUnderlineStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/login_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/login_label_username"
+                style="@style/LabelStyle"
+                android:text="@string/label_username" />
+
+            <EditText
+                style="@style/InputStyle"
+                android:hint="@string/label_username"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/dark_gray" />
+
+            <TextView
+                android:id="@+id/login_label_password"
+                style="@style/LabelStyle"
+                android:text="@string/label_password" />
+
+            <EditText
+                style="@style/InputStyle"
+                android:hint="@string/label_password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:textColorHint="@color/dark_gray" />
+
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/dark_blue"
+                android:fontFamily="@font/graphik_semibold"
+                android:text="@string/label_login"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_sm" />
+
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

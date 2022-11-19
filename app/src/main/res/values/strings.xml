@@ -60,6 +60,9 @@
     <string name="status_deployed">Deployed</string>
     <string name="responsible_admin">Responsible administrator</string>
     <string name="format_full_name">%s %s</string>
+    <string name="label_login">Login</string>
+    <string name="format_label">%s:</string>
+    <string name="label_password">Password</string>
 
 
 </resources>

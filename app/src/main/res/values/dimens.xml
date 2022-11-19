@@ -6,6 +6,7 @@
     <dimen name="text_md">16sp</dimen>
     <dimen name="padding_md">16dp</dimen>
     <dimen name="padding_sm">10dp</dimen>
+    <dimen name="padding_ty">6dp</dimen>
     <dimen name="title_underline_height">3dp</dimen>
     <dimen name="font_weight_semibold">600</dimen>
 </resources>
