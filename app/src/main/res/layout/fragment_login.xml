@@ -72,16 +72,9 @@
 
             <Button
                 android:id="@+id/login_button"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:textColor="?attr/buttonTextColor"
-                android:backgroundTint="?attr/buttonColor"
-                android:fontFamily="@font/graphik_semibold"
-                android:stateListAnimator="@null"
                 android:text="@string/label_login"
-                android:textAllCaps="false"
-                android:textSize="@dimen/text_sm" />
+                style="@style/ButtonStyle" />
 
 
         </LinearLayout>

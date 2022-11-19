@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            style="@style/LinearLayoutStyle"
-            android:showDividers="none">
+        <LinearLayout style="@style/LinearLayoutStyle">
 
             <!-- Header: General -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,8 +41,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Header: General -->
+            <!-- Select type of Customer -->
             <RadioGroup
+                android:id="@+id/customer_type_radio_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -54,6 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/padding_md"
+                    android:checked="true"
                     android:fontFamily="@font/graphik_semibold"
                     android:text="@string/customer_type_internal" />
 
@@ -90,25 +90,81 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                style="@style/LabelStyle"
-                android:text="@string/label_institution" />
+            <!-- Fields: General - Internal customer -->
+            <LinearLayout
+                android:id="@+id/general_internal_customer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider"
+                android:orientation="vertical"
+                android:showDividers="middle">
 
-            <TextView
-                style="@style/LabelStyle"
-                android:text="@string/label_department" />
+                <TextView
+                    style="@style/LabelStyle"
+                    android:text="@string/label_institution" />
 
-            <TextView
-                style="@style/LabelStyle"
-                android:text="@string/label_education" />
+                <EditText
+                    android:id="@+id/institution"
+                    style="@style/InputStyle"
+                    android:autofillHints="text"
+                    android:hint="@string/label_institution"
+                    android:inputType="text" />
 
-            <TextView
-                style="@style/LabelStyle"
-                android:text="@string/label_external_type" />
+                <TextView
+                    style="@style/LabelStyle"
+                    android:text="@string/label_department" />
 
-            <TextView
-                style="@style/LabelStyle"
-                android:text="@string/label_company_name" />
+                <EditText
+                    android:id="@+id/department"
+                    style="@style/InputStyle"
+                    android:autofillHints="text"
+                    android:hint="@string/label_department"
+                    android:inputType="text" />
+
+                <TextView
+                    style="@style/LabelStyle"
+                    android:text="@string/label_education" />
+
+                <EditText
+                    android:id="@+id/education"
+                    style="@style/InputStyle"
+                    android:autofillHints="text"
+                    android:hint="@string/label_education"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <!-- Fields: General - External customer -->
+            <LinearLayout
+                android:id="@+id/general_external_customer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider"
+                android:orientation="vertical"
+                android:showDividers="middle"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/LabelStyle"
+                    android:text="@string/label_external_type" />
+
+                <EditText
+                    android:id="@+id/external_type"
+                    style="@style/InputStyle"
+                    android:autofillHints="name"
+                    android:hint="@string/label_external_type"
+                    android:inputType="text" />
+
+                <TextView
+                    style="@style/LabelStyle"
+                    android:text="@string/label_company_name" />
+
+                <EditText
+                    android:id="@+id/company_name"
+                    style="@style/InputStyle"
+                    android:autofillHints="name"
+                    android:hint="@string/label_company_name"
+                    android:inputType="text" />
+            </LinearLayout>
 
             <!-- Header: Contact information -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -248,6 +304,12 @@
                 android:autofillHints="phone"
                 android:hint="@string/label_phone_number"
                 android:inputType="phone" />
+
+            <Button
+                android:id="@+id/add_customer_button"
+                style="@style/ButtonStyle"
+                android:layout_gravity="center"
+                android:text="@string/add_customer" />
         </LinearLayout>
 
     </ScrollView>
