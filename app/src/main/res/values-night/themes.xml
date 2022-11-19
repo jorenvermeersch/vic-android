@@ -21,7 +21,7 @@
 
         <item name="cardBackgroundColor">@color/dark_gray</item>
         <item name="activeIndicatorColor">@color/blue</item>
-        <item name="inactiveIndicatorColor">@color/black</item>
+        <item name="inactiveIndicatorColor">@color/gray</item>
         <item name="titleAccentColor">@color/white</item>
 
         <item name="hintTextColor">@color/gray</item>
