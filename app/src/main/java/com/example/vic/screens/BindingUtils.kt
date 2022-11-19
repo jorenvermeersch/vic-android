@@ -34,7 +34,6 @@ fun TextView.setName(item: VirtualMachineIndex?) {
 @BindingAdapter("indicator")
 fun TextView.setIndicator(item: VirtualMachineIndex?) {
     item?.let {
-
         val typedValue = TypedValue()
         val ref =
             if (item.status == Status.Deployed) R.attr.activeIndicatorColor else R.attr.inactiveIndicatorColor

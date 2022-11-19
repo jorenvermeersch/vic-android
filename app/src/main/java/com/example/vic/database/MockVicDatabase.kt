@@ -124,7 +124,11 @@ class MockVicDatabase() : VicDatabaseDao {
     }
 
     override fun insertCustomer(customer: Customer): LiveData<Customer> {
-        TODO("Not yet implemented")
+        val customers = _customers.value?.toMutableList() ?: mutableListOf()
+        customers.add(customer)
+        _customers.value = customers
+
+        return MutableLiveData(customer)
     }
 
     override fun getCustomers(): LiveData<List<CustomerIndex>> {
