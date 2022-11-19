@@ -1,7 +1,10 @@
 package com.example.vic.screens
 
+import android.graphics.Color
+import android.util.TypedValue
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
 import com.example.vic.*
@@ -31,18 +34,22 @@ fun TextView.setName(item: VirtualMachineIndex?) {
 @BindingAdapter("indicator")
 fun TextView.setIndicator(item: VirtualMachineIndex?) {
     item?.let {
-        val color =
+
+        val typedValue = TypedValue()
+        val ref =
             if (item.status == Status.Deployed) R.attr.activeIndicatorColor else R.attr.inactiveIndicatorColor
-        DrawableCompat.setTint(background, color)
-        // background.setTint(color)
-        Toast.makeText(context, "Got here!", Toast.LENGTH_LONG)
+        context.theme.resolveAttribute(ref, typedValue, true)
+        val color = typedValue.data
+
+        background.setTint(color)
     }
 }
+
 // fragment_virtual_machine_details.xml.
 @BindingAdapter("text")
 fun TextView.setMode(mode: Mode?) {
     mode?.let {
-       text = context.getString(translateMode(mode))
+        text = context.getString(translateMode(mode))
     }
 }
 
@@ -65,7 +72,7 @@ fun TextView.setPorts(ports: List<Port>?) {
 }
 
 @BindingAdapter("text")
-fun TextView.setDate(date : Date?) {
+fun TextView.setDate(date: Date?) {
     date?.let {
         text = date.toString("yyyy-MM-dd")
     }
@@ -88,24 +95,29 @@ fun TextView.setStatus(status: Status?) {
 @BindingAdapter("indicator")
 fun TextView.setIndicator(item: VirtualMachine?) {
     item?.let {
-
-        val color =
+        val typedValue = TypedValue()
+        val ref =
             if (item.status == Status.Deployed) R.attr.activeIndicatorColor else R.attr.inactiveIndicatorColor
-        DrawableCompat.setTint(background, color)
+        context.theme.resolveAttribute(ref, typedValue, true)
+        val color = typedValue.data
+
+        background.setTint(color)
     }
 }
 
 @BindingAdapter("fullName")
 fun TextView.setFullName(contactPerson: ContactPerson?) {
     contactPerson?.let {
-        text =  String.format(resources.getString(R.string.format_full_name), it.firstName, it.lastName)
+        text =
+            String.format(resources.getString(R.string.format_full_name), it.firstName, it.lastName)
     }
 }
 
 @BindingAdapter("fullName")
 fun TextView.setFullName(account: Account?) {
     account?.let {
-        text =  String.format(resources.getString(R.string.format_full_name), it.firstName, it.lastName)
+        text =
+            String.format(resources.getString(R.string.format_full_name), it.firstName, it.lastName)
 
     }
 }

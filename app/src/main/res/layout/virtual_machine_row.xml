@@ -33,6 +33,7 @@
             android:layout_height="12dp"
             android:layout_marginEnd="@dimen/padding_md"
             android:background="@drawable/indicator_icon"
+            app:indicator="@{virtualMachineIndex}"
             android:backgroundTint="?attr/activeIndicatorColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

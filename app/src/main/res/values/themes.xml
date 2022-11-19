@@ -21,10 +21,10 @@
 
         <item name="cardBackgroundColor">@color/light_gray</item>
         <item name="activeIndicatorColor">@color/blue</item>
-        <item name="inactiveIndicatorColor">@color/dark_gray</item>
+        <item name="inactiveIndicatorColor">@color/gray</item>
         <item name="titleAccentColor">@color/dark_blue</item>
 
-        <item name="hintTextColor">@color/dark_gray</item>
+        <item name="hintTextColor">@color/gray</item>
 
         <!-- Font -->
         <item name="android:fontFamily">@font/graphik</item>
