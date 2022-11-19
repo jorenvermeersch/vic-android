@@ -22,8 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             style="@style/LinearLayoutStyle">
 
-            <!-- Label: Login -->
-
+            <!-- Header: Login -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/login_label"
                 style="@style/TitleContainerStyle"
@@ -58,8 +57,7 @@
                 style="@style/InputStyle"
                 android:hint="@string/label_username"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:textColorHint="@color/dark_gray" />
+                android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/login_label_password"
@@ -70,8 +68,7 @@
                 style="@style/InputStyle"
                 android:hint="@string/label_password"
                 android:importantForAutofill="no"
-                android:inputType="textPassword"
-                android:textColorHint="@color/dark_gray" />
+                android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/login_button"

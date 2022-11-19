@@ -24,6 +24,8 @@
         <item name="inactiveIndicatorColor">@color/dark_gray</item>
         <item name="titleAccentColor">@color/dark_blue</item>
 
+        <item name="hintTextColor">@color/dark_gray</item>
+
         <!-- Font -->
         <item name="android:fontFamily">@font/graphik</item>
 

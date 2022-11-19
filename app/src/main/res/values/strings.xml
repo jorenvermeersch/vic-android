@@ -63,6 +63,13 @@
     <string name="label_login">Login</string>
     <string name="format_label">%s:</string>
     <string name="label_password">Password</string>
+    <string name="log_out">Log out</string>
+    <string name="label_firstname">Firstname</string>
+    <string name="label_lastname">Lastname</string>
+    <string name="back_up_contact_information">Back-up contact information</string>
+    <string name="customer_type">Type</string>
+    <string name="customer_type_internal">Internal</string>
+    <string name="customer_type_external">External</string>
 
 
 </resources>

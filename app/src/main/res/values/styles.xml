@@ -95,6 +95,7 @@
         <item name="android:paddingStart">@dimen/padding_sm</item>
         <item name="android:paddingEnd">@dimen/padding_md</item>
         <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:textColorHint">?attr/hintTextColor</item>
     </style>
 
     <style name="LabelStyle">

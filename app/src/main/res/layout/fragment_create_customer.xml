@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,21 +10,246 @@
             type="com.example.vic.screens.models.ApplicationViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/createBackgroundColor">
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle"
+            android:showDividers="none">
+
+            <!-- Header: General -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/customer_type_label"
+                style="@style/TitleContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="@dimen/padding_ty">
+
+                <TextView
+                    android:id="@+id/customer_type_label_title"
+                    style="@style/TitleTextStyle"
+                    android:text="@string/customer_type"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/TitleUnderlineStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/customer_type_label_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Header: General -->
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/option_internal_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/padding_md"
+                    android:fontFamily="@font/graphik_semibold"
+                    android:text="@string/customer_type_internal" />
+
+                <RadioButton
+                    android:id="@+id/option_external_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/graphik_semibold"
+                    android:text="@string/customer_type_external" />
+            </RadioGroup>
+
+            <!-- Header: General -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/general_label"
+                style="@style/TitleContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="@dimen/padding_ty">
+
+                <TextView
+                    android:id="@+id/general_label_title"
+                    style="@style/TitleTextStyle"
+                    android:text="@string/general"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/TitleUnderlineStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/general_label_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_institution" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_department" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_education" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_external_type" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_company_name" />
+
+            <!-- Header: Contact information -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contact_information_label"
+                style="@style/TitleContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="@dimen/padding_ty">
+
+                <TextView
+                    android:id="@+id/contact_information_label_title"
+                    style="@style/TitleTextStyle"
+                    android:text="@string/contact_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/TitleUnderlineStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/contact_information_label_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_firstname" />
+
+            <EditText
+                android:id="@+id/contact_firstname"
+                style="@style/InputStyle"
+                android:autofillHints="name"
+                android:hint="@string/label_firstname"
+                android:inputType="textPersonName" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_lastname" />
+
+            <EditText
+                android:id="@+id/contact_lastname"
+                style="@style/InputStyle"
+                android:autofillHints="name"
+                android:hint="@string/label_lastname"
+                android:inputType="textPersonName" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_email" />
+
+            <EditText
+                android:id="@+id/contact_email"
+                style="@style/InputStyle"
+                android:autofillHints="emailAddress"
+                android:hint="@string/label_email"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_phone_number" />
+
+            <EditText
+                android:id="@+id/contact_phone_number"
+                style="@style/InputStyle"
+                android:autofillHints="phone"
+                android:hint="@string/label_phone_number"
+                android:inputType="phone" />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CreateCustomer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <!-- Header: Backup contact information -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/backup_contact_information_label"
+                style="@style/TitleContainerStyle"
+                android:layout_width="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="@dimen/padding_ty">
 
+                <TextView
+                    android:id="@+id/backup_contact_information_label_title"
+                    style="@style/TitleTextStyle"
+                    android:text="@string/back_up_contact_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    style="@style/TitleUnderlineStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/backup_contact_information_label_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_firstname" />
+
+            <EditText
+                android:id="@+id/backup_contact_firstname"
+                style="@style/InputStyle"
+                android:autofillHints="name"
+                android:hint="@string/label_firstname"
+                android:inputType="textPersonName" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_lastname" />
+
+            <EditText
+                android:id="@+id/backup_contact_lastname"
+                style="@style/InputStyle"
+                android:autofillHints="name"
+                android:hint="@string/label_lastname"
+                android:inputType="textPersonName" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_email" />
+
+            <EditText
+                android:id="@+id/backup_contact_email"
+                style="@style/InputStyle"
+                android:autofillHints="emailAddress"
+                android:hint="@string/label_email"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                style="@style/LabelStyle"
+                android:text="@string/label_phone_number" />
+
+            <EditText
+                android:id="@+id/backup_contact_phone_number"
+                style="@style/InputStyle"
+                android:autofillHints="phone"
+                android:hint="@string/label_phone_number"
+                android:inputType="phone" />
+        </LinearLayout>
+
+    </ScrollView>
+
 </layout>
