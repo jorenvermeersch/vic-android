@@ -30,7 +30,7 @@ class CustomerListFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
         binding.viewModel = viewModel
 
-        // Make toolbar accessible after.
+        // Make toolbar accessible after logging in.
         val toolbar = requireActivity().findViewById(R.id.toolbar) as Toolbar
         toolbar.visibility = View.VISIBLE
 

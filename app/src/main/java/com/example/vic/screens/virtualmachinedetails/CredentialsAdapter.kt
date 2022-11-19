@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vic.database.entities.Credentials
 import com.example.vic.databinding.CredentialsRowBinding
 
-class CredentialsAdapter() :
+class CredentialsAdapter :
     ListAdapter<Credentials, CredentialsAdapter.ViewHolder>(
         CredentialsDiffCallback()
     ) {

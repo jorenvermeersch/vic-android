@@ -38,11 +38,6 @@ class VirtualMachineDetailsFragment : Fragment() {
             adapter.submitList(it.credentials)
         }
 
-
-
-
-
-
         return binding.root
     }
 }

@@ -18,7 +18,7 @@ class ApplicationViewModel : ViewModel() {
 
     // All customers.
     private val _customers = MutableLiveData<List<CustomerIndex>>(listOf())
-    val customers: LiveData<List<CustomerIndex>> get() = _customers
+    private val customers: LiveData<List<CustomerIndex>> get() = _customers
 
     val filteredCustomers: LiveData<List<CustomerIndex>> = Transformations.switchMap(_searchQuery) {
         filterCustomers(_searchQuery.value)
