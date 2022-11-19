@@ -3,6 +3,7 @@ package com.example.vic.screens.customerlist
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -28,6 +29,10 @@ class CustomerListFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
         binding.viewModel = viewModel
+
+        // Make toolbar accessible after.
+        val toolbar = requireActivity().findViewById(R.id.toolbar) as Toolbar
+        toolbar.visibility = View.VISIBLE
 
         // Binding adapter for RecyclerView with onClickListener.
         val adapter = CustomerIndexAdapter(CustomerIndexListener { customerId ->

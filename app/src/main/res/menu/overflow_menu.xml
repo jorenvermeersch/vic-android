@@ -15,4 +15,11 @@
         app:iconTint="?attr/navigationMenuIconColor"
         android:title="@string/customer_list"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/loginFragment"
+        android:icon="@drawable/logout_icon"
+        app:iconTint="?attr/navigationMenuIconColor"
+        android:title="@string/customer_list"
+        app:showAsAction="ifRoom" />
 </menu>

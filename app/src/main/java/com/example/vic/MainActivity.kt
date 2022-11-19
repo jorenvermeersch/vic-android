@@ -22,16 +22,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        toolbar = binding.toolbar as Toolbar
+        toolbar = binding.toolbar as Toolbar // as Toolbar is needed. App crashes otherwise.
         setSupportActionBar(toolbar)
 
+        // TODO: Not working properly.
         this.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.overflow_menu, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                Timber.i(menuItem.toString())
                 return NavigationUI.onNavDestinationSelected(
                     menuItem,
                     findNavController(R.id.navHostFragment)

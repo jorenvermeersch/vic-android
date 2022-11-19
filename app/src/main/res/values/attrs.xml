@@ -5,6 +5,9 @@
         <attr name="createBackgroundColor" format="color"/>
         <attr name="textColor" format="color" />
 
+        <attr name="buttonTextColor" format="color" />
+        <attr name="buttonColor" format="color" />
+
         <attr name="navigationBackgroundColor" format="color" />
         <attr name="navigationTextColor" format="color" />
         <attr name="navigationIconColor" format="color" />

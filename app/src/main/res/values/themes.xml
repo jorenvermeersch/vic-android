@@ -11,6 +11,9 @@
         <item name="createBackgroundColor">@color/light_blue</item>
         <item name="textColor">@color/black</item>
 
+        <item name="buttonTextColor">@color/white</item>
+        <item name="buttonColor">@color/dark_blue</item>
+
         <item name="navigationBackgroundColor">@color/white</item>
         <item name="navigationTextColor">@color/dark_blue</item>
         <item name="navigationIconColor">@color/blue</item>
