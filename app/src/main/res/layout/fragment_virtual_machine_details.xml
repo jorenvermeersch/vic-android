@@ -14,20 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <LinearLayout style="@style/LinearLayoutStyle">
 
             <!-- Indicator -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/virtual_machine_indicator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_md"
-                android:layout_marginEnd="@dimen/padding_sm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginTop="@dimen/padding_md">
 
                 <TextView
                     android:id="@+id/indicator"
@@ -44,8 +38,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:textColor="?attr/textColor"
                     android:fontFamily="@font/graphik_semibold"
+                    android:textColor="?attr/textColor"
                     android:textSize="@dimen/text_md"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/indicator"
@@ -59,10 +53,7 @@
                 style="@style/TableLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_md"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_indicator">
+                android:layout_marginTop="@dimen/padding_ty">
 
                 <TableRow style="@style/TableRowStyle">
 
@@ -104,10 +95,7 @@
             <!-- Label: Specifications and configuration -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/virtual_machine_specs_label"
-                style="@style/TitleContainerStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_general_table">
+                style="@style/TitleContainerStyle">
 
                 <TextView
                     android:id="@+id/virtual_machine_specs_title"
@@ -132,10 +120,7 @@
                 style="@style/TableLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_md"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/virtual_machine_specs_label">
+                android:layout_marginTop="@dimen/padding_ty">
 
                 <TableRow style="@style/TableRowStyle">
 
@@ -180,11 +165,7 @@
                 android:id="@+id/virtual_machine_config_table"
                 style="@style/TableLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_sm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/virtual_machine_specs_table">
+                android:layout_height="wrap_content">
 
                 <TableRow style="@style/TableRowStyle">
 
@@ -239,10 +220,7 @@
             <!-- Label: Specifications and configuration -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/virtual_machine_availability_label"
-                style="@style/TitleContainerStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_config_table">
+                style="@style/TitleContainerStyle">
 
                 <TextView
                     android:id="@+id/virtual_machine_availability_title"
@@ -267,10 +245,7 @@
                 style="@style/TableLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_md"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_availability_label">
+                android:layout_marginTop="@dimen/padding_ty">
 
                 <TableRow style="@style/TableRowStyle">
 
@@ -314,11 +289,7 @@
                 android:id="@+id/virtual_machine_backup_table"
                 style="@style/TableLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_sm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_date_table">
+                android:layout_height="wrap_content">
 
                 <TableRow style="@style/LastTableRowStyle">
 
@@ -336,10 +307,7 @@
             <!-- Label: Credentials -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/virtual_machine_credentials_label"
-                style="@style/TitleContainerStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_backup_table">
+                style="@style/TitleContainerStyle">
 
                 <TextView
                     android:id="@+id/virtual_machine_credentials_title"
@@ -364,16 +332,12 @@
                 style="@style/RecyclerViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_credentials_label" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <!-- Label: Requester -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/virtual_machine_requester_label"
-                style="@style/TitleContainerStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/credentials_list">
+                style="@style/TitleContainerStyle">
 
                 <TextView
                     android:id="@+id/virtual_machine_requester_title"
@@ -398,10 +362,7 @@
                 style="@style/TableLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_md"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/virtual_machine_requester_label">
+                android:layout_marginTop="@dimen/padding_ty">
 
                 <TableRow style="@style/TableRowStyle">
 
@@ -431,10 +392,7 @@
             <!-- Label: User -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/virtual_machine_user_label"
-                style="@style/TitleContainerStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_requester_table">
+                style="@style/TitleContainerStyle">
 
                 <TextView
                     android:id="@+id/virtual_machine_user_title"
@@ -459,10 +417,7 @@
                 style="@style/TableLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_md"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/virtual_machine_user_label">
+                android:layout_marginTop="@dimen/padding_ty">
 
                 <TableRow style="@style/TableRowStyle">
 
@@ -492,10 +447,7 @@
             <!-- Label: Responsible admin -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/virtual_machine_responsible_admin_label"
-                style="@style/TitleContainerStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/virtual_machine_user_table">
+                style="@style/TitleContainerStyle">
 
                 <TextView
                     android:id="@+id/virtual_machine_responsible_admin_title"
@@ -520,12 +472,8 @@
                 style="@style/TableLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_md"
-                android:layout_marginBottom="@dimen/padding_md"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/virtual_machine_responsible_admin_label">
+                android:layout_marginTop="@dimen/padding_ty"
+                android:layout_marginBottom="@dimen/padding_md">
 
                 <TableRow style="@style/TableRowStyle">
 
@@ -552,7 +500,7 @@
                 </TableRow>
             </TableLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
 

@@ -19,14 +19,10 @@
     <style name="TitleContainerStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">@dimen/padding_sm</item>
-        <item name="android:layout_marginTop">@dimen/padding_md</item>
-        <item name="android:layout_marginEnd">@dimen/padding_sm</item>
+        <item name="android:layout_marginTop">@dimen/padding_ty</item>
     </style>
 
     <style name="TableLayoutStyle">
-        <item name="android:layout_marginStart">@dimen/padding_sm</item>
-        <item name="android:layout_marginEnd">@dimen/padding_sm</item>
         <item name="android:background">@drawable/rounded_corners_background</item>
         <item name="android:paddingStart">@dimen/padding_sm</item>
         <item name="android:paddingEnd">@dimen/padding_sm</item>
@@ -61,9 +57,6 @@
     <style name="RecyclerViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">@dimen/padding_sm</item>
-        <item name="android:layout_marginTop">@dimen/padding_md</item>
-        <item name="android:layout_marginEnd">@dimen/padding_sm</item>
     </style>
 
     <style name="RowStyle">
@@ -96,5 +89,15 @@
         <item name="android:textColor">?attr/textColor</item>
         <item name="android:fontFamily">@font/graphik_semibold</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="LinearLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:divider">@drawable/divider</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingStart">@dimen/padding_sm</item>
+        <item name="android:paddingEnd">@dimen/padding_sm</item>
+        <item name="android:showDividers">middle</item>
     </style>
 </resources>

@@ -44,6 +44,9 @@
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="android:textSize">@dimen/text_sm</item>
         <item name="android:fontFamily">@font/graphik</item>
+        <item name="android:layout_height">@dimen/card_height</item>
+        <item name="android:background">@drawable/rounded_corners_background</item>
+        <item name="android:queryBackground">@android:color/transparent</item>
     </style>
 
 
