@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.example.vic.R
 import com.example.vic.databinding.FragmentCustomerListBinding
 import com.example.vic.screens.models.ApplicationViewModel
@@ -30,30 +26,29 @@ class CustomerListFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
         binding.viewModel = viewModel
 
-        // Make toolbar accessible after logging in.
+
+        showToolbar()
+
+        configureSearchView()
+
+        setCustomerList()
+
+        setLocalCustomerList()
+
+        // TODO: onClickListener for binding.addLocalCustomersButton
+
+        return binding.root
+    }
+
+
+    private fun showToolbar() {
+        // Make toolbar visible after logging in.
         val toolbar = requireActivity().findViewById(R.id.toolbar) as Toolbar
         toolbar.visibility = View.VISIBLE
+    }
 
-        // Binding adapter for RecyclerView with onClickListener.
-        val adapter = CustomerIndexAdapter(CustomerIndexListener { customerId ->
-            viewModel.onCustomerClicked(customerId)
-
-            findNavController().navigate(
-                CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
-                    customerId
-                )
-            )
-        })
-        binding.customerList.adapter = adapter
-
-        // Display customers in RecyclerView.
-        viewModel.filteredCustomers.observe(viewLifecycleOwner) { customers ->
-            customers?.let {
-                adapter.submitList(customers)
-            }
-        }
-
-        // Search bar.
+    private fun configureSearchView() {
+        // Update displayed customers when searching.
         binding.customerSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
@@ -72,7 +67,52 @@ class CustomerListFragment : Fragment() {
             viewModel.resetCustomerSearch()
             false
         }
+    }
 
-        return binding.root
+    private fun setCustomerList() {
+        // Binding adapter that sets chosenCustomer and navigates to the customer details page.
+        val adapter = CustomerIndexAdapter(CustomerIndexListener { customerId ->
+            viewModel.onCustomerClicked(customerId)
+
+            findNavController().navigate(
+                CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
+                    customerId
+                )
+            )
+        })
+
+        binding.customerList.adapter = adapter
+
+        // Display customers in RecyclerView.
+        viewModel.filteredCustomers.observe(viewLifecycleOwner) { customers ->
+            customers?.let {
+                adapter.submitList(customers)
+            }
+        }
+    }
+
+    private fun setLocalCustomerList() {
+        // Binding adapter that sets chosenCustomer and navigates to the customer details page.
+        val adapter = CustomerIndexAdapter(CustomerIndexListener { customerId ->
+            viewModel.onCustomerClicked(customerId)
+
+            findNavController().navigate(
+                CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
+                    customerId
+                )
+            )
+        })
+        binding.localCustomerList.adapter = adapter
+
+        viewModel.locallyStoredCustomers.observe(viewLifecycleOwner) { customers ->
+            // List should only be displayed if there are customers stored locally.
+            binding.localCustomerListContainer.visibility =
+                if (customers == null || customers.isEmpty()) View.GONE else View.VISIBLE
+
+            customers?.let {
+                adapter.submitList(customers)
+
+            }
+        }
     }
 }

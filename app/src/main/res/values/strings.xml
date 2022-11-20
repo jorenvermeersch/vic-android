@@ -70,4 +70,6 @@
     <string name="customer_type">Customer type</string>
     <string name="customer_type_internal">Internal</string>
     <string name="customer_type_external">External</string>
+    <string name="locally_stored_customers">Locally stored customers</string>
+    <string name="upload">Upload</string>
 </resources>

@@ -8,7 +8,6 @@ import com.example.vic.database.MockVicDatabase
 import com.example.vic.database.entities.Customer
 import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.database.entities.VirtualMachine
-import com.example.vic.database.entities.VirtualMachineIndex
 
 class ApplicationViewModel : ViewModel() {
 
@@ -23,6 +22,10 @@ class ApplicationViewModel : ViewModel() {
     val filteredCustomers: LiveData<List<CustomerIndex>> = Transformations.switchMap(_searchQuery) {
         filterCustomers(_searchQuery.value)
     }
+
+    // Locally stored customers.
+    private val _locallyStoredCustomers = MutableLiveData<List<CustomerIndex>>(listOf())
+    val locallyStoredCustomers : LiveData<List<CustomerIndex>> get() = _locallyStoredCustomers
 
     // Customer selected by user.
     private val _chosenCustomer = MutableLiveData<Customer>(null)
@@ -39,10 +42,6 @@ class ApplicationViewModel : ViewModel() {
 
     fun onCustomerSearch(query: String) {
         _searchQuery.value = query
-    }
-
-    fun onVirtualMachineSearch(query: String) {
-
     }
 
     fun onCustomerClicked(customerId: Long) {
