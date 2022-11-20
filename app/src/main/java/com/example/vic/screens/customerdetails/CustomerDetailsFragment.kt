@@ -7,17 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.entities.Customer
 import com.example.vic.database.enums.CustomerType
 import com.example.vic.databinding.FragmentCustomerDetailsBinding
-import com.example.vic.screens.customerlist.CustomerIndexAdapter
-import com.example.vic.screens.customerlist.CustomerIndexListener
-import com.example.vic.screens.customerlist.CustomerListFragmentDirections
 import com.example.vic.screens.models.ApplicationViewModel
-import timber.log.Timber
 
 class CustomerDetailsFragment : Fragment() {
 
@@ -33,7 +28,21 @@ class CustomerDetailsFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_details, container, false)
         binding.viewModel = viewModel
 
+        setLayout()
 
+        setVirtualMachineList()
+
+        return binding.root
+    }
+
+    private fun setLayout() {
+        // Change layout based on type of customer.
+        viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
+            updateLayout(customer)
+        }
+    }
+
+    private fun setVirtualMachineList() {
         val adapter = VirtualMachineIndexAdapter(VirtualMachineIndexListener { machineId ->
             viewModel.onVirtualMachineClicked(machineId)
             findNavController().navigate(
@@ -42,15 +51,11 @@ class CustomerDetailsFragment : Fragment() {
                 )
             )
         })
-
         binding.virtualMachineList.adapter = adapter
 
         viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
             adapter.submitList(customer.virtualMachines)
-            updateLayout(customer)
         }
-
-        return binding.root
     }
 
     private fun updateLayout(customer: Customer) {

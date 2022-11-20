@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.databinding.FragmentVirtualMachineDetailsBinding
 import com.example.vic.screens.models.ApplicationViewModel
@@ -31,13 +29,18 @@ class VirtualMachineDetailsFragment : Fragment() {
         )
         binding.viewModel = viewModel
 
+        setCredentialsList()
+
+        return binding.root
+    }
+
+
+    private fun setCredentialsList() {
         val adapter = CredentialsAdapter()
         binding.credentialsList.adapter = adapter
 
         viewModel.chosenVirtualMachine.observe(viewLifecycleOwner) {
             adapter.submitList(it.credentials)
         }
-
-        return binding.root
     }
 }

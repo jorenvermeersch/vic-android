@@ -12,6 +12,8 @@ import com.example.vic.database.entities.VirtualMachine
 class ApplicationViewModel : ViewModel() {
 
     private val database = MockVicDatabase()
+    // TODO: Database mocks API currently.
+    //  Add Room Database to store and fetch customers user adds using app.
 
     private val _searchQuery = MutableLiveData<String?>(null)
 
@@ -25,7 +27,9 @@ class ApplicationViewModel : ViewModel() {
 
     // Locally stored customers.
     private val _locallyStoredCustomers = MutableLiveData<List<CustomerIndex>>(listOf())
-    val locallyStoredCustomers : LiveData<List<CustomerIndex>> get() = _locallyStoredCustomers
+    val locallyStoredCustomers: LiveData<List<CustomerIndex>> get() = _locallyStoredCustomers
+    // TODO: Fetch from Room Database.
+
 
     // Customer selected by user.
     private val _chosenCustomer = MutableLiveData<Customer>(null)
@@ -42,6 +46,10 @@ class ApplicationViewModel : ViewModel() {
 
     fun onCustomerSearch(query: String) {
         _searchQuery.value = query
+    }
+
+    fun resetCustomerSearch() {
+        _searchQuery.value = null
     }
 
     fun onCustomerClicked(customerId: Long) {
@@ -66,7 +74,4 @@ class ApplicationViewModel : ViewModel() {
         return resultContainer
     }
 
-    fun resetCustomerSearch() {
-        _searchQuery.value = null
-    }
 }

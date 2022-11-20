@@ -27,16 +27,20 @@ class LoginFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         binding.viewModel = viewModel
 
-        // Make toolbar inaccessible in login screen.
-        val toolbar = requireActivity().findViewById(R.id.toolbar) as Toolbar
-        toolbar.visibility = View.GONE
 
+        hideToolbar()
 
         binding.loginButton.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCustomerListFragment())
         }
 
         return binding.root
+    }
+
+    private fun hideToolbar() {
+        // Make toolbar invisible and inaccessible when not logged in.
+        val toolbar = requireActivity().findViewById(R.id.toolbar) as Toolbar
+        toolbar.visibility = View.GONE
     }
 
 
