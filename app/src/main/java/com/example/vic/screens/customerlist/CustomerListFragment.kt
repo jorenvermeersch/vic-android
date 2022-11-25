@@ -33,10 +33,6 @@ class CustomerListFragment : Fragment() {
 
         setCustomerList()
 
-        setLocalCustomerList()
-
-        // TODO: onClickListener for binding.addLocalCustomersButton
-
         return binding.root
     }
 
@@ -87,31 +83,6 @@ class CustomerListFragment : Fragment() {
         viewModel.filteredCustomers.observe(viewLifecycleOwner) { customers ->
             customers?.let {
                 adapter.submitList(customers)
-            }
-        }
-    }
-
-    private fun setLocalCustomerList() {
-        // Binding adapter that sets chosenCustomer and navigates to the customer details page.
-        val adapter = CustomerIndexAdapter(CustomerIndexListener { customerId ->
-            viewModel.onCustomerClicked(customerId)
-
-            findNavController().navigate(
-                CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
-                    customerId
-                )
-            )
-        })
-        binding.localCustomerList.adapter = adapter
-
-        viewModel.locallyStoredCustomers.observe(viewLifecycleOwner) { customers ->
-            // List should only be displayed if there are customers stored locally.
-            binding.localCustomerListContainer.visibility =
-                if (customers == null || customers.isEmpty()) View.GONE else View.VISIBLE
-
-            customers?.let {
-                adapter.submitList(customers)
-
             }
         }
     }
