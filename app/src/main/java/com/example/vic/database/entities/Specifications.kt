@@ -1,9 +1,7 @@
 package com.example.vic.database.entities
 
 data class Specifications(
-    val processors: Int,
-    val memory: Int,
-    val storage: Int,
-) {
-
-}
+    var processors: Int,
+    var memory: Int,
+    var storage: Int,
+)

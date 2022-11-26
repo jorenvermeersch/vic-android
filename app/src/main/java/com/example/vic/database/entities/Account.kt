@@ -3,16 +3,14 @@ package com.example.vic.database.entities
 import com.example.vic.database.enums.Role
 
 data class Account(
-    val id: Long,
-    val firstName: String,
-    val lastName: String,
-    val email: String,
-    val role: Role,
-    val password: String,
-    val isActive: Boolean,
-    val department: String,
-    val education: String,
-) {
-
-}
+    var id: Long,
+    var firstName: String,
+    var lastName: String,
+    var email: String,
+    var role: Role,
+    var password: String,
+    var isActive: Boolean,
+    var department: String,
+    var education: String,
+)
 

@@ -7,7 +7,7 @@ import com.example.vic.database.enums.*
 import com.example.vic.getCurrentDateTime
 
 
-class MockVicDatabase() : VicDatabaseDao {
+class MockApi {
 
     private val _customers = MutableLiveData<List<Customer>>(listOf())
     private val _virtualMachines = MutableLiveData<List<VirtualMachine>>(listOf())
@@ -122,27 +122,19 @@ class MockVicDatabase() : VicDatabaseDao {
         return mockVirtualMachines
     }
 
-    override fun insertCustomer(customer: Customer): LiveData<Customer> {
-        val customers = _customers.value?.toMutableList() ?: mutableListOf()
-        customers.add(customer)
-        _customers.value = customers
-
-        return MutableLiveData(customer)
-    }
-
-    override fun getCustomers(): LiveData<List<CustomerIndex>> {
+    fun getCustomers(): LiveData<List<CustomerIndex>> {
         val customers = _customers.value?.map { c ->
             CustomerIndex(c.id, c.contactPerson.firstName)
         }
         return MutableLiveData(customers)
     }
 
-    override fun getCustomerById(customerId: Long): LiveData<Customer> {
+    fun getCustomerById(customerId: Long): LiveData<Customer> {
         val customer = _customers.value?.find { it -> it.id == customerId }
         return MutableLiveData(customer)
     }
 
-    override fun getVirtualMachineById(machineId: Long): LiveData<VirtualMachine> {
+    fun getVirtualMachineById(machineId: Long): LiveData<VirtualMachine> {
         val machine = _virtualMachines.value?.find { it -> it.id == machineId }
         return MutableLiveData(machine)
     }

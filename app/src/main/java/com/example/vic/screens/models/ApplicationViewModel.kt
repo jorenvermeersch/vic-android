@@ -1,19 +1,17 @@
 package com.example.vic.screens.models
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import com.example.vic.database.MockVicDatabase
+import android.app.Application
+import androidx.lifecycle.*
+import com.example.vic.database.CustomerIndexDao
+import com.example.vic.database.MockApi
 import com.example.vic.database.entities.Customer
 import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.database.entities.VirtualMachine
 
-class ApplicationViewModel : ViewModel() {
+class ApplicationViewModel(val database: CustomerIndexDao, application: Application) :
+    AndroidViewModel(application) {
 
-    private val database = MockVicDatabase()
-    // TODO: Database mocks API currently.
-    //  Add Room Database to store and fetch customers user adds using app.
+    private val mockApi = MockApi()
 
     private val _searchQuery = MutableLiveData<String?>(null)
 
@@ -25,12 +23,6 @@ class ApplicationViewModel : ViewModel() {
         filterCustomers(_searchQuery.value)
     }
 
-    // Locally stored customers.
-    private val _locallyStoredCustomers = MutableLiveData<List<CustomerIndex>>(listOf())
-    val locallyStoredCustomers: LiveData<List<CustomerIndex>> get() = _locallyStoredCustomers
-    // TODO: Fetch from Room Database.
-
-
     // Customer selected by user.
     private val _chosenCustomer = MutableLiveData<Customer>(null)
     val chosenCustomer: LiveData<Customer> get() = _chosenCustomer
@@ -41,7 +33,7 @@ class ApplicationViewModel : ViewModel() {
 
 
     init {
-        _customers.value = database.getCustomers().value
+        _customers.value = mockApi.getCustomers().value
     }
 
     fun onCustomerSearch(query: String) {
@@ -53,12 +45,12 @@ class ApplicationViewModel : ViewModel() {
     }
 
     fun onCustomerClicked(customerId: Long) {
-        val customer = database.getCustomerById(customerId)
+        val customer = mockApi.getCustomerById(customerId)
         _chosenCustomer.value = customer.value
     }
 
     fun onVirtualMachineClicked(machineId: Long) {
-        val virtualMachine = database.getVirtualMachineById(machineId)
+        val virtualMachine = mockApi.getVirtualMachineById(machineId)
         _chosenVirtualMachine.value = virtualMachine.value
     }
 
