@@ -9,13 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
+import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCustomerListBinding
 import com.example.vic.screens.models.ApplicationViewModel
+import com.example.vic.screens.models.ApplicationViewModelFactory
 
 class CustomerListFragment : Fragment() {
 
     private lateinit var binding: FragmentCustomerListBinding
-    private val viewModel: ApplicationViewModel by activityViewModels()
+    private val viewModel: ApplicationViewModel by activityViewModels {
+        val appContext = requireNotNull(this.activity).application
+        val dataSource = VicDatabase.getInstance(appContext).customerIndexDao
+        ApplicationViewModelFactory(dataSource, appContext)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

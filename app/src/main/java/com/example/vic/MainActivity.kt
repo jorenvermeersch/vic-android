@@ -5,29 +5,17 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.ActivityMainBinding
-import com.example.vic.screens.models.ApplicationViewModel
-import com.example.vic.screens.models.ApplicationViewModelFactory
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var toolbar: Toolbar
-
-    private val viewModel: ApplicationViewModel by viewModels {
-        // TODO: How to use activityViewModels with ViewModelFactory.
-        val appContext = application
-        val dataSource = VicDatabase.getInstance(appContext).customerIndexDao
-        ApplicationViewModelFactory(dataSource, appContext)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

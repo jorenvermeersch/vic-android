@@ -46,7 +46,9 @@ dependencies {
 
     // Room database.
     implementation "androidx.room:room-runtime:$room_version"
-    //annotationProcessor "androidx.room:room-compiler:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
 
     // Base.
     implementation 'androidx.core:core-ktx:1.9.0'
