@@ -40,7 +40,6 @@ class VirtualMachineDetailsFragment : Fragment() {
         return binding.root
     }
 
-
     private fun setCredentialsList() {
         val adapter = CredentialsAdapter()
         binding.credentialsList.adapter = adapter

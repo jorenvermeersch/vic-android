@@ -41,9 +41,7 @@ class LoginFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-
         hideToolbar()
-
 
         binding.loginButton.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCustomerListFragment())
@@ -57,8 +55,4 @@ class LoginFragment : Fragment() {
         val toolbar = requireActivity().findViewById(R.id.toolbar) as Toolbar
         toolbar.visibility = View.GONE
     }
-
-
-
-
 }

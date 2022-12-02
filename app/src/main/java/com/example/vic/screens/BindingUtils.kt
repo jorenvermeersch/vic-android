@@ -1,19 +1,25 @@
 package com.example.vic.screens
 
-import android.graphics.Color
 import android.util.TypedValue
 import android.widget.TextView
-import android.widget.Toast
-import androidx.annotation.ColorInt
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
-import com.example.vic.*
-import com.example.vic.database.entities.*
+import com.example.vic.R
+import com.example.vic.database.entities.Account
+import com.example.vic.database.entities.ContactPerson
+import com.example.vic.database.entities.CustomerIndex
+import com.example.vic.database.entities.Port
+import com.example.vic.database.entities.VirtualMachine
+import com.example.vic.database.entities.VirtualMachineIndex
 import com.example.vic.database.enums.BackupFrequency
 import com.example.vic.database.enums.Mode
 import com.example.vic.database.enums.Status
 import com.example.vic.database.enums.Template
-import java.util.*
+import com.example.vic.toString
+import com.example.vic.translateBackupFrequency
+import com.example.vic.translateMode
+import com.example.vic.translateStatus
+import com.example.vic.translateTemplate
+import java.util.Date
 
 // customer_row.xml.
 @BindingAdapter("name")
@@ -117,8 +123,5 @@ fun TextView.setFullName(account: Account?) {
     account?.let {
         text =
             String.format(resources.getString(R.string.format_full_name), it.firstName, it.lastName)
-
     }
 }
-
-

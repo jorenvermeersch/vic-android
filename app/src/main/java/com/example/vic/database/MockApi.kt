@@ -2,21 +2,33 @@ package com.example.vic.database
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.vic.database.entities.*
-import com.example.vic.database.enums.*
+import com.example.vic.database.entities.Account
+import com.example.vic.database.entities.ContactPerson
+import com.example.vic.database.entities.Credentials
+import com.example.vic.database.entities.Customer
+import com.example.vic.database.entities.CustomerIndex
+import com.example.vic.database.entities.Host
+import com.example.vic.database.entities.Port
+import com.example.vic.database.entities.Specifications
+import com.example.vic.database.entities.VirtualMachine
+import com.example.vic.database.entities.VirtualMachineIndex
+import com.example.vic.database.enums.Availability
+import com.example.vic.database.enums.BackupFrequency
+import com.example.vic.database.enums.CustomerType
+import com.example.vic.database.enums.Mode
+import com.example.vic.database.enums.Role
+import com.example.vic.database.enums.Status
+import com.example.vic.database.enums.Template
 import com.example.vic.getCurrentDateTime
-
 
 class MockApi {
 
     private val _customers = MutableLiveData<List<Customer>>(listOf())
     private val _virtualMachines = MutableLiveData<List<VirtualMachine>>(listOf())
 
-
     init {
         populate()
     }
-
 
     private fun populate() {
         val mockCustomers = generateMockCustomers()
@@ -37,7 +49,6 @@ class MockApi {
 
         _customers.value = mockCustomers
         _virtualMachines.value = mockVirtualMachines
-
     }
 
     private fun generateMockCustomers(): List<Customer> {

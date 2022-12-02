@@ -32,7 +32,6 @@ class CustomerListFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
         binding.viewModel = viewModel
 
-
         showToolbar()
 
         configureSearchView()
@@ -41,7 +40,6 @@ class CustomerListFragment : Fragment() {
 
         return binding.root
     }
-
 
     private fun showToolbar() {
         // Make toolbar visible after logging in.
@@ -73,15 +71,17 @@ class CustomerListFragment : Fragment() {
 
     private fun setCustomerList() {
         // Binding adapter that sets chosenCustomer and navigates to the customer details page.
-        val adapter = CustomerIndexAdapter(CustomerIndexListener { customerId ->
-            viewModel.onCustomerClicked(customerId)
+        val adapter = CustomerIndexAdapter(
+            CustomerIndexListener { customerId ->
+                viewModel.onCustomerClicked(customerId)
 
-            findNavController().navigate(
-                CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
-                    customerId
+                findNavController().navigate(
+                    CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
+                        customerId
+                    )
                 )
-            )
-        })
+            }
+        )
 
         binding.customerList.adapter = adapter
 

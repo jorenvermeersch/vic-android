@@ -1,7 +1,11 @@
 package com.example.vic.database.entities
 
-import com.example.vic.database.enums.*
-import java.util.*
+import com.example.vic.database.enums.Availability
+import com.example.vic.database.enums.BackupFrequency
+import com.example.vic.database.enums.Mode
+import com.example.vic.database.enums.Status
+import com.example.vic.database.enums.Template
+import java.util.Date
 
 data class VirtualMachine(
     var id: Long,
@@ -24,5 +28,3 @@ data class VirtualMachine(
     var requester: Customer?,
     var user: Customer?,
 )
-
-

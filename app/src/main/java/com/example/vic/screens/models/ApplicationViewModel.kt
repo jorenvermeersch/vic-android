@@ -31,7 +31,6 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
     private val _chosenVirtualMachine = MutableLiveData<VirtualMachine>(null)
     val chosenVirtualMachine: LiveData<VirtualMachine> get() = _chosenVirtualMachine
 
-
     init {
         _customers.value = mockApi.getCustomers().value
     }
@@ -65,5 +64,4 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
 
         return resultContainer
     }
-
 }

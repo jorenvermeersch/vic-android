@@ -11,7 +11,7 @@ import com.example.vic.databinding.FragmentNavigationBarBinding
 
 class NavigationBarFragment : Fragment() {
 
-    private lateinit var binding : FragmentNavigationBarBinding
+    private lateinit var binding: FragmentNavigationBarBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,

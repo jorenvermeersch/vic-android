@@ -13,4 +13,3 @@ data class Account(
     var department: String,
     var education: String,
 )
-
