@@ -1,3 +1,5 @@
+import org.gradle.internal.os.OperatingSystem
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -64,3 +66,20 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
+
+task installGitHook(type: Copy) {
+    OperatingSystem os = OperatingSystem.current()
+    def suffix = "macos"
+
+     if (os.isWindows()) {
+         suffix = "windows"
+     }
+
+    from new File(rootProject.rootDir, "scripts/pre-commit-$suffix")
+    into { new File(rootProject.rootDir, '.git/hooks') }
+    rename("pre-commit-$suffix", 'pre-commit')
+
+    fileMode 0775
+}
+
+tasks.getByPath(':app:preBuild').dependsOn installGitHook
