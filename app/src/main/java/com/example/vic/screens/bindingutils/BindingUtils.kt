@@ -5,9 +5,7 @@ import androidx.databinding.BindingAdapter
 import com.example.vic.R
 import com.example.vic.database.entities.ContactPerson
 
-
 // Binding adapter used in multiple fragments.
-
 @BindingAdapter("fullName")
 fun TextView.setFullName(contactPerson: ContactPerson?) {
     contactPerson?.let {
@@ -15,4 +13,3 @@ fun TextView.setFullName(contactPerson: ContactPerson?) {
             String.format(resources.getString(R.string.format_full_name), it.firstName, it.lastName)
     }
 }
-
