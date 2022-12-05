@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                     when (menuItem.itemId) {
                         R.id.loginFragment -> {
                             logout()
+                            findNavController(R.id.navHostFragment).navigate(R.id.loginFragment)
                         }
                     }
                     return NavigationUI.onNavDestinationSelected(
