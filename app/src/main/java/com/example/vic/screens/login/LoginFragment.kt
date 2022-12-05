@@ -23,7 +23,6 @@ import com.example.vic.screens.models.ApplicationViewModelFactory
 
 class LoginFragment : Fragment() {
     private lateinit var account: Auth0
-    private var loggedIn = false
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: ApplicationViewModel by activityViewModels {
         val appContext = requireNotNull(this.activity).application
@@ -74,35 +73,23 @@ class LoginFragment : Fragment() {
             .withScheme("demo")
             .withScope("openid profile email")
             // Launch the authentication passing the callback where the results will be received
-            .start(requireContext(), object : Callback<Credentials, AuthenticationException> {
-                // Called when there is an authentication failure
-                override fun onFailure(error: AuthenticationException) {
-                    loggedIn = false
-                    Toast.makeText(context, "Login failed.", Toast.LENGTH_SHORT).show()
+            .start(
+                requireContext(),
+                object : Callback<Credentials, AuthenticationException> {
+                    // Called when there is an authentication failure
+                    override fun onFailure(error: AuthenticationException) {
+                        Toast.makeText(context, "Login failed.", Toast.LENGTH_SHORT).show()
+                    }
 
+                    // Called when authentication completed successfully
+                    override fun onSuccess(result: Credentials) {
+                        // Get the access token from the credentials object.
+                        // This can be used to call APIs
+                        CredentialsManager.saveCredentials(requireContext(), result)
+                        Toast.makeText(context, "Login successful.", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCustomerListFragment())
+                    }
                 }
-
-                // Called when authentication completed successfully
-                override fun onSuccess(result: Credentials) {
-                    // Get the access token from the credentials object.
-                    // This can be used to call APIs
-                    CredentialsManager.saveCredentials(requireContext(), result)
-                    checkIfToken()
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCustomerListFragment())
-
-                }
-            })
+            )
     }
-
-    private fun checkIfToken(){
-        val token = CredentialsManager.getAccessToken(requireContext())
-        if(token != null){
-            //checking if the token works...
-            Toast.makeText(context, "Token exist.", Toast.LENGTH_SHORT).show()
-        }
-        else {
-            Toast.makeText(context, "Token doesn't exist.", Toast.LENGTH_SHORT).show()
-        }
-    }
-
 }
