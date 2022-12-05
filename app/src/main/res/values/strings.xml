@@ -72,4 +72,6 @@
     <string name="customer_type_external">External</string>
     <string name="locally_stored_customers">Locally stored customers</string>
     <string name="upload">Upload</string>
+    <string name="client_id">NX6EQdmambgHSfFkN2a4b04YESJu6r94</string>
+    <string name="com_auth0_domain">dev-ashmgrzh4gfnfa18.us.auth0.com</string>
 </resources>
