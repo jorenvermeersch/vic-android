@@ -7,13 +7,9 @@ import com.example.vic.R
 import com.example.vic.database.entities.Account
 import com.example.vic.database.entities.ContactPerson
 import com.example.vic.database.entities.CustomerIndex
-import com.example.vic.database.entities.Port
 import com.example.vic.database.entities.VirtualMachine
 import com.example.vic.database.entities.VirtualMachineIndex
-import com.example.vic.database.enums.BackupFrequency
-import com.example.vic.database.enums.Mode
 import com.example.vic.database.enums.Status
-import com.example.vic.database.enums.Template
 import com.example.vic.toString
 import com.example.vic.translateBackupFrequency
 import com.example.vic.translateMode
