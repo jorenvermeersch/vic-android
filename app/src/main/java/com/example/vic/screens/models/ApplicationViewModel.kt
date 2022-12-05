@@ -1,7 +1,10 @@
 package com.example.vic.screens.models
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.example.vic.database.CustomerIndexDao
 import com.example.vic.database.MockApi
 import com.example.vic.database.entities.Customer
@@ -30,7 +33,6 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
     // Virtual machine selected by user.
     private val _chosenVirtualMachine = MutableLiveData<VirtualMachine>(null)
     val chosenVirtualMachine: LiveData<VirtualMachine> get() = _chosenVirtualMachine
-
 
     init {
         _customers.value = mockApi.getCustomers().value
@@ -65,5 +67,4 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
 
         return resultContainer
     }
-
 }

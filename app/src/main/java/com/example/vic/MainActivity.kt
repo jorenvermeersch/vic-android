@@ -1,10 +1,10 @@
 package com.example.vic
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
@@ -25,19 +25,20 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         // TODO: Not working properly.
-        this.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.overflow_menu, menu)
-            }
+        this.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.overflow_menu, menu)
+                }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return NavigationUI.onNavDestinationSelected(
-                    menuItem,
-                    findNavController(R.id.navHostFragment)
-                )
-            }
-        }, this)
-
-
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return NavigationUI.onNavDestinationSelected(
+                        menuItem,
+                        findNavController(R.id.navHostFragment)
+                    )
+                }
+            },
+            this
+        )
     }
 }

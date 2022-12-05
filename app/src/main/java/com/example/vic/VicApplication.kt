@@ -9,5 +9,4 @@ class VicApplication : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
     }
-
 }

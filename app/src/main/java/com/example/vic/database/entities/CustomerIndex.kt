@@ -10,7 +10,5 @@ data class CustomerIndex(
     var id: Long,
 
     @ColumnInfo(name = "name")
-    var name : String,
+    var name: String,
 )
-
-

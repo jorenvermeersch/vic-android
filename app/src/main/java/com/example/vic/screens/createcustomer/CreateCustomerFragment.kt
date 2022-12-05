@@ -75,7 +75,6 @@ class CreateCustomerFragment : Fragment() {
         return when (itemId) {
             R.id.option_external_customer -> CustomerType.External
             else -> CustomerType.Internal
-
         }
     }
 

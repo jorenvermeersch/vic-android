@@ -1,12 +1,13 @@
 package com.example.vic
 
-import com.example.vic.database.entities.ContactPerson
 import com.example.vic.database.enums.BackupFrequency
 import com.example.vic.database.enums.Mode
 import com.example.vic.database.enums.Status
 import com.example.vic.database.enums.Template
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
     val formatter = SimpleDateFormat(format, locale)
@@ -16,7 +17,6 @@ fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String 
 fun getCurrentDateTime(): Date {
     return Calendar.getInstance().time
 }
-
 
 fun translateMode(mode: Mode): Int {
     return when (mode) {
@@ -40,16 +40,14 @@ fun translateBackupFrequency(backupFrequency: BackupFrequency): Int {
         BackupFrequency.Daily -> R.string.backup_daily
         BackupFrequency.Weekly -> R.string.backup_weekly
         BackupFrequency.Monthly -> R.string.backup_monthly
-
     }
 }
 
-fun translateStatus(status: Status) : Int {
+fun translateStatus(status: Status): Int {
     return when (status) {
         Status.Requested -> R.string.status_requested
         Status.InProgress -> R.string.status_in_progress
         Status.ReadyToDeploy -> R.string.status_ready_to_deploy
         Status.Deployed -> R.string.status_deployed
     }
-
 }

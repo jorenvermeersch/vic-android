@@ -9,4 +9,3 @@ enum class Availability {
     Saturday,
     Sunday,
 }
-

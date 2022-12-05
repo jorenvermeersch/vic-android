@@ -51,14 +51,16 @@ class CustomerDetailsFragment : Fragment() {
     }
 
     private fun setVirtualMachineList() {
-        val adapter = VirtualMachineIndexAdapter(VirtualMachineIndexListener { machineId ->
-            viewModel.onVirtualMachineClicked(machineId)
-            findNavController().navigate(
-                CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
-                    machineId
+        val adapter = VirtualMachineIndexAdapter(
+            VirtualMachineIndexListener { machineId ->
+                viewModel.onVirtualMachineClicked(machineId)
+                findNavController().navigate(
+                    CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
+                        machineId
+                    )
                 )
-            )
-        })
+            }
+        )
         binding.virtualMachineList.adapter = adapter
 
         viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
@@ -76,7 +78,6 @@ class CustomerDetailsFragment : Fragment() {
                     it.externalType.visibility = View.GONE
                     it.companyName.visibility = View.GONE
                 }
-
             }
             CustomerType.External -> {
                 binding.let {
@@ -91,6 +92,5 @@ class CustomerDetailsFragment : Fragment() {
 
         binding.customerBackupContactInformation.visibility =
             if (customer.backupContactPerson == null) View.GONE else View.VISIBLE
-
     }
 }
