@@ -45,7 +45,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/indicator"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:text="@{viewModel.chosenVirtualMachine.status}" />
+                    app:status="@{viewModel.chosenVirtualMachine}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Table: General information -->
@@ -176,7 +176,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:text="@{viewModel.chosenVirtualMachine.mode}"
+                        app:mode="@{viewModel.chosenVirtualMachine}"
                         tools:text="@string/name_placeholder" />
                 </TableRow>
 
@@ -188,7 +188,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:text="@{viewModel.chosenVirtualMachine.template}"
+                        app:template="@{viewModel.chosenVirtualMachine}"
                         tools:text="@string/name_placeholder" />
                 </TableRow>
 
@@ -213,7 +213,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:text="@{viewModel.chosenVirtualMachine.ports}"
+                        app:ports="@{viewModel.chosenVirtualMachine}"
                         tools:text="@string/name_placeholder" />
                 </TableRow>
             </TableLayout>
@@ -256,7 +256,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:text="@{viewModel.chosenVirtualMachine.applicationDate}"
+                        app:date="@{viewModel.chosenVirtualMachine.applicationDate}"
                         tools:text="@string/date_placeholder" />
                 </TableRow>
 
@@ -268,7 +268,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:text="@{viewModel.chosenVirtualMachine.startDate}"
+                        app:date="@{viewModel.chosenVirtualMachine.startDate}"
                         tools:text="@string/date_placeholder" />
                 </TableRow>
 
@@ -280,7 +280,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:text="@{viewModel.chosenVirtualMachine.endDate}"
+                        app:date="@{viewModel.chosenVirtualMachine.endDate}"
                         tools:text="@string/date_placeholder" />
                 </TableRow>
             </TableLayout>
@@ -300,7 +300,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:text="@{viewModel.chosenVirtualMachine.backupFrequency}"
+                        app:backupFrequency="@{viewModel.chosenVirtualMachine}"
                         tools:text="@string/name_placeholder" />
                 </TableRow>
             </TableLayout>

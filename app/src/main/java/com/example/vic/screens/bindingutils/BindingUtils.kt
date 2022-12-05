@@ -1,4 +1,4 @@
-package com.example.vic.screens
+package com.example.vic.screens.bindingutils
 
 import android.util.TypedValue
 import android.widget.TextView
@@ -51,49 +51,49 @@ fun TextView.setIndicator(item: VirtualMachineIndex?) {
 }
 
 // fragment_virtual_machine_details.xml.
-@BindingAdapter("text")
-fun TextView.setMode(mode: Mode?) {
-    mode?.let {
-        text = context.getString(translateMode(mode))
+@BindingAdapter("mode")
+fun TextView.setMode(item: VirtualMachine?) {
+    item?.let {
+        text = context.getString(translateMode(item.mode))
     }
 }
 
-@BindingAdapter("text")
-fun TextView.setTemplate(template: Template?) {
-    template?.let {
-        text = context.getString(translateTemplate(template))
+@BindingAdapter("template")
+fun TextView.setTemplate(item: VirtualMachine?) {
+    item?.let {
+        text = context.getString(translateTemplate(item.template))
     }
 }
 
-@BindingAdapter("text")
-fun TextView.setPorts(ports: List<Port>?) {
+@BindingAdapter("ports")
+fun TextView.setPorts(item: VirtualMachine?) {
     var result = ""
 
-    ports?.let {
-        result = ports.joinToString(", ") { it.service }
+    item?.let {
+        result = item.ports.joinToString(", ") { it.service }
     }
 
     text = result
 }
 
-@BindingAdapter("text")
+@BindingAdapter("date")
 fun TextView.setDate(date: Date?) {
     date?.let {
         text = date.toString("yyyy-MM-dd")
     }
 }
 
-@BindingAdapter("text")
-fun TextView.setBackupFrequency(backupFrequency: BackupFrequency?) {
-    backupFrequency?.let {
-        text = context.getString(translateBackupFrequency(backupFrequency))
+@BindingAdapter("backupFrequency")
+fun TextView.setBackupFrequency(item: VirtualMachine?) {
+    item?.let {
+        text = context.getString(translateBackupFrequency(item.backupFrequency))
     }
 }
 
-@BindingAdapter("text")
-fun TextView.setStatus(status: Status?) {
-    status?.let {
-        text = context.getString(translateStatus(status))
+@BindingAdapter("status")
+fun TextView.setStatus(item: VirtualMachine?) {
+    item?.let {
+        text = context.getString(translateStatus(item.status))
     }
 }
 
