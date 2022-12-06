@@ -175,6 +175,14 @@
                         tools:text="@string/customer_email_placeholder" />
                 </TableRow>
 
+                <TableRow style="@style/TableRowButtonStyle">
+
+                    <Button
+                        android:id="@+id/send_mail_button"
+                        style="@style/TableRowButtonItemStyle"
+                        android:text="@string/send_email" />
+                </TableRow>
+
                 <TableRow style="@style/LastTableRowStyle">
 
                     <TextView
@@ -191,9 +199,9 @@
                 <TableRow style="@style/TableRowButtonStyle">
 
                     <Button
-                        android:id="@+id/send_mail_button"
+                        android:id="@+id/call_customer_button"
                         style="@style/TableRowButtonItemStyle"
-                        android:text="@string/send_email" />
+                        android:text="@string/call_customer" />
                 </TableRow>
 
             </TableLayout>
@@ -230,6 +238,14 @@
                         tools:text="@string/customer_email_placeholder" />
                 </TableRow>
 
+                <TableRow style="@style/TableRowButtonStyle">
+
+                    <Button
+                        android:id="@+id/send_backupmail_button"
+                        style="@style/TableRowButtonItemStyle"
+                        android:text="@string/send_email" />
+                </TableRow>
+
                 <TableRow style="@style/LastTableRowStyle">
 
                     <TextView
@@ -245,9 +261,9 @@
                 <TableRow style="@style/TableRowButtonStyle">
 
                     <Button
-                        android:id="@+id/send_backupmail_button"
+                        android:id="@+id/call_backup_button"
                         style="@style/TableRowButtonItemStyle"
-                        android:text="@string/send_email" />
+                        android:text="@string/call_backup" />
                 </TableRow>
             </TableLayout>
 
