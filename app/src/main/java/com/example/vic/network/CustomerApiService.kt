@@ -1,6 +1,5 @@
 package com.example.vic.network
 
-import com.example.vic.database.entities.ContactPerson
 import com.example.vic.database.entities.Customer
 import com.example.vic.database.entities.CustomerIndex
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -22,7 +21,7 @@ private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-private val logger = HttpLoggingInterceptor().apply{level = HttpLoggingInterceptor.Level.BASIC}
+private val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
 private val client = OkHttpClient.Builder()
     .addInterceptor(logger)
@@ -35,23 +34,20 @@ private val retrofit = Retrofit.Builder()
     .client(client)
     .build()
 
-
 interface CustomerApiService {
 
     @GET("{id}")
-    fun getCustomerById(@Path("id") id : Long): Deferred<Customer>
+    fun getCustomerById(@Path("id") id: Long): Deferred<Customer>
 
     @GET("indexes")
-    fun getCustomerIndexes() : Deferred<List<CustomerIndex>>
+    fun getCustomerIndexes(): Deferred<List<CustomerIndex>>
 
     @POST
     fun insertCustomer(@Body customer: Customer)
-
 }
 
-
-object CustomerApi{
-    val retrofitService : CustomerApiService by lazy {
+object CustomerApi {
+    val retrofitService: CustomerApiService by lazy {
         retrofit.create(CustomerApiService::class.java)
     }
 }
