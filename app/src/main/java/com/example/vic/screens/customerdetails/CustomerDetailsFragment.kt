@@ -36,7 +36,7 @@ class CustomerDetailsFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_details, container, false)
         binding.viewModel = viewModel
-        binding.sendMailBtn.setOnClickListener { composeEmail(arrayOf(binding.customerEmail.getText().toString()), "-Ponderer-") }
+        setButtons()
         setLayout()
         setVirtualMachineList()
 
@@ -62,6 +62,11 @@ class CustomerDetailsFragment : Fragment() {
                 updateLayout(customer)
             }
         }
+    }
+
+    private fun setButtons() {
+        binding.sendMailButton.setOnClickListener { composeEmail(arrayOf(binding.customerEmail.text.toString()), "-Onderwerp-") }
+        binding.sendBackupmailButton.setOnClickListener { composeEmail(arrayOf(binding.backupEmail.text.toString()), "-Onderwerp-") }
     }
 
     private fun setVirtualMachineList() {

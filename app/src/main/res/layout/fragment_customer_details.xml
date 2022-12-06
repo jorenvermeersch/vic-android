@@ -126,19 +126,6 @@
                 android:id="@+id/customer_contact_info_title_label"
                 style="@style/TitleContainerStyle">
 
-                <Button
-                    android:id="@+id/sendMailBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/send_email"
-                    android:textColor="#1976D2"
-                    app:layout_constraintBottom_toBottomOf="@+id/customer_contact_title"
-                    app:layout_constraintEnd_toEndOf="@+id/customer_contact_title"
-                    app:layout_constraintHorizontal_bias="0.98"
-                    app:layout_constraintStart_toStartOf="@+id/customer_contact_title"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="TouchTargetSizeCheck" />
-
                 <TextView
                     android:id="@+id/customer_contact_title"
                     style="@style/TitleTextStyle"
@@ -198,7 +185,17 @@
                         style="@style/TableRowItemStyle"
                         android:text="@{viewModel.chosenCustomer.contactPerson.phoneNumber}"
                         tools:text="@string/phone_number_placeholder" />
+
+                </TableRow >
+
+                <TableRow style="@style/TableRowButtonStyle">
+
+                    <Button
+                        android:id="@+id/send_mail_button"
+                        style="@style/TableRowButtonItemStyle"
+                        android:text="@string/send_email" />
                 </TableRow>
+
             </TableLayout>
 
             <!-- Table: Back-up contact information -->
@@ -227,6 +224,7 @@
                         android:text="@string/label_email" />
 
                     <TextView
+                        android:id="@+id/backupEmail"
                         style="@style/TableRowItemStyle"
                         android:text="@{viewModel.chosenCustomer.backupContactPerson.email}"
                         tools:text="@string/customer_email_placeholder" />
@@ -242,6 +240,14 @@
                         style="@style/TableRowItemStyle"
                         android:text="@{viewModel.chosenCustomer.backupContactPerson.phoneNumber}"
                         tools:text="@string/phone_number_placeholder" />
+                </TableRow>
+
+                <TableRow style="@style/TableRowButtonStyle">
+
+                    <Button
+                        android:id="@+id/send_backupmail_button"
+                        style="@style/TableRowButtonItemStyle"
+                        android:text="@string/send_email" />
                 </TableRow>
             </TableLayout>
 
