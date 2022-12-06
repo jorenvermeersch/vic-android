@@ -1,5 +1,7 @@
 package com.example.vic.screens.customerdetails
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +17,7 @@ import com.example.vic.database.enums.CustomerType
 import com.example.vic.databinding.FragmentCustomerDetailsBinding
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
+import timber.log.Timber
 
 class CustomerDetailsFragment : Fragment() {
 
@@ -33,12 +36,23 @@ class CustomerDetailsFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_details, container, false)
         binding.viewModel = viewModel
-
+        binding.sendMailBtn.setOnClickListener { composeEmail(arrayOf(binding.customerEmail.getText().toString()), "-Ponderer-") }
         setLayout()
-
         setVirtualMachineList()
 
         return binding.root
+    }
+
+    private fun composeEmail(Address: Array<String>, subject: String) {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            for (item in Address) {
+                Timber.tag("Address").i(item)
+            }
+            data = Uri.parse("mailto:") // only email apps should handle this
+            putExtra(Intent.EXTRA_EMAIL, Address)
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+        }
+        startActivity(intent)
     }
 
     private fun setLayout() {
