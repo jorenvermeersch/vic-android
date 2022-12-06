@@ -190,6 +190,7 @@
                         android:text="@string/label_phone_number" />
 
                     <TextView
+                        android:id="@+id/customerTel"
                         style="@style/TableRowItemStyle"
                         android:text="@{viewModel.chosenCustomer.contactPerson.phoneNumber}"
                         tools:text="@string/phone_number_placeholder" />
@@ -253,6 +254,7 @@
                         android:text="@string/label_phone_number" />
 
                     <TextView
+                        android:id="@+id/backupTel"
                         style="@style/TableRowItemStyle"
                         android:text="@{viewModel.chosenCustomer.backupContactPerson.phoneNumber}"
                         tools:text="@string/phone_number_placeholder" />

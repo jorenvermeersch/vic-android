@@ -55,6 +55,11 @@ class CustomerDetailsFragment : Fragment() {
         startActivity(intent)
     }
 
+    private fun callNumber(phone: String) {
+        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
+        startActivity(intent)
+    }
+
     private fun setLayout() {
         // Change layout based on type of customer.
         viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
@@ -67,6 +72,8 @@ class CustomerDetailsFragment : Fragment() {
     private fun setButtons() {
         binding.sendMailButton.setOnClickListener { composeEmail(arrayOf(binding.customerEmail.text.toString()), "-Onderwerp-") }
         binding.sendBackupmailButton.setOnClickListener { composeEmail(arrayOf(binding.backupEmail.text.toString()), "-Onderwerp-") }
+        binding.callCustomerButton.setOnClickListener { callNumber(binding.customerTel.text.toString()) }
+        binding.callBackupButton.setOnClickListener { callNumber(binding.backupTel.text.toString()) }
     }
 
     private fun setVirtualMachineList() {
