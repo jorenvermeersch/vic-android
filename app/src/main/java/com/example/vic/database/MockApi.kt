@@ -58,6 +58,7 @@ class MockApi {
             val internal = id in 2..6
 
             val contact = ContactPerson(
+                id.toLong(),
                 "firstname-$id",
                 "lastname-$id",
                 "customer-$id.example@devops.com",

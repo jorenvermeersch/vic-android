@@ -1,7 +1,9 @@
 package com.example.vic.database.entities
 
 import com.example.vic.database.enums.CustomerType
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Customer(
     var id: Long,
     var customerType: CustomerType,

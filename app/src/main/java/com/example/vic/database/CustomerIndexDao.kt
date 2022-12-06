@@ -12,5 +12,5 @@ interface CustomerIndexDao {
     fun getAll(): LiveData<List<CustomerIndex>>
 
     @Insert
-    fun insertAll(customerIndexes: List<CustomerIndex>)
+    suspend fun insertAll(vararg customerIndexes : CustomerIndex)
 }
