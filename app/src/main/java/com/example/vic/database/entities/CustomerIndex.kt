@@ -7,11 +7,10 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class CustomerIndexData (
-        var customers: List<CustomerIndex>,
-        var totalAmount: Long
+data class CustomerIndexData(
+    var customers: List<CustomerIndex>,
+    var totalAmount: Long
 )
-
 
 @JsonClass(generateAdapter = true)
 @Entity(tableName = "customer_index_table")

@@ -1,6 +1,5 @@
 package com.example.vic.network
 
-import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.database.entities.CustomerIndexData
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
