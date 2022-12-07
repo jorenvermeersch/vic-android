@@ -14,7 +14,8 @@ import com.example.vic.database.entities.VirtualMachine
 class ApplicationViewModel(val database: CustomerIndexDao, application: Application) :
     AndroidViewModel(application) {
 
-    private val mockApi = MockApi()
+    private val api = MockApi()
+//    private val realApi =
 
     private val _searchQuery = MutableLiveData<String?>(null)
 
@@ -35,7 +36,11 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
     val chosenVirtualMachine: LiveData<VirtualMachine> get() = _chosenVirtualMachine
 
     init {
-        _customers.value = mockApi.getCustomers().value
+        getAllCustomers()
+    }
+
+    fun getAllCustomers() {
+        _customers.value = api.getCustomers().value
     }
 
     fun onCustomerSearch(query: String) {
@@ -47,12 +52,12 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
     }
 
     fun onCustomerClicked(customerId: Long) {
-        val customer = mockApi.getCustomerById(customerId)
+        val customer = api.getCustomerById(customerId)
         _chosenCustomer.value = customer.value
     }
 
     fun onVirtualMachineClicked(machineId: Long) {
-        val virtualMachine = mockApi.getVirtualMachineById(machineId)
+        val virtualMachine = api.getVirtualMachineById(machineId)
         _chosenVirtualMachine.value = virtualMachine.value
     }
 
