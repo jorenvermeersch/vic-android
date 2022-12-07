@@ -121,6 +121,7 @@
             </TableLayout>
 
             <!-- Label: Contact information -->
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/customer_contact_info_title_label"
                 style="@style/TitleContainerStyle">
@@ -168,9 +169,21 @@
                         android:text="@string/label_email" />
 
                     <TextView
+                        android:id="@+id/customerEmail"
                         style="@style/TableRowItemStyle"
                         android:text="@{viewModel.chosenCustomer.contactPerson.email}"
                         tools:text="@string/customer_email_placeholder" />
+                </TableRow>
+
+                <TableRow style="@style/TableRowButtonStyle">
+
+                    <ImageButton
+                        android:id="@+id/send_mail_button"
+                        style="@style/ImageButtonStyle"
+                        android:layout_width="match_parent"
+                        android:contentDescription="@string/send_email"
+                        android:src="@drawable/email_icon"
+                        app:tint="?attr/cardIconColor" />
                 </TableRow>
 
                 <TableRow style="@style/LastTableRowStyle">
@@ -180,10 +193,23 @@
                         android:text="@string/label_phone_number" />
 
                     <TextView
+                        android:id="@+id/customerTel"
                         style="@style/TableRowItemStyle"
                         android:text="@{viewModel.chosenCustomer.contactPerson.phoneNumber}"
                         tools:text="@string/phone_number_placeholder" />
+
                 </TableRow>
+
+                <TableRow style="@style/TableRowButtonStyle">
+
+                    <ImageButton
+                        android:id="@+id/call_customer_button"
+                        style="@style/ImageButtonStyle"
+                        android:contentDescription="@string/call_customer"
+                        android:src="@drawable/phone_icon"
+                        app:tint="?attr/cardIconColor" />
+                </TableRow>
+
             </TableLayout>
 
             <!-- Table: Back-up contact information -->
@@ -212,9 +238,20 @@
                         android:text="@string/label_email" />
 
                     <TextView
+                        android:id="@+id/backupEmail"
                         style="@style/TableRowItemStyle"
                         android:text="@{viewModel.chosenCustomer.backupContactPerson.email}"
                         tools:text="@string/customer_email_placeholder" />
+                </TableRow>
+
+                <TableRow style="@style/TableRowButtonStyle">
+
+                    <ImageButton
+                        android:id="@+id/send_backupmail_button"
+                        style="@style/ImageButtonStyle"
+                        android:contentDescription="@string/send_email"
+                        android:src="@drawable/email_icon"
+                        app:tint="?attr/cardIconColor" />
                 </TableRow>
 
                 <TableRow style="@style/LastTableRowStyle">
@@ -224,9 +261,20 @@
                         android:text="@string/label_phone_number" />
 
                     <TextView
+                        android:id="@+id/backupTel"
                         style="@style/TableRowItemStyle"
                         android:text="@{viewModel.chosenCustomer.backupContactPerson.phoneNumber}"
                         tools:text="@string/phone_number_placeholder" />
+                </TableRow>
+
+                <TableRow style="@style/TableRowButtonStyle">
+
+                    <ImageButton
+                        android:id="@+id/call_backup_button"
+                        style="@style/ImageButtonStyle"
+                        android:contentDescription="@string/call_backup"
+                        android:src="@drawable/phone_icon"
+                        app:tint="?attr/cardIconColor" />
                 </TableRow>
             </TableLayout>
 

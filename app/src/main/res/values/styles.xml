@@ -116,4 +116,24 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_sm</item>
     </style>
+
+    <style name="TableRowButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TableRowButtonItemStyle">
+        <item name="android:layout_width">370dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">#757575</item>
+    </style>
+
+    <style name="ImageButtonStyle">
+        <item name="android:backgroundTint">?attr/cardBackgroundColor</item>
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 </resources>

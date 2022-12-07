@@ -72,4 +72,7 @@
     <string name="customer_type_external">External</string>
     <string name="locally_stored_customers">Locally stored customers</string>
     <string name="upload">Upload</string>
+    <string name="send_email">Send Email</string>
+    <string name="call_customer">Call Customer</string>
+    <string name="call_backup">Call Backup</string>
 </resources>
