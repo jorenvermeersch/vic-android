@@ -1,7 +1,6 @@
 package com.example.vic.screens.models
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,15 +11,10 @@ import com.example.vic.database.entities.Customer
 import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.database.entities.VirtualMachine
 import com.example.vic.network.CustomerApi
-import com.example.vic.network.CustomerApiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import timber.log.Timber
 
 class ApplicationViewModel(val database: CustomerIndexDao, application: Application) :
     AndroidViewModel(application) {
@@ -39,7 +33,6 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
 
     val filteredCustomers: LiveData<List<CustomerIndex>> = Transformations.switchMap(_searchQuery) {
         filterCustomers(_searchQuery.value)
@@ -62,9 +55,9 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
         coroutineScope.launch {
             var getCustomerIndexDeferrerd = CustomerApi.retrofitService.getCustomerIndexes()
             try {
-                var listResult = getCustomerIndexDeferrerd.await()
-                _response.value = "SUCCESS: ${listResult?.size} ITEMS WERE FOUND"
-                _customers.value = listResult
+                var result = getCustomerIndexDeferrerd.await()
+                _response.value = "SUCCESS: ${result.totalAmount} ITEMS WERE FOUND"
+                _customers.value = result.customers
             } catch (t: Throwable) {
                 _response.value = "Could not fetch data"
             }
@@ -80,7 +73,6 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
 //                _response.value = "rip"
 //            }
 //        })
-
     }
 
     fun onCustomerSearch(query: String) {
