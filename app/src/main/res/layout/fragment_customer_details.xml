@@ -177,10 +177,13 @@
 
                 <TableRow style="@style/TableRowButtonStyle">
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/send_mail_button"
-                        style="@style/TableRowButtonItemStyle"
-                        android:text="@string/send_email" />
+                        style="@style/ImageButtonStyle"
+                        android:layout_width="match_parent"
+                        android:contentDescription="@string/send_email"
+                        android:src="@drawable/email_icon"
+                        app:tint="?attr/cardIconColor" />
                 </TableRow>
 
                 <TableRow style="@style/LastTableRowStyle">
@@ -195,14 +198,16 @@
                         android:text="@{viewModel.chosenCustomer.contactPerson.phoneNumber}"
                         tools:text="@string/phone_number_placeholder" />
 
-                </TableRow >
+                </TableRow>
 
                 <TableRow style="@style/TableRowButtonStyle">
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/call_customer_button"
-                        style="@style/TableRowButtonItemStyle"
-                        android:text="@string/call_customer" />
+                        style="@style/ImageButtonStyle"
+                        android:contentDescription="@string/call_customer"
+                        android:src="@drawable/phone_icon"
+                        app:tint="?attr/cardIconColor" />
                 </TableRow>
 
             </TableLayout>
@@ -241,10 +246,12 @@
 
                 <TableRow style="@style/TableRowButtonStyle">
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/send_backupmail_button"
-                        style="@style/TableRowButtonItemStyle"
-                        android:text="@string/send_email" />
+                        style="@style/ImageButtonStyle"
+                        android:contentDescription="@string/send_email"
+                        android:src="@drawable/email_icon"
+                        app:tint="?attr/cardIconColor" />
                 </TableRow>
 
                 <TableRow style="@style/LastTableRowStyle">
@@ -262,10 +269,12 @@
 
                 <TableRow style="@style/TableRowButtonStyle">
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/call_backup_button"
-                        style="@style/TableRowButtonItemStyle"
-                        android:text="@string/call_backup" />
+                        style="@style/ImageButtonStyle"
+                        android:contentDescription="@string/call_backup"
+                        android:src="@drawable/phone_icon"
+                        app:tint="?attr/cardIconColor" />
                 </TableRow>
             </TableLayout>
 
