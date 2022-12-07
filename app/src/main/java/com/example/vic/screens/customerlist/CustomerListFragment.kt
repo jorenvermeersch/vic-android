@@ -34,7 +34,6 @@ class CustomerListFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
         binding.viewModel = viewModel
 
-
         showToolbar()
 
         configureSearchView()
