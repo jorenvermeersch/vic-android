@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="response"
+            type="String" />
 
         <variable
             name="viewModel"
@@ -15,6 +18,16 @@
         android:layout_height="wrap_content">
 
         <LinearLayout style="@style/LinearLayoutStyle">
+
+            <TextView
+                android:id="@+id/customer_list_titlef"
+                style="@style/TitleTextStyle"
+                android:layout_width="366dp"
+                android:text='@{"response: " + viewModel.response}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text='Test Response : {}' />
 
             <SearchView
                 android:id="@+id/customer_search"

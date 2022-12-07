@@ -8,14 +8,16 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-private const val BASE_URL = NetworkConfig.BASE_URL + "customers/"
+private const val BASE_URL = NetworkConfig.BASE_URL // + "customers/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -28,22 +30,27 @@ private val client = OkHttpClient.Builder()
     .build()
 
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .addConverterFactory(ScalarsConverterFactory.create())
+//    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .client(client)
     .build()
 
 interface CustomerApiService {
 
-    @GET("{id}")
-    fun getCustomerById(@Path("id") id: Long): Deferred<Customer>
+//    @GET("/realestate")
+    @GET(".")
+    fun getCustomerIndexes(): Call<String>
 
-    @GET("indexes")
-    fun getCustomerIndexes(): Deferred<List<CustomerIndex>>
-
-    @POST
-    fun insertCustomer(@Body customer: Customer)
+//    @GET("{id}")
+//    fun getCustomerById(@Path("id") id: Long): Deferred<Customer>
+//
+//    @GET("indexes")
+//    fun getCustomerIndexes(): Deferred<List<CustomerIndex>>
+//
+//    @POST
+//    fun insertCustomer(@Body customer: Customer)
 }
 
 object CustomerApi {
