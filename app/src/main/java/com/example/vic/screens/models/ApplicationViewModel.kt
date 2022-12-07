@@ -13,6 +13,10 @@ import com.example.vic.database.entities.CustomerIndex
 import com.example.vic.database.entities.VirtualMachine
 import com.example.vic.network.CustomerApi
 import com.example.vic.network.CustomerApiService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +37,10 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
     private val _response = MutableLiveData<String>("default value")
     public val response: LiveData<String> get() = _response
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+
     val filteredCustomers: LiveData<List<CustomerIndex>> = Transformations.switchMap(_searchQuery) {
         filterCustomers(_searchQuery.value)
     }
@@ -50,15 +58,28 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
     }
 
     private fun getAllCustomers() {
-        CustomerApi.retrofitService.getCustomerIndexes().enqueue(object: Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                _response.value = response.body()
-            }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                _response.value = "rip"
+        coroutineScope.launch {
+            var getCustomerIndexDeferrerd = CustomerApi.retrofitService.getCustomerIndexes()
+            try {
+                var listResult = getCustomerIndexDeferrerd.await()
+                _response.value = "SUCCESS: ${listResult?.size} ITEMS WERE FOUND"
+                _customers.value = listResult
+            } catch (t: Throwable) {
+                _response.value = "Could not fetch data"
             }
-        })
+        }
+
+//        CustomerApi.retrofitService.getCustomerIndexes().enqueue(object: Callback<List<CustomerIndex>> {
+//            override fun onResponse(call: Call<List<CustomerIndex>>, response: Response<List<CustomerIndex>>) {
+//                _response.value = "SUCCESS: ${response.body()?.size} ITEMS WERE FOUND"
+//                _customers =  response.body()
+//            }
+//
+//            override fun onFailure(call: Call<List<CustomerIndex>>, t: Throwable) {
+//                _response.value = "rip"
+//            }
+//        })
 
     }
 
