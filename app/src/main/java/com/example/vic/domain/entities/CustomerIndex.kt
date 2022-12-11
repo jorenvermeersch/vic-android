@@ -8,9 +8,9 @@ data class CustomerIndexData(
     var totalAmount: Long
 )
 
-@Entity(tableName = "customer_index_table")
+//@Entity(tableName = "customer_index_table")
 data class CustomerIndex(
-    @PrimaryKey
+//    @PrimaryKey
     var id: Long,
     var name: String,
 )

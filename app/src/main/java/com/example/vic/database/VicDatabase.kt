@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.vic.domain.entities.CustomerIndex
 
-@Database(entities = [CustomerIndex::class], version = 1, exportSchema = false)
+@Database(entities = [DatabaseCustomerIndex::class], version = 1, exportSchema = false)
 abstract class VicDatabase : RoomDatabase() {
 
     abstract val customerIndexDatabaseDao: CustomerIndexDatabaseDao
