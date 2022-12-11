@@ -5,18 +5,18 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.example.vic.database.CustomerIndexDao
+import com.example.vic.database.CustomerIndexDatabaseDao
 import com.example.vic.database.MockApi
-import com.example.vic.database.entities.Customer
-import com.example.vic.database.entities.CustomerIndex
-import com.example.vic.database.entities.VirtualMachine
+import com.example.vic.domain.entities.Customer
+import com.example.vic.domain.entities.CustomerIndex
+import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.network.CustomerApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class ApplicationViewModel(val database: CustomerIndexDao, application: Application) :
+class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: Application) :
     AndroidViewModel(application) {
 
     private val api = MockApi()
@@ -56,8 +56,8 @@ class ApplicationViewModel(val database: CustomerIndexDao, application: Applicat
             var getCustomerIndexDeferrerd = CustomerApi.retrofitService.getCustomerIndexes()
             try {
                 var result = getCustomerIndexDeferrerd.await()
-                _response.value = "SUCCESS: ${result.totalAmount} ITEMS WERE FOUND"
-                _customers.value = result.customers
+                _response.value = "SUCCESS: ${result.apiCustomerIndexes.size} ITEMS WERE FOUND"
+                _customers.value = result.apiCustomerIndexes.map { CustomerIndex(id = it.id, name = it.name) }
             } catch (t: Throwable) {
                 _response.value = "Could not fetch data"
             }

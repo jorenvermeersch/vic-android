@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vic.database.entities.CustomerIndex
+import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.databinding.CustomerRowBinding
 
 class CustomerIndexAdapter(private val clickListener: CustomerIndexListener) :

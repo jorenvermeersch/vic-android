@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.vic.database.entities.CustomerIndex
+import com.example.vic.domain.entities.CustomerIndex
 
 @Dao
-interface CustomerIndexDao {
+interface CustomerIndexDatabaseDao {
     @Query("SELECT * FROM customer_index_table")
     fun getAll(): LiveData<List<CustomerIndex>>
 

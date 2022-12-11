@@ -1,4 +1,4 @@
-package com.example.vic.database.enums
+package com.example.vic.domain.enums
 
 enum class Mode {
     IAAS,

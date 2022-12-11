@@ -1,6 +1,6 @@
 package com.example.vic.network
 
-import com.example.vic.database.entities.CustomerIndexData
+import com.example.vic.domain.entities.CustomerIndexData
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -37,7 +37,7 @@ interface CustomerApiService {
 //    fun getCustomerIndexes(): Call<String>
 
     @GET(".")
-    fun getCustomerIndexes(): Deferred<CustomerIndexData>
+    fun getCustomerIndexes(): Deferred<ApiCustomerIndexContainer>
 
 //    @GET("{id}")
 //    fun getCustomerById(@Path("id") id: Long): Deferred<Customer>

@@ -6,7 +6,7 @@
 
         <variable
             name="customerIndex"
-            type="com.example.vic.database.entities.CustomerIndex" />
+            type="com.example.vic.domain.entities.CustomerIndex" />
 
         <variable
             name="clickListener"

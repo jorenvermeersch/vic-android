@@ -4,9 +4,9 @@ import android.util.TypedValue
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.vic.R
-import com.example.vic.database.entities.Account
-import com.example.vic.database.entities.VirtualMachine
-import com.example.vic.database.enums.Status
+import com.example.vic.domain.entities.Account
+import com.example.vic.domain.entities.VirtualMachine
+import com.example.vic.domain.enums.Status
 import com.example.vic.toString
 import com.example.vic.translateBackupFrequency
 import com.example.vic.translateMode

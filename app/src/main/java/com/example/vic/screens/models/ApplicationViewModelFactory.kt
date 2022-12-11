@@ -3,10 +3,10 @@ package com.example.vic.screens.models
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.vic.database.CustomerIndexDao
+import com.example.vic.database.CustomerIndexDatabaseDao
 
 class ApplicationViewModelFactory(
-    private val dataSource: CustomerIndexDao,
+    private val dataSource: CustomerIndexDatabaseDao,
     private val application: Application
 ) : ViewModelProvider.Factory {
 

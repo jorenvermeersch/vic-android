@@ -1,10 +1,10 @@
-package com.example.vic.database.entities
+package com.example.vic.domain.entities
 
-import com.example.vic.database.enums.Availability
-import com.example.vic.database.enums.BackupFrequency
-import com.example.vic.database.enums.Mode
-import com.example.vic.database.enums.Status
-import com.example.vic.database.enums.Template
+import com.example.vic.domain.enums.Availability
+import com.example.vic.domain.enums.BackupFrequency
+import com.example.vic.domain.enums.Mode
+import com.example.vic.domain.enums.Status
+import com.example.vic.domain.enums.Template
 import java.util.Date
 
 data class VirtualMachine(

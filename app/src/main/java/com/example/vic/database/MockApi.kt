@@ -2,23 +2,23 @@ package com.example.vic.database
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.vic.database.entities.Account
-import com.example.vic.database.entities.ContactPerson
-import com.example.vic.database.entities.Credentials
-import com.example.vic.database.entities.Customer
-import com.example.vic.database.entities.CustomerIndex
-import com.example.vic.database.entities.Host
-import com.example.vic.database.entities.Port
-import com.example.vic.database.entities.Specifications
-import com.example.vic.database.entities.VirtualMachine
-import com.example.vic.database.entities.VirtualMachineIndex
-import com.example.vic.database.enums.Availability
-import com.example.vic.database.enums.BackupFrequency
-import com.example.vic.database.enums.CustomerType
-import com.example.vic.database.enums.Mode
-import com.example.vic.database.enums.Role
-import com.example.vic.database.enums.Status
-import com.example.vic.database.enums.Template
+import com.example.vic.domain.entities.Account
+import com.example.vic.domain.entities.ContactPerson
+import com.example.vic.domain.entities.Credentials
+import com.example.vic.domain.entities.Customer
+import com.example.vic.domain.entities.CustomerIndex
+import com.example.vic.domain.entities.Host
+import com.example.vic.domain.entities.Port
+import com.example.vic.domain.entities.Specifications
+import com.example.vic.domain.entities.VirtualMachine
+import com.example.vic.domain.entities.VirtualMachineIndex
+import com.example.vic.domain.enums.Availability
+import com.example.vic.domain.enums.BackupFrequency
+import com.example.vic.domain.enums.CustomerType
+import com.example.vic.domain.enums.Mode
+import com.example.vic.domain.enums.Role
+import com.example.vic.domain.enums.Status
+import com.example.vic.domain.enums.Template
 import com.example.vic.getCurrentDateTime
 
 class MockApi {

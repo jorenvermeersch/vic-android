@@ -1,6 +1,6 @@
-package com.example.vic.database.entities
+package com.example.vic.domain.entities
 
-import com.example.vic.database.enums.Status
+import com.example.vic.domain.enums.Status
 
 data class VirtualMachineIndex(
     var id: Long,

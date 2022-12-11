@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.vic.database.entities.CustomerIndex
+import com.example.vic.domain.entities.CustomerIndex
 
 @Database(entities = [CustomerIndex::class], version = 1, exportSchema = false)
 abstract class VicDatabase : RoomDatabase() {
 
-    abstract val customerIndexDao: CustomerIndexDao
+    abstract val customerIndexDatabaseDao: CustomerIndexDatabaseDao
 
     companion object {
         @Volatile

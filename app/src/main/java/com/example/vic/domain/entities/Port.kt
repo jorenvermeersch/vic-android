@@ -1,4 +1,4 @@
-package com.example.vic.database.entities
+package com.example.vic.domain.entities
 
 data class Port(
     var number: Int,

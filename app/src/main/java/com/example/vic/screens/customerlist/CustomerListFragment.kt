@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
@@ -21,7 +22,7 @@ class CustomerListFragment : Fragment() {
     private lateinit var binding: FragmentCustomerListBinding
     private val viewModel: ApplicationViewModel by activityViewModels {
         val appContext = requireNotNull(this.activity).application
-        val dataSource = VicDatabase.getInstance(appContext).customerIndexDao
+        val dataSource = VicDatabase.getInstance(appContext).customerIndexDatabaseDao
         ApplicationViewModelFactory(dataSource, appContext)
     }
 
@@ -32,7 +33,15 @@ class CustomerListFragment : Fragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
+
+//        val application = requireNotNull(this.activity).application
+//        val datasource = VicDatabase.getInstance(application).customerIndexDatabaseDao
+//
+//        val viewModelFactory = CustomerListViewModelFactory(datasource, application)
+//        val viewModel = ViewModelProvider(this, viewModelFactory).get(CustomerListViewModel::class.java)
+
         binding.viewModel = viewModel
+        binding.setLifecycleOwner(this)
 
         showToolbar()
 

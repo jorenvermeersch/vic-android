@@ -1,6 +1,6 @@
-package com.example.vic.database.entities
+package com.example.vic.domain.entities
 
-import com.example.vic.database.enums.Role
+import com.example.vic.domain.enums.Role
 
 data class Account(
     var id: Long,

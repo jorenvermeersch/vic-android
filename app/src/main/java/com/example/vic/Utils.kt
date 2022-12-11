@@ -1,9 +1,9 @@
 package com.example.vic
 
-import com.example.vic.database.enums.BackupFrequency
-import com.example.vic.database.enums.Mode
-import com.example.vic.database.enums.Status
-import com.example.vic.database.enums.Template
+import com.example.vic.domain.enums.BackupFrequency
+import com.example.vic.domain.enums.Mode
+import com.example.vic.domain.enums.Status
+import com.example.vic.domain.enums.Template
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date

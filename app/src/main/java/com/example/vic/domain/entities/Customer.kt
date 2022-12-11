@@ -1,6 +1,6 @@
-package com.example.vic.database.entities
+package com.example.vic.domain.entities
 
-import com.example.vic.database.enums.CustomerType
+import com.example.vic.domain.enums.CustomerType
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
