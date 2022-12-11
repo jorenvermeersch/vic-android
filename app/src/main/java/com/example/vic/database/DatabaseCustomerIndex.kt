@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 import com.example.vic.domain.entities.CustomerIndex
 import com.squareup.moshi.Json
 
-
 @Entity(tableName = "customer_index_table")
 data class DatabaseCustomerIndex(
     @PrimaryKey
@@ -18,8 +17,7 @@ data class DatabaseCustomerIndex(
     var name: String,
 )
 
-//convert Joke to ApiJoke
-fun List<DatabaseCustomerIndex>.asDomainModel() : List<CustomerIndex>{
+fun List<DatabaseCustomerIndex>.asDomainModel(): List<CustomerIndex> {
     return map {
         CustomerIndex(
             id = it.id,
