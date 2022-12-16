@@ -74,4 +74,7 @@
     <string name="upload">Upload</string>
     <string name="client_id">NX6EQdmambgHSfFkN2a4b04YESJu6r94</string>
     <string name="com_auth0_domain">dev-ashmgrzh4gfnfa18.us.auth0.com</string>
+    <string name="send_email">Send Email</string>
+    <string name="call_customer">Call Customer</string>
+    <string name="call_backup">Call Backup</string>
 </resources>

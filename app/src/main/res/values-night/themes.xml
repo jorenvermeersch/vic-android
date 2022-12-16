@@ -20,6 +20,7 @@
         <item name="navigationMenuIconColor">@color/white</item>
 
         <item name="cardBackgroundColor">@color/dark_gray</item>
+        <item name="cardIconColor">@color/white</item>
         <item name="activeIndicatorColor">@color/blue</item>
         <item name="inactiveIndicatorColor">@color/gray</item>
         <item name="titleAccentColor">@color/white</item>
