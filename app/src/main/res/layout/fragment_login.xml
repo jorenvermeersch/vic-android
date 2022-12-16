@@ -29,52 +29,14 @@
                 android:layout_width="match_parent"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="@dimen/padding_ty">
-
-                <TextView
-                    android:id="@+id/login_title"
-                    style="@style/TitleTextStyle"
-                    android:text="@string/label_login"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/login_title_underline"
-                    style="@style/TitleUnderlineStyle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/login_title" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/login_label_username"
-                style="@style/LabelStyle"
-                android:text="@string/label_username" />
-
-            <EditText
-                style="@style/InputStyle"
-                android:hint="@string/label_username"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/login_label_password"
-                style="@style/LabelStyle"
-                android:text="@string/label_password" />
-
-            <EditText
-                style="@style/InputStyle"
-                android:hint="@string/label_password"
-                android:importantForAutofill="no"
-                android:inputType="textPassword" />
+                android:layout_marginBottom="@dimen/padding_ty"/>
 
             <Button
                 android:id="@+id/login_button"
+                style="@style/ButtonStyle"
+                android:layout_width="129dp"
                 android:layout_gravity="center"
-                android:text="@string/label_login"
-                style="@style/ButtonStyle" />
+                android:text="@string/label_login" />
 
 
         </LinearLayout>

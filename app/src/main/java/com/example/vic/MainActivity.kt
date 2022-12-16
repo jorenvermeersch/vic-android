@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
                             logout()
                             findNavController(R.id.navHostFragment).navigate(R.id.loginFragment)
                             findNavController(R.id.navHostFragment).popBackStack(R.id.loginFragment, true)
-
                         }
                     }
                     return NavigationUI.onNavDestinationSelected(
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(findNavController(R.id.navHostFragment).currentDestination?.id == R.id.loginFragment) {
+        if (findNavController(R.id.navHostFragment).currentDestination?.id == R.id.loginFragment) {
             finish()
         } else {
             onBackPressedDispatcher.onBackPressed()
