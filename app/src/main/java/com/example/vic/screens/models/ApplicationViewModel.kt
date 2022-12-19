@@ -13,20 +13,13 @@ import com.example.vic.database.VicDatabase.Companion.getInstance
 import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
-import com.example.vic.domain.enums.CustomerType
-import com.example.vic.network.ApiCustomer
 import com.example.vic.network.CustomerApi
 import com.example.vic.network.asDomainModel
 import com.example.vic.repository.CustomerIndexRepository
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import timber.log.Timber
 
 class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: Application) :
     AndroidViewModel(application) {
@@ -73,33 +66,8 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     }
 
     fun onCustomerClicked(customerId: Long) {
-//        val customer = api.getCustomerById(customerId)
-//        _chosenCustomer.value = customer.value
-
-//        val customer = CustomerApi.retrofitService.getCustomerById()
-//        _chosenCustomer.value = customer.asDomainModel()
-
-        Timber.d("Test was here 1")
-
-//            coroutineScope.launch (Dispatchers.Main) {
-//                var data: Deferred<ApiCustomer>
-//                data = CustomerApi.retrofitService.getCustomerById()
-//
-//                val customer: ApiCustomer = data.await()
-//                _chosenCustomer.value = customer.asDomainModel()
-//                data.enqueue(object: Callback<ApiCustomer?> {
-//                    override fun onResponse(call: Call<ApiCustomer?>, response: Response<ApiCustomer?>){
-//                        val response = response.body()!!
-//                        _chosenCustomer.value = response.asDomainModel()
-//                    }
-//
-//                    override fun onFailure(call: Call<ApiCustomer?>, t: Throwable) {
-//                        Timber.e("Failed to fetch customer")
-//                    }
-//                })
-
         coroutineScope.launch {
-            var getCustomerDetails = CustomerApi.retrofitService.getCustomerById("8c78d014-aad3-4cee-853f-81978c2fc1ce")
+            var getCustomerDetails = CustomerApi.retrofitService.getCustomerById("5533f0b6-d769-4b99-a88b-4b38a1dc4651")
             try {
                 var result = getCustomerDetails.await()
                 _chosenCustomer.value = result.customer!!.asDomainModel()
@@ -120,7 +88,6 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
         }
 
         val resultContainer = MutableLiveData<List<CustomerIndex>>()
-//        val results = _customers.value?.filter { it -> it.name.contains(query) }
         val results = customers.value?.filter { it -> it.name.contains(query) }
         resultContainer.value = results ?: listOf()
 

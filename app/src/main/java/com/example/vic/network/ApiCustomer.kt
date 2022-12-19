@@ -2,38 +2,11 @@ package com.example.vic.network
 
 import com.example.vic.domain.entities.ContactPerson
 import com.example.vic.domain.entities.Customer
-import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.domain.entities.VirtualMachineIndex
 import com.example.vic.domain.enums.CustomerType
 import com.example.vic.domain.enums.Status
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-
-//
-// {
-//     "customer": {
-//     "id": 1,
-//     "institution": null,
-//     "department": null,
-//     "education": null,
-//      "customerType": 1,
-//     "companyType": "Voka",
-//     "companyName": "Jacobs, Bakker and Broek",
-//     "contactPerson": {
-//     "firstname": "Max",
-//     "lastname": "Vliet",
-//     "email": "Rick_Dijk46@gmail.com",
-//     "phonenumber": "06 9793 0815"
-// },
-//     "backupContactPerson": {
-//     "firstname": "Stijn",
-//     "lastname": "Jansen",
-//     "email": "Luuk.Berg@hotmail.com",
-//     "phonenumber": "9379393915"
-// },
-//     "virtualMachines": []
-// }
-// }
 
 @JsonClass(generateAdapter = true)
 data class ApiCustomerContainer(
@@ -65,6 +38,7 @@ data class ApiCustomer(
     var virtualMachines: List<ApiVm>?
 )
 
+@JsonClass(generateAdapter = true)
 data class ApiContactPerson(
     @Json(name = "firstname") var firstName: String,
     @Json(name = "lastname") var lastName: String,
@@ -72,16 +46,12 @@ data class ApiContactPerson(
     @Json(name = "phonenumber") var phoneNumber: String?,
 )
 
+@JsonClass(generateAdapter = true)
 data class ApiVm(
     @Json(name = "id") var id: Long = -1,
     @Json(name = "fqdn") var fqdn: String = "",
     @Json(name = "status") var status: Int = -1,
 )
-
-//Requested,
-//InProgress,
-//ReadyToDeploy,
-//Deployed
 
 fun ApiCustomer.asDomainModel(): Customer {
 
@@ -103,23 +73,17 @@ fun ApiCustomer.asDomainModel(): Customer {
         education = edu,
         type = companyType,
         companyName = companyName,
-        virtualMachines = virtualMachines!!.map { VirtualMachineIndex( it.id, it.fqdn, when (it.status) {
-            0 -> Status.Requested
-            1 -> Status.InProgress
-            2 -> Status.ReadyToDeploy
-            3 -> Status.Deployed
-            else -> Status.Requested
-        }) }
+        virtualMachines = virtualMachines!!.map {
+            VirtualMachineIndex(
+                it.id, it.fqdn,
+                when (it.status) {
+                    0 -> Status.Requested
+                    1 -> Status.InProgress
+                    2 -> Status.ReadyToDeploy
+                    3 -> Status.Deployed
+                    else -> Status.Requested
+                }
+            )
+        }
     )
 }
-
-//    var id: Long,
-//    var customerType: CustomerType,
-//    var contactPerson: ContactPerson,
-//    var backupContactPerson: ContactPerson?,
-//    var institution: String?, // Internal.
-//    var department: String?, // Internal.
-//    var education: String?, // Internal.
-//    var type: String?, // External.
-//    var companyName: String?, // External.
-//    var virtualMachines: List<VirtualMachineIndex>
