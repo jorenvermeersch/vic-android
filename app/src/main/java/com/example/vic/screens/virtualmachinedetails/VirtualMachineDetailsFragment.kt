@@ -35,7 +35,7 @@ class VirtualMachineDetailsFragment : Fragment() {
         )
         binding.viewModel = viewModel
 
-        setCredentialsList()
+//        setCredentialsList()
 
         return binding.root
     }

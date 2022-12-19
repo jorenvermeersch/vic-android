@@ -80,23 +80,19 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     }
 
     fun onVirtualMachineClicked(machineId: Long) {
-
-
-
         coroutineScope.launch {
             var getVirtualMachineDetails = VirtualMachineApi.retrofitService.getVirtualMachineById("5359d02c-aa72-4246-bb66-9756b2f42d78")
             Timber.d("resultvm: not yet ...")
             try {
                 Timber.d("resultvm: not yet")
                 var result = getVirtualMachineDetails.await()
-                Timber.d("resultvm: " + result.virtualMachine.name)
+                Timber.d("resultvm: " + result!!.virtualMachine!!.name)
 
                 _chosenVirtualMachine.value = result.virtualMachine!!.asDomainModel()
             } catch (e: Exception) {
                 _chosenVirtualMachine.value = null
             }
         }
-
     }
 
     private fun filterCustomers(query: String?): LiveData<List<CustomerIndex>> {

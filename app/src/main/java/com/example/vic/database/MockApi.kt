@@ -6,12 +6,10 @@ import com.example.vic.domain.entities.Account
 import com.example.vic.domain.entities.ContactPerson
 import com.example.vic.domain.entities.Credentials
 import com.example.vic.domain.entities.Customer
-import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.Host
 import com.example.vic.domain.entities.Port
 import com.example.vic.domain.entities.Specifications
 import com.example.vic.domain.entities.VirtualMachine
-import com.example.vic.domain.entities.VirtualMachineIndex
 import com.example.vic.domain.enums.Availability
 import com.example.vic.domain.enums.BackupFrequency
 import com.example.vic.domain.enums.CustomerType
