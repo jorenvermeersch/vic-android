@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.vic.database.VicDatabase
 import com.example.vic.database.asDomainModel
+import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.network.CustomerApi
-import com.example.vic.network.CustomerApiService
 import com.example.vic.network.asDatabaseModel
+import com.example.vic.network.asDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -20,16 +21,19 @@ class CustomerIndexRepository(private val database: VicDatabase) {
 
     suspend fun refreshCustomerIndexes() {
         withContext(Dispatchers.IO) {
-            Timber.d("ConnectionTest", "ja hier")
             val results = CustomerApi.retrofitService.getCustomerIndexes().await()
-            Timber.d("results", results)
             database.customerIndexDatabaseDao.insertAll(*results.asDatabaseModel())
         }
     }
+
+//    suspend fun getCustomerById(): Customer {
+//        val results = CustomerApi.retrofitService.getCustomerById().await()
+//        return results.asDomainModel()
+//    }
 }
 
 //
-//class JokeRepository(private val database: JokeDatabase) {
+// class JokeRepository(private val database: JokeDatabase) {
 //
 //    //Network call
 //    //get jokes from the database, but transform them with map
@@ -70,4 +74,4 @@ class CustomerIndexRepository(private val database: VicDatabase) {
 //        //the returned joke can be used to pass as save arg to the next fragment (e.g)
 //        return newJoke
 //    }
-//}
+// }

@@ -136,7 +136,7 @@ class MockApi {
 
     fun getCustomers(): LiveData<List<CustomerIndex>> {
         val customers = _customers.value?.map { c ->
-            CustomerIndex(c.id, c.contactPerson.firstName)
+            CustomerIndex(c.id, c.contactPerson!!.firstName)
         }
         return MutableLiveData(customers)
     }

@@ -7,6 +7,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -31,22 +32,14 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface CustomerApiService {
-
-//    @GET("/realestate")
-//    @GET(".")
-//    fun getCustomerIndexes(): Call<String>
-
-    @GET(".")
+    @GET("f96362ed-9b89-4991-bf5a-2c4b8c86dc3b/")
     fun getCustomerIndexes(): Deferred<ApiCustomerIndexContainer>
 
-//    @GET("{id}")
-//    fun getCustomerById(@Path("id") id: Long): Deferred<Customer>
-//
-//    @GET("indexes")
-//    fun getCustomerIndexes(): Deferred<List<CustomerIndex>>
-//
-//    @POST
-//    fun insertCustomer(@Body customer: Customer)
+    @GET("b32e129b-194d-4a03-bd0e-b10fc64e994a/")
+//    @GET("33413381-2f5e-4bef-93de-4886cd79a3e4/")
+//    @GET("50228511-198d-48b1-b3a2-07207ec53bce/")
+//    @GET("b67f617f-4961-42eb-b6ce-61aaf31e5e4b/")
+    fun getCustomerById(): Call<ApiCustomer>
 }
 
 object CustomerApi {

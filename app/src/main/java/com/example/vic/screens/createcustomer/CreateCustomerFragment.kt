@@ -89,6 +89,10 @@ class CreateCustomerFragment : Fragment() {
                     it.generalInternalCustomer.visibility = View.GONE
                     it.generalExternalCustomer.visibility = View.VISIBLE
                 }
+                else -> {
+                    it.generalInternalCustomer.visibility = View.GONE
+                    it.generalExternalCustomer.visibility = View.GONE
+                }
             }
         }
     }
