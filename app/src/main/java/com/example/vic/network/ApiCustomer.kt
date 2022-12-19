@@ -2,38 +2,47 @@ package com.example.vic.network
 
 import com.example.vic.domain.entities.ContactPerson
 import com.example.vic.domain.entities.Customer
+import com.example.vic.domain.entities.VirtualMachine
+import com.example.vic.domain.entities.VirtualMachineIndex
 import com.example.vic.domain.enums.CustomerType
+import com.example.vic.domain.enums.Status
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import timber.log.Timber
+
 //
-//{
-//    "customer": {
-//    "id": 1,
-//    "institution": null,
-//    "department": null,
-//    "education": null,
-//    "customerType": 1,
-//    "companyType": "Voka",
-//    "companyName": "Jacobs, Bakker and Broek",
-//    "contactPerson": {
-//    "firstname": "Max",
-//    "lastname": "Vliet",
-//    "email": "Rick_Dijk46@gmail.com",
-//    "phonenumber": "06 9793 0815"
-//},
-//    "backupContactPerson": {
-//    "firstname": "Stijn",
-//    "lastname": "Jansen",
-//    "email": "Luuk.Berg@hotmail.com",
-//    "phonenumber": "9379393915"
-//},
-//    "virtualMachines": []
-//}
-//}
+// {
+//     "customer": {
+//     "id": 1,
+//     "institution": null,
+//     "department": null,
+//     "education": null,
+//      "customerType": 1,
+//     "companyType": "Voka",
+//     "companyName": "Jacobs, Bakker and Broek",
+//     "contactPerson": {
+//     "firstname": "Max",
+//     "lastname": "Vliet",
+//     "email": "Rick_Dijk46@gmail.com",
+//     "phonenumber": "06 9793 0815"
+// },
+//     "backupContactPerson": {
+//     "firstname": "Stijn",
+//     "lastname": "Jansen",
+//     "email": "Luuk.Berg@hotmail.com",
+//     "phonenumber": "9379393915"
+// },
+//     "virtualMachines": []
+// }
+// }
 
 @JsonClass(generateAdapter = true)
-data class ApiCustomer (
+data class ApiCustomerContainer(
+    @Json(name = "customer")
+    var customer: ApiCustomer?,
+)
+
+@JsonClass(generateAdapter = true)
+data class ApiCustomer(
     @Json(name = "id")
     var id: Long?,
     @Json(name = "companyName")
@@ -52,36 +61,29 @@ data class ApiCustomer (
     var apiContactPerson: ApiContactPerson?,
     @Json(name = "backupContactPerson")
     var apiBackupContactPerson: ApiContactPerson?,
+    @Json(name = "virtualMachines")
+    var virtualMachines: List<ApiVm>?
 )
 
-data class ApiContactPerson (
+data class ApiContactPerson(
     @Json(name = "firstname") var firstName: String,
     @Json(name = "lastname") var lastName: String,
     @Json(name = "email") var email: String,
     @Json(name = "phonenumber") var phoneNumber: String?,
 )
 
-data class ApiVm (
-    @Json(name = "firstname") var firstName: String,
-    @Json(name = "lastname") var lastName: String,
-    @Json(name = "email") var email: String,
-    @Json(name = "phonenumber") var phoneNumber: String?,
+data class ApiVm(
+    @Json(name = "id") var id: Long = -1,
+    @Json(name = "fqdn") var fqdn: String = "",
+    @Json(name = "status") var status: Int = -1,
 )
 
-//
-//"id": 2,
-//"fqdn": "sophie.eu",
-//"status": 1
+//Requested,
+//InProgress,
+//ReadyToDeploy,
+//Deployed
 
 fun ApiCustomer.asDomainModel(): Customer {
-
-//    Timber.i("test customer type", "insti: ", institution)
-//    Timber.e("TYPE COMP: " + companyType)
-    Timber.e("TYPE COMP: " + id)
-    Timber.e("TYPE COMP: " + companyName)
-    Timber.e("TYPE COMP: " + edu)
-    Timber.e("TYPE COMP: " + apiContactPerson!!.firstName)
-
 
     return Customer(
         id = 1,
@@ -101,11 +103,15 @@ fun ApiCustomer.asDomainModel(): Customer {
         education = edu,
         type = companyType,
         companyName = companyName,
-        virtualMachines = listOf()
+        virtualMachines = virtualMachines!!.map { VirtualMachineIndex( it.id, it.fqdn, when (it.status) {
+            0 -> Status.Requested
+            1 -> Status.InProgress
+            2 -> Status.ReadyToDeploy
+            3 -> Status.Deployed
+            else -> Status.Requested
+        }) }
     )
 }
-
-
 
 //    var id: Long,
 //    var customerType: CustomerType,

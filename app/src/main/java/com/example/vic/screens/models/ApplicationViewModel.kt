@@ -6,12 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
-//import androidx.lifecycle.*
 import com.example.vic.database.CustomerIndexDatabaseDao
 import com.example.vic.database.MockApi
 import com.example.vic.database.VicDatabase
 import com.example.vic.database.VicDatabase.Companion.getInstance
-import com.example.vic.domain.entities.ContactPerson
 import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
@@ -34,8 +32,7 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     AndroidViewModel(application) {
 
     private val api = MockApi()
-//    private val realApi =
-
+    // private val realApi =
     private val _searchQuery = MutableLiveData<String?>(null)
 
     private val _response = MutableLiveData<String>("default value")
@@ -84,21 +81,32 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
 
         Timber.d("Test was here 1")
 
-            val data: Call<ApiCustomer> = CustomerApi.retrofitService.getCustomerById()
+//            coroutineScope.launch (Dispatchers.Main) {
+//                var data: Deferred<ApiCustomer>
+//                data = CustomerApi.retrofitService.getCustomerById()
+//
+//                val customer: ApiCustomer = data.await()
+//                _chosenCustomer.value = customer.asDomainModel()
+//                data.enqueue(object: Callback<ApiCustomer?> {
+//                    override fun onResponse(call: Call<ApiCustomer?>, response: Response<ApiCustomer?>){
+//                        val response = response.body()!!
+//                        _chosenCustomer.value = response.asDomainModel()
+//                    }
+//
+//                    override fun onFailure(call: Call<ApiCustomer?>, t: Throwable) {
+//                        Timber.e("Failed to fetch customer")
+//                    }
+//                })
 
-            data.enqueue(object: Callback<ApiCustomer?> {
-                override fun onResponse(
-                    call: Call<ApiCustomer?>,
-                    response: Response<ApiCustomer?>
-                ) {
-                    val response = response.body()!!
-                    _chosenCustomer.value = response.asDomainModel()
-                }
-
-                override fun onFailure(call: Call<ApiCustomer?>, t: Throwable) {
-                    Timber.e("Failed to fetch customer")
-                }
-            })
+        coroutineScope.launch {
+            var getCustomerDetails = CustomerApi.retrofitService.getCustomerById("8c78d014-aad3-4cee-853f-81978c2fc1ce")
+            try {
+                var result = getCustomerDetails.await()
+                _chosenCustomer.value = result.customer!!.asDomainModel()
+            } catch (e: Exception) {
+                _chosenCustomer.value = null
+            }
+        }
     }
 
     fun onVirtualMachineClicked(machineId: Long) {

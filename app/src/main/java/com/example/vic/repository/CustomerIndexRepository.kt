@@ -4,14 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.vic.database.VicDatabase
 import com.example.vic.database.asDomainModel
-import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.network.CustomerApi
 import com.example.vic.network.asDatabaseModel
-import com.example.vic.network.asDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class CustomerIndexRepository(private val database: VicDatabase) {
 

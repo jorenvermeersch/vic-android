@@ -1,6 +1,5 @@
 package com.example.vic.network
 
-import com.example.vic.domain.entities.CustomerIndexData
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -11,6 +10,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 private const val BASE_URL = NetworkConfig.BASE_URL // + "customers/"
 
@@ -35,11 +35,12 @@ interface CustomerApiService {
     @GET("f96362ed-9b89-4991-bf5a-2c4b8c86dc3b/")
     fun getCustomerIndexes(): Deferred<ApiCustomerIndexContainer>
 
-    @GET("b32e129b-194d-4a03-bd0e-b10fc64e994a/")
+//    f7022cd9-a9be-4f03-83fd-9ae4b4775312/
+    @GET("{id}/")
 //    @GET("33413381-2f5e-4bef-93de-4886cd79a3e4/")
 //    @GET("50228511-198d-48b1-b3a2-07207ec53bce/")
 //    @GET("b67f617f-4961-42eb-b6ce-61aaf31e5e4b/")
-    fun getCustomerById(): Call<ApiCustomer>
+    fun getCustomerById(@Path("id") id: String): Deferred<ApiCustomerContainer>
 }
 
 object CustomerApi {
