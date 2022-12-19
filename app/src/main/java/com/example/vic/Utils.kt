@@ -18,36 +18,40 @@ fun getCurrentDateTime(): Date {
     return Calendar.getInstance().time
 }
 
-fun translateMode(mode: Mode): Int {
+fun translateMode(mode: Mode?): Int {
     return when (mode) {
         Mode.SAAS -> R.string.mode_saas
         Mode.PAAS -> R.string.mode_paas
         Mode.IAAS -> R.string.mode_iaas
+        else -> -1
     }
 }
 
-fun translateTemplate(template: Template): Int {
+fun translateTemplate(template: Template?): Int {
     return when (template) {
         Template.NoTemplate -> R.string.template_no_template
         Template.AI -> R.string.template_ai
         Template.WebServer -> R.string.template_web_server
+        else -> -1
     }
 }
 
-fun translateBackupFrequency(backupFrequency: BackupFrequency): Int {
+fun translateBackupFrequency(backupFrequency: BackupFrequency?): Int {
     return when (backupFrequency) {
         BackupFrequency.NoBackup -> R.string.backup_no_backup
         BackupFrequency.Daily -> R.string.backup_daily
         BackupFrequency.Weekly -> R.string.backup_weekly
         BackupFrequency.Monthly -> R.string.backup_monthly
+        else -> -1
     }
 }
 
-fun translateStatus(status: Status): Int {
+fun translateStatus(status: Status?): Int {
     return when (status) {
         Status.Requested -> R.string.status_requested
         Status.InProgress -> R.string.status_in_progress
         Status.ReadyToDeploy -> R.string.status_ready_to_deploy
         Status.Deployed -> R.string.status_deployed
+        else -> -1
     }
 }

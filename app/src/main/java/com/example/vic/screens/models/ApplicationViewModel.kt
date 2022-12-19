@@ -14,12 +14,14 @@ import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.network.CustomerApi
+import com.example.vic.network.VirtualMachineApi
 import com.example.vic.network.asDomainModel
 import com.example.vic.repository.CustomerIndexRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: Application) :
     AndroidViewModel(application) {
@@ -43,8 +45,8 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     val chosenCustomer: LiveData<Customer?> get() = _chosenCustomer
 
     // Virtual machine selected by user.
-    private val _chosenVirtualMachine = MutableLiveData<VirtualMachine>(null)
-    val chosenVirtualMachine: LiveData<VirtualMachine> get() = _chosenVirtualMachine
+    private val _chosenVirtualMachine = MutableLiveData<VirtualMachine?>(null)
+    val chosenVirtualMachine: LiveData<VirtualMachine?> get() = _chosenVirtualMachine
 
     private val datab: VicDatabase = getInstance(application)
     private val repository = CustomerIndexRepository(datab)
@@ -78,8 +80,23 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     }
 
     fun onVirtualMachineClicked(machineId: Long) {
-        val virtualMachine = api.getVirtualMachineById(machineId)
-        _chosenVirtualMachine.value = virtualMachine.value
+
+
+
+        coroutineScope.launch {
+            var getVirtualMachineDetails = VirtualMachineApi.retrofitService.getVirtualMachineById("5359d02c-aa72-4246-bb66-9756b2f42d78")
+            Timber.d("resultvm: not yet ...")
+            try {
+                Timber.d("resultvm: not yet")
+                var result = getVirtualMachineDetails.await()
+                Timber.d("resultvm: " + result.virtualMachine.name)
+
+                _chosenVirtualMachine.value = result.virtualMachine!!.asDomainModel()
+            } catch (e: Exception) {
+                _chosenVirtualMachine.value = null
+            }
+        }
+
     }
 
     private fun filterCustomers(query: String?): LiveData<List<CustomerIndex>> {

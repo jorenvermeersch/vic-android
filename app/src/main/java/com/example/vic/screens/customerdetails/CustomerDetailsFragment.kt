@@ -97,6 +97,15 @@ class CustomerDetailsFragment : Fragment() {
                     it.companyName.visibility = View.GONE
                 }
             }
+            else -> {
+                binding.let {
+                    it.institution.visibility = View.GONE
+                    it.department.visibility = View.GONE
+                    it.education.visibility = View.GONE
+                    it.externalType.visibility = View.GONE
+                    it.companyName.visibility = View.GONE
+                }
+            }
         }
 
         binding.customerBackupContactInformation.visibility =

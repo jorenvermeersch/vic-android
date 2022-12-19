@@ -30,10 +30,10 @@ fun TextView.setTemplate(item: VirtualMachine?) {
 
 @BindingAdapter("ports")
 fun TextView.setPorts(item: VirtualMachine?) {
-    var result = ""
+    var result: String? = ""
 
     item?.let {
-        result = item.ports.joinToString(", ") { it.service }
+        result = item.ports!!.joinToString(", ") { it.service.toString() }
     }
 
     text = result

@@ -35,16 +35,16 @@ class MockApi {
         val mockVirtualMachines = generateMockVirtualMachines()
 
         for (index in mockCustomers.indices) {
-            val mockCustomer = mockCustomers[index]
-            val machine1 = mockVirtualMachines[index]
-            val machine2 = mockVirtualMachines[index + 1]
-
-            mockCustomer.virtualMachines =
-                listOf(machine1, machine2).map { VirtualMachineIndex(it.id, it.name, it.status) }
-            machine1.requester = mockCustomer
-            machine1.user = mockCustomer
-            machine2.requester = mockCustomer
-            machine2.user = mockCustomer
+//            val mockCustomer = mockCustomers[index]
+//            val machine1 = mockVirtualMachines[index]
+//            val machine2 = mockVirtualMachines[index + 1]
+//
+//            mockCustomer.virtualMachines =
+//                listOf(machine1, machine2).map { VirtualMachineIndex(it.id, it.name, it.status) }
+//            machine1.requester = mockCustomer
+//            machine1.user = mockCustomer
+//            machine2.requester = mockCustomer
+//            machine2.user = mockCustomer
         }
 
         _customers.value = mockCustomers
@@ -134,12 +134,12 @@ class MockApi {
         return mockVirtualMachines
     }
 
-    fun getCustomers(): LiveData<List<CustomerIndex>> {
-        val customers = _customers.value?.map { c ->
-            CustomerIndex(c.id, c.contactPerson!!.firstName)
-        }
-        return MutableLiveData(customers)
-    }
+//    fun getCustomers(): LiveData<List<CustomerIndex>> {
+//        val customers = _customers.value?.map { c ->
+//            CustomerIndex(c.id, c.contactPerson!!.firstName)
+//        }
+//        return MutableLiveData(customers)
+//    }
 
     fun getCustomerById(customerId: Long): LiveData<Customer> {
         val customer = _customers.value?.find { it -> it.id == customerId }

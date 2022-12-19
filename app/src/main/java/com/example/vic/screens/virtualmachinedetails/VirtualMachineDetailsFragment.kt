@@ -45,7 +45,7 @@ class VirtualMachineDetailsFragment : Fragment() {
         binding.credentialsList.adapter = adapter
 
         viewModel.chosenVirtualMachine.observe(viewLifecycleOwner) {
-            adapter.submitList(it.credentials)
+            adapter.submitList(it!!.credentials)
         }
     }
 }
