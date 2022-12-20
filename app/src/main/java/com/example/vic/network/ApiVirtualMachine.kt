@@ -1,9 +1,21 @@
 package com.example.vic.network
 
+import com.example.vic.domain.entities.Account
+import com.example.vic.domain.entities.Credentials
+import com.example.vic.domain.entities.Customer
+import com.example.vic.domain.entities.Host
+import com.example.vic.domain.entities.Port
+import com.example.vic.domain.entities.Specifications
 import com.example.vic.domain.entities.VirtualMachine
+import com.example.vic.domain.enums.Availability
+import com.example.vic.domain.enums.BackupFrequency
+import com.example.vic.domain.enums.CustomerType
+import com.example.vic.domain.enums.Mode
+import com.example.vic.domain.enums.Role
+import com.example.vic.domain.enums.Status
+import com.example.vic.domain.enums.Template
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import java.util.Date
 
 @JsonClass(generateAdapter = true)
 data class ApiVirtualMachineContainer(
@@ -24,7 +36,7 @@ data class ApiVirtualMachine(
     @Json(name = "backupFrequenty")
     var backupFrequency: Int?,
     @Json(name = "applicationDate")
-    var applicationDate: Date?,
+    var applicationDate: String?,
     @Json(name = "timeSpan")
     var timespan: ApiTimeSpan?,
     @Json(name = "reason")
@@ -56,9 +68,9 @@ data class ApiVirtualMachine(
 @JsonClass(generateAdapter = true)
 data class ApiTimeSpan(
     @Json(name = "startDate")
-    var start: Date?,
+    var start: String?,
     @Json(name = "endDate")
-    var end: Date?
+    var end: String?
 )
 
 @JsonClass(generateAdapter = true)
@@ -130,110 +142,110 @@ fun ApiVirtualMachine.asDomainModel(): VirtualMachine {
     return VirtualMachine(
         id = id,
         name = name,
-//        specifications = Specifications(
-//            processors = specification!!.virtualProcessors,
-//            memory = specification!!.memory,
-//            storage = specification!!.storage,
-//        ),
-//        template = when (template) {
-//            0 -> Template.NoTemplate
-//            1 -> Template.AI
-//            2 -> Template.WebServer
-//            else -> null
-//        },
-//        mode = when (mode) {
-//            0 -> Mode.IAAS
-//            1 -> Mode.PAAS
-//            2 -> Mode.SAAS
-//            else -> null
-//        },
-//        fqdn = fqdn,
-//        availabilities = availabilities!!.map { Availability.valueOf(it) },
-//        backupFrequency = when (backupFrequency) {
-//            0 -> BackupFrequency.NoBackup
-//            1 -> BackupFrequency.Daily
-//            2 -> BackupFrequency.Weekly
-//            3 -> BackupFrequency.Monthly
-//            else -> BackupFrequency.NoBackup
-//        },
-//        applicationDate = applicationDate,
-//        startDate = timespan!!.start,
-//        endDate = timespan!!.end,
-//        status = when (status) {
-//            0 -> Status.Requested
-//            1 -> Status.InProgress
-//            2 -> Status.ReadyToDeploy
-//            3 -> Status.Deployed
-//            else -> null
-//        },
-//        reason = reason,
-//        ports = ports!!.map {
-//            Port(
-//                number = it.number,
-//                service = it.service
-//            )
-//        },
-//        host = Host(
-//            id = host!!.id,
-//            name = host!!.name,
-//            specifications = null
-//        ),
-//        credentials = credentials!!.map {
-//            Credentials(
-//                username = it.username,
-//                passwordHash = it.passwordHash,
-//                role = it.role
-//            )
-//        },
-//        account = Account(
-//            id = account!!.id,
-//            firstName = account!!.firstname,
-//            lastName = account!!.lastname,
-//            email = account!!.email,
-//            role = when (status) {
-//                0 -> Role.Observer
-//                1 -> Role.Admin
-//                2 -> Role.Master
-//                else -> null
-//            },
-//            password = null,
-//            isActive = account!!.isActive,
-//            department = null,
-//            education = null
-//        ),
-//        requester = Customer(
-//            id = requester!!.id,
-//            customerType = when (requester!!.customerType) {
-//                0 -> CustomerType.Internal
-//                0 -> CustomerType.External
-//                else -> CustomerType.Unknown
-//            },
-//            contactPerson = null,
-//            backupContactPerson = null,
-//            institution = null,
-//            department = null,
-//            education = null,
-//            type = null,
-//            companyName = requester!!.name,
-//            virtualMachines = null
-//            // TODO: add email to customer
-//        ),
-//        user = Customer(
-//            id = user!!.id,
-//            customerType = when (user!!.customerType) {
-//                0 -> CustomerType.Internal
-//                0 -> CustomerType.External
-//                else -> CustomerType.Unknown
-//            },
-//            contactPerson = null,
-//            backupContactPerson = null,
-//            institution = null,
-//            department = null,
-//            education = null,
-//            type = null,
-//            companyName = user!!.name,
-//            virtualMachines = null
-//            // TODO: add email to customer
-//        ),
+        specifications = Specifications(
+            processors = specification!!.virtualProcessors,
+            memory = specification!!.memory,
+            storage = specification!!.storage,
+        ),
+        template = when (template) {
+            0 -> Template.NoTemplate
+            1 -> Template.AI
+            2 -> Template.WebServer
+            else -> null
+        },
+        mode = when (mode) {
+            0 -> Mode.IAAS
+            1 -> Mode.PAAS
+            2 -> Mode.SAAS
+            else -> null
+        },
+        fqdn = fqdn,
+        availabilities = availabilities!!.map { Availability.valueOf(it) },
+        backupFrequency = when (backupFrequency) {
+            0 -> BackupFrequency.NoBackup
+            1 -> BackupFrequency.Daily
+            2 -> BackupFrequency.Weekly
+            3 -> BackupFrequency.Monthly
+            else -> BackupFrequency.NoBackup
+        },
+        applicationDate = applicationDate,
+        startDate = timespan!!.start,
+        endDate = timespan!!.end,
+        status = when (status) {
+            0 -> Status.Requested
+            1 -> Status.InProgress
+            2 -> Status.ReadyToDeploy
+            3 -> Status.Deployed
+            else -> null
+        },
+        reason = reason,
+        ports = ports!!.map {
+            Port(
+                number = it.number,
+                service = it.service
+            )
+        },
+        host = Host(
+            id = host!!.id,
+            name = host!!.name,
+            specifications = null
+        ),
+        credentials = credentials!!.map {
+            Credentials(
+                username = it.username,
+                passwordHash = it.passwordHash,
+                role = it.role
+            )
+        },
+        account = Account(
+            id = account!!.id,
+            firstName = account!!.firstname,
+            lastName = account!!.lastname,
+            email = account!!.email,
+            role = when (status) {
+                0 -> Role.Observer
+                1 -> Role.Admin
+                2 -> Role.Master
+                else -> null
+            },
+            password = null,
+            isActive = account!!.isActive,
+            department = null,
+            education = null
+        ),
+        requester = Customer(
+            id = requester!!.id,
+            customerType = when (requester!!.customerType) {
+                0 -> CustomerType.Internal
+                0 -> CustomerType.External
+                else -> CustomerType.Unknown
+            },
+            contactPerson = null,
+            backupContactPerson = null,
+            institution = null,
+            department = null,
+            education = null,
+            type = null,
+            companyName = requester!!.name,
+            virtualMachines = null
+            // TODO: add email to customer
+        ),
+        user = Customer(
+            id = user!!.id,
+            customerType = when (user!!.customerType) {
+                0 -> CustomerType.Internal
+                0 -> CustomerType.External
+                else -> CustomerType.Unknown
+            },
+            contactPerson = null,
+            backupContactPerson = null,
+            institution = null,
+            department = null,
+            education = null,
+            type = null,
+            companyName = user!!.name,
+            virtualMachines = null
+            // TODO: add email to customer
+        ),
     )
 }

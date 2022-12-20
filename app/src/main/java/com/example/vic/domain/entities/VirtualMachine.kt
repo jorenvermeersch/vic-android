@@ -5,7 +5,6 @@ import com.example.vic.domain.enums.BackupFrequency
 import com.example.vic.domain.enums.Mode
 import com.example.vic.domain.enums.Status
 import com.example.vic.domain.enums.Template
-import java.util.Date
 
 data class VirtualMachine(
     var id: Long? = null,
@@ -16,9 +15,9 @@ data class VirtualMachine(
     var fqdn: String? = null,
     var availabilities: List<Availability>? = null,
     var backupFrequency: BackupFrequency? = null,
-    var applicationDate: Date? = null,
-    var startDate: Date? = null,
-    var endDate: Date? = null,
+    var applicationDate: String? = null,
+    var startDate: String? = null,
+    var endDate: String? = null,
     var status: Status? = null,
     var reason: String? = null,
     var ports: List<Port>? = null,

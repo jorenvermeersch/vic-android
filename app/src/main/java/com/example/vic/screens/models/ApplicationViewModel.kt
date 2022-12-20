@@ -56,6 +56,7 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
         viewModelScope.launch {
             repository.refreshCustomerIndexes()
             onCustomerClicked(0)
+            onVirtualMachineClicked(0)
         }
     }
 

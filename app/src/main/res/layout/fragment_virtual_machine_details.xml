@@ -256,7 +256,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:date="@{viewModel.chosenVirtualMachine.applicationDate}"
+                        android:text="@{viewModel.chosenVirtualMachine.applicationDate}"
                         tools:text="@string/date_placeholder" />
                 </TableRow>
 
@@ -268,7 +268,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:date="@{viewModel.chosenVirtualMachine.startDate}"
+                        android:text="@{viewModel.chosenVirtualMachine.startDate}"
                         tools:text="@string/date_placeholder" />
                 </TableRow>
 
@@ -280,7 +280,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        app:date="@{viewModel.chosenVirtualMachine.endDate}"
+                        android:text="@{viewModel.chosenVirtualMachine.endDate}"
                         tools:text="@string/date_placeholder" />
                 </TableRow>
             </TableLayout>
