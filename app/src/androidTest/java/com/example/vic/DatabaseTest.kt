@@ -1,4 +1,4 @@
-// package com.example.vic
+package com.example.vic
 //
 // import androidx.room.Room
 // import androidx.test.platform.app.InstrumentationRegistry
