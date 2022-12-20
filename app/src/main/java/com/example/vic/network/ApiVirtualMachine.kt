@@ -1,19 +1,6 @@
 package com.example.vic.network
 
-import com.example.vic.domain.entities.Account
-import com.example.vic.domain.entities.Credentials
-import com.example.vic.domain.entities.Customer
-import com.example.vic.domain.entities.Host
-import com.example.vic.domain.entities.Port
-import com.example.vic.domain.entities.Specifications
 import com.example.vic.domain.entities.VirtualMachine
-import com.example.vic.domain.enums.Availability
-import com.example.vic.domain.enums.BackupFrequency
-import com.example.vic.domain.enums.CustomerType
-import com.example.vic.domain.enums.Mode
-import com.example.vic.domain.enums.Role
-import com.example.vic.domain.enums.Status
-import com.example.vic.domain.enums.Template
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.util.Date
@@ -28,42 +15,42 @@ data class ApiVirtualMachineContainer(
 data class ApiVirtualMachine(
     @Json(name = "name")
     var name: String?,
-//    @Json(name = "template")
-//    var template: Int?,
-//    @Json(name = "mode")
-//    var mode: Int?,
-//    @Json(name = "availabilities")
-//    var availabilities: List<String>?,
-//    @Json(name = "backupFrequenty")
-//    var backupFrequency: Int?,
-//    @Json(name = "applicationDate")
-//    var applicationDate: Date?,
-//    @Json(name = "timeSpan")
-//    var timespan: ApiTimeSpan?,
-//    @Json(name = "reason")
-//    var reason: String?,
-//    @Json(name = "ports")
-//    var ports: List<ApiPort>?,
-//    @Json(name = "specification")
-//    var specification: ApiSpecifications?,
-//    @Json(name = "host")
-//    var host: ApiHost?,
-//    @Json(name = "credentials")
-//    var credentials: List<ApiCredential>?,
-//    @Json(name = "account")
-//    var account: ApiAccount?,
-//    @Json(name = "requester")
-//    var requester: ApiUser?,
-//    @Json(name = "user")
-//    var user: ApiUser?,
-//    @Json(name = "hasVpnConnection")
-//    var hasVpnConnection: Boolean?,
+    @Json(name = "template")
+    var template: Int?,
+    @Json(name = "mode")
+    var mode: Int?,
+    @Json(name = "availabilities")
+    var availabilities: List<String>?,
+    @Json(name = "backupFrequenty")
+    var backupFrequency: Int?,
+    @Json(name = "applicationDate")
+    var applicationDate: Date?,
+    @Json(name = "timeSpan")
+    var timespan: ApiTimeSpan?,
+    @Json(name = "reason")
+    var reason: String?,
+    @Json(name = "ports")
+    var ports: List<ApiPort>?,
+    @Json(name = "specification")
+    var specification: ApiSpecifications?,
+    @Json(name = "host")
+    var host: ApiHost?,
+    @Json(name = "credentials")
+    var credentials: List<ApiCredential>?,
+    @Json(name = "account")
+    var account: ApiAccount?,
+    @Json(name = "requester")
+    var requester: ApiUser?,
+    @Json(name = "user")
+    var user: ApiUser?,
+    @Json(name = "hasVpnConnection")
+    var hasVpnConnection: Boolean?,
     @Json(name = "id")
     var id: Long?,
-//    @Json(name = "fqdn")
-//    var fqdn: String?,
-//    @Json(name = "status")
-//    var status: Int?
+    @Json(name = "fqdn")
+    var fqdn: String?,
+    @Json(name = "status")
+    var status: Int?
 )
 
 @JsonClass(generateAdapter = true)
