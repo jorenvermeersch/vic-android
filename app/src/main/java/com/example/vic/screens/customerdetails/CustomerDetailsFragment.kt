@@ -35,24 +35,28 @@ class CustomerDetailsFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_details, container, false)
         binding.viewModel = viewModel
 
-        setLayout()
+        viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
+            customer?.let {
+                updateLayout(customer)
+            }
+        }
 
         setVirtualMachineList()
 
         return binding.root
     }
 
-    private fun setLayout() {
-        // Change layout based on type of customer.
-        viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
-            Log.i("CUSTOMER2 (CustomerDetailsFragment / setLayout()): ", customer.toString())
-            if (customer != null) {
-                customer?.let {
-                    updateLayout(customer)
-                }
-            }
-        }
-    }
+//    private fun setLayout() {
+//        // Change layout based on type of customer.
+//        viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
+//            Log.i("CUSTOMER2 (CustomerDetailsFragment / setLayout()): ", customer.toString())
+//            if (customer != null) {
+//                customer?.let {
+//                    updateLayout(customer)
+//                }
+//            }
+//        }
+//    }
 
     private fun setVirtualMachineList() {
         val adapter = VirtualMachineIndexAdapter(
