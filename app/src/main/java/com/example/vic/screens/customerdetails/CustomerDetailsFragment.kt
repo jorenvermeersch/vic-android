@@ -1,6 +1,7 @@
 package com.example.vic.screens.customerdetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.example.vic.domain.enums.CustomerType
 import com.example.vic.databinding.FragmentCustomerDetailsBinding
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
+import kotlinx.coroutines.coroutineScope
 
 class CustomerDetailsFragment : Fragment() {
 
@@ -44,10 +46,15 @@ class CustomerDetailsFragment : Fragment() {
     private fun setLayout() {
         // Change layout based on type of customer.
         viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
-            customer?.let {
-                updateLayout(customer)
+            Log.i("CUSTOMER2 (CustomerDetailsFragment / setLayout()): ", customer.toString())
+            if(customer != null) {
+                customer?.let {
+                    updateLayout(customer)
+                }
             }
         }
+
+
     }
 
     private fun setVirtualMachineList() {

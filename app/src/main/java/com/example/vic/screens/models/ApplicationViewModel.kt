@@ -1,6 +1,7 @@
 package com.example.vic.screens.models
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +47,7 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     }
 
     // Customer selected by user.
-    private val _chosenCustomer = MutableLiveData<Customer?>(null)
+    private val _chosenCustomer = MutableLiveData<Customer?>()
     val chosenCustomer: LiveData<Customer?> get() = _chosenCustomer
 
 
@@ -78,9 +80,11 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
             var getCustomerDetails = CustomerApi.retrofitService.getCustomerById("5533f0b6-d769-4b99-a88b-4b38a1dc4651")
             try {
                 var result = getCustomerDetails.await()
-                _chosenCustomer.value = result.customer!!.asDomainModel()
+                var customerDomainified = result!!.asDomainModel()
+                _chosenCustomer.value = customerDomainified
             } catch (e: Exception) {
-                _chosenCustomer.value = null
+//                _chosenCustomer.value = null
+                Log.i("Error whilst fetching the customer details: ", e.message.toString())
             }
         }
     }

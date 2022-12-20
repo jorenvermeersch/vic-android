@@ -53,37 +53,75 @@ data class ApiVm(
     @Json(name = "status") var status: Int = -1,
 )
 
-fun ApiCustomer.asDomainModel(): Customer {
+fun ApiCustomerContainer.asDomainModel(): Customer {
+    return customer.let {
+        return Customer(
+            id = 1,
+            customerType = when (it!!.customerType) {
+                0 -> CustomerType.Internal
+                1 -> CustomerType.External
+                else -> CustomerType.Unknown
+            },
+            contactPerson = ContactPerson(null, it.apiContactPerson!!.firstName, it.apiContactPerson!!.lastName, it.apiContactPerson!!.email, it.apiContactPerson!!.phoneNumber),
+            backupContactPerson = ContactPerson(null, it.apiBackupContactPerson!!.firstName, it.apiBackupContactPerson!!.lastName, it.apiBackupContactPerson!!.email, it.apiBackupContactPerson!!.phoneNumber),
+            institution = when (it!!.institution) {
+                0 -> "Hogent"
+                1 -> "Ehb"
+                else -> "Niet gekend"
+            },
+            department = it.department,
+            education = it.edu,
+            type = it.companyType,
+            companyName = it.companyName,
+            virtualMachines = it.virtualMachines!!.map {
+                VirtualMachineIndex(
+                    it.id, it.fqdn,
+                    when (it.status) {
+                        0 -> Status.Requested
+                        1 -> Status.InProgress
+                        2 -> Status.ReadyToDeploy
+                        3 -> Status.Deployed
+                        else -> Status.Requested
+                    }
+                )
+            }
+//            virtualMachines = null
+        )
+    }
 
-    return Customer(
-        id = 1,
-        customerType = when (customerType) {
-            0 -> CustomerType.Internal
-            1 -> CustomerType.External
-            else -> CustomerType.Unknown
-        },
-        contactPerson = ContactPerson(null, apiContactPerson!!.firstName, apiContactPerson!!.lastName, apiContactPerson!!.email, apiContactPerson!!.phoneNumber),
-        backupContactPerson = ContactPerson(null, apiBackupContactPerson!!.firstName, apiBackupContactPerson!!.lastName, apiBackupContactPerson!!.email, apiBackupContactPerson!!.phoneNumber),
-        institution = when (institution) {
-            0 -> "Hogent"
-            1 -> "Ehb"
-            else -> "Niet gekend"
-        },
-        department = department,
-        education = edu,
-        type = companyType,
-        companyName = companyName,
-        virtualMachines = virtualMachines!!.map {
-            VirtualMachineIndex(
-                it.id, it.fqdn,
-                when (it.status) {
-                    0 -> Status.Requested
-                    1 -> Status.InProgress
-                    2 -> Status.ReadyToDeploy
-                    3 -> Status.Deployed
-                    else -> Status.Requested
-                }
-            )
-        }
-    )
 }
+
+
+//fun ApiCustomer.asDomainModel(): Customer {
+//    return Customer(
+//        id = 1,
+//        customerType = when (customerType) {
+//            0 -> CustomerType.Internal
+//            1 -> CustomerType.External
+//            else -> CustomerType.Unknown
+//        },
+//        contactPerson = ContactPerson(null, apiContactPerson!!.firstName, apiContactPerson!!.lastName, apiContactPerson!!.email, apiContactPerson!!.phoneNumber),
+//        backupContactPerson = ContactPerson(null, apiBackupContactPerson!!.firstName, apiBackupContactPerson!!.lastName, apiBackupContactPerson!!.email, apiBackupContactPerson!!.phoneNumber),
+//        institution = when (institution) {
+//            0 -> "Hogent"
+//            1 -> "Ehb"
+//            else -> "Niet gekend"
+//        },
+//        department = "DEPPE",
+//        education = edu,
+//        type = companyType,
+//        companyName = "tesrt",
+//        virtualMachines = virtualMachines!!.map {
+//            VirtualMachineIndex(
+//                it.id, it.fqdn,
+//                when (it.status) {
+//                    0 -> Status.Requested
+//                    1 -> Status.InProgress
+//                    2 -> Status.ReadyToDeploy
+//                    3 -> Status.Deployed
+//                    else -> Status.Requested
+//                }
+//            )
+//        }
+//    )
+//}
