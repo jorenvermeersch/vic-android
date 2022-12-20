@@ -45,8 +45,6 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     private val _chosenCustomer = MutableLiveData<Customer?>()
     val chosenCustomer: LiveData<Customer?> get() = _chosenCustomer
 
-
-
     // Virtual machine selected by user.
     private val _chosenVirtualMachine = MutableLiveData<VirtualMachine?>(null)
     val chosenVirtualMachine: LiveData<VirtualMachine?> get() = _chosenVirtualMachine

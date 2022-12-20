@@ -22,16 +22,15 @@ class CustomerIndexRepository(private val database: VicDatabase, private val con
 
     suspend fun refreshCustomerIndexes() {
 
-        if (isOnline(context)){
+        if (isOnline(context)) {
             Timber.i("online")
             withContext(Dispatchers.IO) {
                 val results = CustomerApi.retrofitService.getCustomerIndexes().await()
                 database.customerIndexDatabaseDao.insertAll(*results.asDatabaseModel())
             }
-        } else{
+        } else {
             Timber.i("offline")
         }
-
     }
 
     fun isOnline(context: Context): Boolean {
