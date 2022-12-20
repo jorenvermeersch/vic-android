@@ -14,7 +14,6 @@ import com.example.vic.database.VicDatabase.Companion.getInstance
 import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
-import com.example.vic.network.ApiCustomerContainer
 import com.example.vic.network.CustomerApi
 import com.example.vic.network.VirtualMachineApi
 import com.example.vic.network.asDomainModel
@@ -23,10 +22,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 
 class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: Application) :

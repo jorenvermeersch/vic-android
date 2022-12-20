@@ -88,11 +88,9 @@ fun ApiCustomerContainer.asDomainModel(): Customer {
 //            virtualMachines = null
         )
     }
-
 }
 
-
-//fun ApiCustomer.asDomainModel(): Customer {
+// fun ApiCustomer.asDomainModel(): Customer {
 //    return Customer(
 //        id = 1,
 //        customerType = when (customerType) {
@@ -124,4 +122,4 @@ fun ApiCustomerContainer.asDomainModel(): Customer {
 //            )
 //        }
 //    )
-//}
+// }

@@ -11,12 +11,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
+import com.example.vic.databinding.FragmentCustomerDetailsBinding
 import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.enums.CustomerType
-import com.example.vic.databinding.FragmentCustomerDetailsBinding
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
-import kotlinx.coroutines.coroutineScope
 
 class CustomerDetailsFragment : Fragment() {
 
@@ -47,14 +46,12 @@ class CustomerDetailsFragment : Fragment() {
         // Change layout based on type of customer.
         viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
             Log.i("CUSTOMER2 (CustomerDetailsFragment / setLayout()): ", customer.toString())
-            if(customer != null) {
+            if (customer != null) {
                 customer?.let {
                     updateLayout(customer)
                 }
             }
         }
-
-
     }
 
     private fun setVirtualMachineList() {
