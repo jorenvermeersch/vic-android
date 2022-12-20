@@ -1,6 +1,7 @@
 package com.example.vic.network
 
 import com.example.vic.domain.entities.Account
+import com.example.vic.domain.entities.ContactPerson
 import com.example.vic.domain.entities.Credentials
 import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.Host
@@ -168,9 +169,9 @@ fun ApiVirtualMachine.asDomainModel(): VirtualMachine {
             3 -> BackupFrequency.Monthly
             else -> BackupFrequency.NoBackup
         },
-        applicationDate = applicationDate,
-        startDate = timespan!!.start,
-        endDate = timespan!!.end,
+        applicationDate = applicationDate!!.substring(0, 10),
+        startDate = timespan!!.start!!.substring(0, 10),
+        endDate = timespan!!.end!!.substring(0, 10),
         status = when (status) {
             0 -> Status.Requested
             1 -> Status.InProgress
@@ -220,7 +221,7 @@ fun ApiVirtualMachine.asDomainModel(): VirtualMachine {
                 0 -> CustomerType.External
                 else -> CustomerType.Unknown
             },
-            contactPerson = null,
+            contactPerson = ContactPerson(null, requester!!.name, requester!!.name, requester!!.email, null),
             backupContactPerson = null,
             institution = null,
             department = null,
@@ -237,7 +238,7 @@ fun ApiVirtualMachine.asDomainModel(): VirtualMachine {
                 0 -> CustomerType.External
                 else -> CustomerType.Unknown
             },
-            contactPerson = null,
+            contactPerson = ContactPerson(null, user!!.name, user!!.name, user!!.email, null),
             backupContactPerson = null,
             institution = null,
             department = null,
