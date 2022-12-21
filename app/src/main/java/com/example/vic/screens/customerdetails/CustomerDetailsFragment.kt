@@ -77,8 +77,7 @@ class CustomerDetailsFragment : Fragment() {
                 it.externalType.visibility = View.GONE
                 it.companyName.visibility = View.GONE
             }
-        }
-        else{
+        } else {
             when (customer.customerType) {
                 CustomerType.Internal -> {
                     binding.let {
@@ -118,8 +117,6 @@ class CustomerDetailsFragment : Fragment() {
                 }
             }
         }
-
-
 
         binding.customerBackupContactInformation.visibility =
             if (customer.backupContactPerson == null) View.GONE else View.VISIBLE

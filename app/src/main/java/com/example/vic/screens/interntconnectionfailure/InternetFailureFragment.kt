@@ -1,7 +1,6 @@
 package com.example.vic.screens.interntconnectionfailure
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
-import com.example.vic.databinding.FragmentCustomerDetailsBinding
 import com.example.vic.databinding.FragmentInternetfailureBinding
-import com.example.vic.misc.GlobalMethods
-import com.example.vic.screens.createcustomer.CreateCustomerFragmentDirections
-import com.example.vic.screens.customerlist.CustomerListFragmentDirections
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
 

@@ -1,7 +1,6 @@
 package com.example.vic.screens.customerlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,7 +80,6 @@ class CustomerListFragment : Fragment() {
         }
     }
 
-    // TODO: Redirect to page not found if there is not internet available
     private fun setCustomerList() {
         // Binding adapter that sets chosenCustomer and navigates to the customer details page.
         val adapter = CustomerIndexAdapter(
