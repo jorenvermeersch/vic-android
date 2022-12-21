@@ -60,3 +60,7 @@ class VirtualMachineIndexDiffCallback : DiffUtil.ItemCallback<VirtualMachineInde
 class VirtualMachineIndexListener(val clickListener: (machineId: Long) -> Unit) {
     fun onClick(virtualMachineIndex: VirtualMachineIndex) = clickListener(virtualMachineIndex.id)
 }
+
+class GoBackListener(val clickListener: () -> Unit) {
+    fun onClick() = clickListener()
+}

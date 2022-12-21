@@ -1,6 +1,7 @@
 package com.example.vic.screens.customerlist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCustomerListBinding
+import com.example.vic.misc.GlobalMethods
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
 
@@ -79,6 +81,7 @@ class CustomerListFragment : Fragment() {
         }
     }
 
+    // TODO: Redirect to page not found if there is not internet available
     private fun setCustomerList() {
         // Binding adapter that sets chosenCustomer and navigates to the customer details page.
         val adapter = CustomerIndexAdapter(
@@ -86,9 +89,10 @@ class CustomerListFragment : Fragment() {
                 viewModel.onCustomerClicked(customerId)
 
                 findNavController().navigate(
-                    CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
-                        customerId
-                    )
+                    when (GlobalMethods.isOnline(requireActivity().application)) {
+                        true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
+                        false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+                    }
                 )
             }
         )

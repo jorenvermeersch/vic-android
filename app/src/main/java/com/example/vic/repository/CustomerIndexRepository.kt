@@ -1,13 +1,12 @@
 package com.example.vic.repository
 
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.vic.database.VicDatabase
 import com.example.vic.database.asDomainModel
 import com.example.vic.domain.entities.CustomerIndex
+import com.example.vic.misc.GlobalMethods
 import com.example.vic.network.CustomerApi
 import com.example.vic.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +21,7 @@ class CustomerIndexRepository(private val database: VicDatabase, private val con
 
     suspend fun refreshCustomerIndexes() {
 
-        if (isOnline(context)) {
+        if (GlobalMethods.isOnline(context)) {
             Timber.i("online")
             withContext(Dispatchers.IO) {
                 val results = CustomerApi.retrofitService.getCustomerIndexes().await()
@@ -31,12 +30,6 @@ class CustomerIndexRepository(private val database: VicDatabase, private val con
         } else {
             Timber.i("offline")
         }
-    }
-
-    fun isOnline(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
     }
 
 //    suspend fun getCustomerById(): Customer {
