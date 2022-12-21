@@ -76,15 +76,21 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     suspend fun findCustomer(customerId: Long?): Deferred<ApiCustomerContainer> {
         var result: ApiCustomerContainer? = null;
         var getCustomerDetails = CustomerApi.retrofitService.getCustomerById(customerId)
+
         coroutineScope.launch {
             try {
                 result = getCustomerDetails.await()
                 var customerDomainified = result!!.asDomainModel()
                 _chosenCustomer.value = customerDomainified
+
+
+
             } catch (e: Exception) {
                 Log.i("Error whot fetching the customer details: ", e.message.toString())
             }
         }
+
+        Log.i("vms available", chosenCustomer.value!!.virtualMachines.toString())
 
         return getCustomerDetails
     }
