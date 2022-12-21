@@ -11,7 +11,6 @@ import com.example.vic.network.CustomerApi
 import com.example.vic.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class CustomerIndexRepository(private val database: VicDatabase, private val context: Context) {
 

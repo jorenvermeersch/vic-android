@@ -17,6 +17,7 @@ import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.misc.GlobalMethods
 import com.example.vic.network.ApiCustomerContainer
+import com.example.vic.network.ApiVirtualMachineContainer
 import com.example.vic.network.CustomerApi
 import com.example.vic.network.VirtualMachineApi
 import com.example.vic.network.asDomainModel
@@ -82,9 +83,6 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
                 result = getCustomerDetails.await()
                 var customerDomainified = result!!.asDomainModel()
                 _chosenCustomer.value = customerDomainified
-
-
-
             } catch (e: Exception) {
                 Log.i("Error whot fetching the customer details: ", e.message.toString())
             }
@@ -95,40 +93,39 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
         return getCustomerDetails
     }
 
-//    fun onCustomerClicked(customerId: Long?): Deferred<Customer>? {
-//        var newdata: Boolean = false;
-//        coroutineScope.launch {
-//            var result: ApiCustomerContainer? = null;
-//            var getCustomerDetails = CustomerApi.retrofitService.getCustomerById(customerId)
-//            try {
-//                result = getCustomerDetails.await()
-//                var customerDomainified = result!!.asDomainModel()
-//                _chosenCustomer.value = customerDomainified
-//                newdata = true
-//            } catch (e: Exception) {
-//                Log.i("Error whot fetching the customer details: ", e.message.toString())
-//            }
-//        }
-//    }
-
     fun setChosenCustomer(customer: Customer?) {
         _chosenCustomer.value = customer
     }
 
-    fun onVirtualMachineClicked(machineId: Long) {
+    suspend fun findVirtualMachine(machineId: Long?): Deferred<ApiVirtualMachineContainer> {
+        var result: ApiVirtualMachineContainer? = null;
+        var getVirtualMachine = VirtualMachineApi.retrofitService.getVirtualMachineById(machineId)
+
         coroutineScope.launch {
-            var getVirtualMachineDetails = VirtualMachineApi.retrofitService.getVirtualMachineById("5359d02c-aa72-4246-bb66-9756b2f42d78")
-            Timber.d("resultvm: not yet ...")
             try {
-                Timber.d("resultvm: not yet")
-                var result = getVirtualMachineDetails.await()
-                Timber.d("resultvm: " + result!!.virtualMachine!!.name)
-                _chosenVirtualMachine.value = result.virtualMachine!!.asDomainModel()
+                result = getVirtualMachine.await()
+                var machineDomainified = result!!.virtualMachine!!.asDomainModel()
+                _chosenVirtualMachine.value = machineDomainified
             } catch (e: Exception) {
-                _chosenVirtualMachine.value = null
+                Log.i("Error whot fetching the customer details: ", e.message.toString())
             }
         }
+        Log.i("vms available", chosenCustomer.value!!.virtualMachines.toString())
+        return getVirtualMachine
     }
+
+//    fun onVirtualMachineClicked(machineId: Long) {
+//        coroutineScope.launch {
+//            var getVirtualMachineDetails = VirtualMachineApi.retrofitService.getVirtualMachineById(machineId)
+//            try {
+//                var result = getVirtualMachineDetails.await()
+//                _chosenVirtualMachine.value = result.virtualMachine!!.asDomainModel()
+//            } catch (e: Exception) {
+//                _chosenVirtualMachine.value = null
+//            }
+//        }
+//        Timber.d("resultvm: " + chosenVirtualMachine.value.toString())
+//    }
 
     private fun filterCustomers(query: String?): LiveData<List<CustomerIndex>> {
         if (query.isNullOrBlank()) {

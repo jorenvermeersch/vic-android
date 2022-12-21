@@ -31,8 +31,8 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface VirtualMachineApiService {
-    @GET("{id}/")
-    fun getVirtualMachineById(@Path("id") id: String): Deferred<ApiVirtualMachineContainer>
+    @GET("virtualmachine/{id}/")
+    fun getVirtualMachineById(@Path("id") id: Long?): Deferred<ApiVirtualMachineContainer>
 }
 
 object VirtualMachineApi {

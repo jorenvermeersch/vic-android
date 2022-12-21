@@ -9,16 +9,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCustomerDetailsBinding
 import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.enums.CustomerType
 import com.example.vic.misc.GlobalMethods
+import com.example.vic.screens.customerlist.CustomerListFragmentDirections
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class CustomerDetailsFragment : Fragment() {
 
@@ -29,6 +32,8 @@ class CustomerDetailsFragment : Fragment() {
         ApplicationViewModelFactory(dataSource, appContext)
     }
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,20 +56,32 @@ class CustomerDetailsFragment : Fragment() {
     private fun setVirtualMachineList() {
         val adapter = VirtualMachineIndexAdapter(
             VirtualMachineIndexListener { machineId ->
-                viewModel.onVirtualMachineClicked(machineId)
-                findNavController().navigate(
-                    CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
-                        machineId
-                    )
-                )
+                coroutineScope.launch {
+                    try {
+                        viewModel.findVirtualMachine(machineId).await()
+                        findNavController().navigate(
+                            when (GlobalMethods.isOnline(requireActivity().application)) {
+                                true -> CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
+                                    machineId
+                                )
+                                false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+                            }
+                        )
+                        Log.i("Fetch Success", "Data was fetched and will be shown")
+                    } catch (e: Exception) {
+                        Log.i("Error while fetching the customer details: ", e.message.toString())
+                    }
+                }
             }
         )
+
         binding.virtualMachineList.adapter = adapter
 
         viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
             adapter.submitList(customer?.virtualMachines)
         }
     }
+
 
     private fun updateLayout(customer: Customer) {
 

@@ -15,18 +15,11 @@ import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCustomerListBinding
 import com.example.vic.misc.GlobalMethods
-import com.example.vic.network.ApiCustomerContainer
-import com.example.vic.network.CustomerApi
-import com.example.vic.network.asDomainModel
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
-import kotlin.coroutines.coroutineContext
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class CustomerListFragment : Fragment() {
@@ -98,21 +91,20 @@ class CustomerListFragment : Fragment() {
     private fun setCustomerList() {
         val adapter = CustomerIndexAdapter(
             CustomerIndexListener { customerId ->
-                    coroutineScope.launch {
-                        try {
-                            viewModel.findCustomer(customerId).await()
-                            findNavController().navigate(
-                                when (GlobalMethods.isOnline(requireActivity().application)) {
-                                    true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
-                                    false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
-                                }
-                            )
-                            Log.i("Fetch Success", "Data was fetched and will be shown")
-                        } catch (e: Exception) {
-                            Log.i("Error while fetching the customer details: ", e.message.toString())
-                        }
+                coroutineScope.launch {
+                    try {
+                        viewModel.findCustomer(customerId).await()
+                        findNavController().navigate(
+                            when (GlobalMethods.isOnline(requireActivity().application)) {
+                                true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
+                                false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+                            }
+                        )
+                        Log.i("Fetch Success", "Data was fetched and will be shown")
+                    } catch (e: Exception) {
+                        Log.i("Error while fetching the customer details: ", e.message.toString())
                     }
-
+                }
 
                 viewModel.chosenCustomer.observe(viewLifecycleOwner) {
                     findNavController().navigate(
