@@ -11,7 +11,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-private const val BASE_URL = NetworkConfig.BASE_URL // + "customers/"
+private const val BASE_URL = NetworkConfig.BASE_URL
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -31,15 +31,11 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface CustomerApiService {
-    @GET("f96362ed-9b89-4991-bf5a-2c4b8c86dc3b/")
+    @GET("customers/")
     fun getCustomerIndexes(): Deferred<ApiCustomerIndexContainer>
 
-//    f7022cd9-a9be-4f03-83fd-9ae4b4775312/
-    @GET("{id}/")
-//    @GET("33413381-2f5e-4bef-93de-4886cd79a3e4/")
-//    @GET("50228511-198d-48b1-b3a2-07207ec53bce/")
-//    @GET("b67f617f-4961-42eb-b6ce-61aaf31e5e4b/")
-    fun getCustomerById(@Path("id") id: String): Deferred<ApiCustomerContainer>
+    @GET("customer/{id}/")
+    fun getCustomerById(@Path("id") id: Long?): Deferred<ApiCustomerContainer>
 }
 
 object CustomerApi {

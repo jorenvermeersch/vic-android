@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.example.vic.database.CustomerIndexDatabaseDao
 import com.example.vic.database.MockApi
 import com.example.vic.database.VicDatabase
@@ -14,11 +15,15 @@ import com.example.vic.database.VicDatabase.Companion.getInstance
 import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
+import com.example.vic.misc.GlobalMethods
+import com.example.vic.network.ApiCustomerContainer
 import com.example.vic.network.CustomerApi
 import com.example.vic.network.VirtualMachineApi
 import com.example.vic.network.asDomainModel
 import com.example.vic.repository.CustomerIndexRepository
+import com.example.vic.screens.customerlist.CustomerListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -55,8 +60,6 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     init {
         viewModelScope.launch {
             repository.refreshCustomerIndexes()
-            onCustomerClicked(0)
-            onVirtualMachineClicked(0)
         }
     }
 
@@ -70,18 +73,40 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
         _searchQuery.value = null
     }
 
-    fun onCustomerClicked(customerId: Long) {
+    suspend fun findCustomer(customerId: Long?): Deferred<ApiCustomerContainer> {
+        var result: ApiCustomerContainer? = null;
+        var getCustomerDetails = CustomerApi.retrofitService.getCustomerById(customerId)
         coroutineScope.launch {
-            var getCustomerDetails = CustomerApi.retrofitService.getCustomerById("5533f0b6-d769-4b99-a88b-4b38a1dc4651")
             try {
-                var result = getCustomerDetails.await()
+                result = getCustomerDetails.await()
                 var customerDomainified = result!!.asDomainModel()
                 _chosenCustomer.value = customerDomainified
             } catch (e: Exception) {
-//                _chosenCustomer.value = null
-                Log.i("Error whilst fetching the customer details: ", e.message.toString())
+                Log.i("Error whot fetching the customer details: ", e.message.toString())
             }
         }
+
+        return getCustomerDetails
+    }
+
+//    fun onCustomerClicked(customerId: Long?): Deferred<Customer>? {
+//        var newdata: Boolean = false;
+//        coroutineScope.launch {
+//            var result: ApiCustomerContainer? = null;
+//            var getCustomerDetails = CustomerApi.retrofitService.getCustomerById(customerId)
+//            try {
+//                result = getCustomerDetails.await()
+//                var customerDomainified = result!!.asDomainModel()
+//                _chosenCustomer.value = customerDomainified
+//                newdata = true
+//            } catch (e: Exception) {
+//                Log.i("Error whot fetching the customer details: ", e.message.toString())
+//            }
+//        }
+//    }
+
+    fun setChosenCustomer(customer: Customer?) {
+        _chosenCustomer.value = customer
     }
 
     fun onVirtualMachineClicked(machineId: Long) {
@@ -92,7 +117,6 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
                 Timber.d("resultvm: not yet")
                 var result = getVirtualMachineDetails.await()
                 Timber.d("resultvm: " + result!!.virtualMachine!!.name)
-
                 _chosenVirtualMachine.value = result.virtualMachine!!.asDomainModel()
             } catch (e: Exception) {
                 _chosenVirtualMachine.value = null
