@@ -1,7 +1,6 @@
 package com.example.vic.screens.models
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -9,7 +8,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.vic.database.CustomerIndexDatabaseDao
-import com.example.vic.database.MockApi
 import com.example.vic.database.VicDatabase
 import com.example.vic.database.VicDatabase.Companion.getInstance
 import com.example.vic.domain.entities.Customer
@@ -18,55 +16,43 @@ import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.misc.Global
 import com.example.vic.network.ApiCustomerContainer
 import com.example.vic.repository.CustomerIndexRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: Application) :
     AndroidViewModel(application) {
 
-    private val api = MockApi()
-    // private val realApi =
     private val _searchQuery = MutableLiveData<String?>(null)
-
-    private val _response = MutableLiveData<String>("default value")
-    public val response: LiveData<String> get() = _response
-
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     val filteredCustomers: LiveData<List<CustomerIndex>> = Transformations.switchMap(_searchQuery) {
         filterCustomers(_searchQuery.value)
     }
 
-    // Customer selected by user.
-    private val _allcustomers = MutableLiveData<List<Customer>>(null)
-    val allcustomers: LiveData<List<Customer>> get() = _allcustomers
+    // All customers.
+    private val _allCustomers = MutableLiveData<List<Customer>>(null)
+    val allCustomers: LiveData<List<Customer>> get() = _allCustomers
 
+    // Customer selected by user.
     private val _chosenCustomer = MutableLiveData<Customer?>()
     val chosenCustomer: LiveData<Customer?> get() = _chosenCustomer
 
-    // Virtual machine selected by user.
-    private val _allvirtualMachines = MutableLiveData<List<VirtualMachine>>(null)
-    val allvirtualMachines: LiveData<List<VirtualMachine>> get() = _allvirtualMachines
+    // All virtual machines.
+    private val _allVirtualMachines = MutableLiveData<List<VirtualMachine>>(null)
+    val allVirtualMachines: LiveData<List<VirtualMachine>> get() = _allVirtualMachines
 
+    // Virtual machine selected by user.
     private val _chosenVirtualMachine = MutableLiveData<VirtualMachine?>(null)
     val chosenVirtualMachine: LiveData<VirtualMachine?> get() = _chosenVirtualMachine
 
-    private val datab: VicDatabase = getInstance(application)
-    private val repository = CustomerIndexRepository(datab, application)
+    private val vicDatabase: VicDatabase = getInstance(application)
+    private val repository = CustomerIndexRepository(vicDatabase, application)
 
     init {
         viewModelScope.launch {
             repository.refreshCustomerIndexes()
 
             if (Global.isOnline(getApplication<Application>().applicationContext)) {
-                _allvirtualMachines.value = repository.fetchVirtualMachines()
-                _allcustomers.value = repository.fetchCustomers()
-
-                Log.i("retrieved data vms output: ", allvirtualMachines.value!!.get(0).toString())
-                Log.i("retrieved data customers output: ", allcustomers.value!!.get(5).toString())
+                _allVirtualMachines.value = repository.fetchVirtualMachines()
+                _allCustomers.value = repository.fetchCustomers()
             }
         }
     }
@@ -82,15 +68,14 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     }
 
     fun findCustomer(customerId: Long?) {
-//        _chosenCustomer.value = allcustomers.value!!.get(customerId!!.toInt())
-        if (allcustomers.value != null) {
-            _chosenCustomer.value = allcustomers.value!!.find { it.id == customerId }
+        if (allCustomers.value != null) {
+            _chosenCustomer.value = allCustomers.value!!.find { it.id == customerId }
         }
     }
 
     fun findVirtualMachine(machineId: Long?) {
-        if (allvirtualMachines.value != null) {
-            _chosenVirtualMachine.value = allvirtualMachines.value!!.find { it.id == machineId }
+        if (allVirtualMachines.value != null) {
+            _chosenVirtualMachine.value = allVirtualMachines.value!!.find { it.id == machineId }
         }
     }
 
@@ -98,20 +83,15 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
         viewModelScope.launch {
 
             if (Global.isOnline(getApplication<Application>().applicationContext)) {
-                var id: Long? = repository.createCustomer(customer)
-                Log.i("createcustomer", id.toString())
+                repository.createCustomer(customer)
                 repository.refreshCustomerIndexes()
-                _allvirtualMachines.value = repository.fetchVirtualMachines()
-                _allcustomers.value = repository.fetchCustomers()
+                _allVirtualMachines.value = repository.fetchVirtualMachines()
+                _allCustomers.value = repository.fetchCustomers()
             } else {
-                val toast = Toast.makeText(getApplication(), "Error: customer is niet toegevoegd", Toast.LENGTH_LONG)
+                val toast = Toast.makeText(getApplication(), "Error: Klant is niet toegevoegd", Toast.LENGTH_LONG)
                 toast.show()
             }
         }
-    }
-
-    fun setChosenCustomer(customer: Customer?) {
-        _chosenCustomer.value = customer
     }
 
     private fun filterCustomers(query: String?): LiveData<List<CustomerIndex>> {

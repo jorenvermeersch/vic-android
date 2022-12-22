@@ -85,7 +85,7 @@ class CustomerListFragment : Fragment() {
                 try {
                     viewModel.findCustomer(customerId)
                     findNavController().navigate(
-                        when (Global.isOnline(requireActivity().application) && viewModel.allcustomers.value != null) {
+                        when (Global.isOnline(requireActivity().application) && viewModel.allCustomers.value != null) {
                             true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
                             false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
                         }
