@@ -18,7 +18,7 @@ class VirtualMachineDetailsFragment : Fragment() {
     private lateinit var binding: FragmentVirtualMachineDetailsBinding
     private val viewModel: ApplicationViewModel by activityViewModels {
         val appContext = requireNotNull(this.activity).application
-        val dataSource = VicDatabase.getInstance(appContext).customerIndexDao
+        val dataSource = VicDatabase.getInstance(appContext).customerIndexDatabaseDao
         ApplicationViewModelFactory(dataSource, appContext)
     }
 
@@ -45,7 +45,7 @@ class VirtualMachineDetailsFragment : Fragment() {
         binding.credentialsList.adapter = adapter
 
         viewModel.chosenVirtualMachine.observe(viewLifecycleOwner) {
-            adapter.submitList(it.credentials)
+            adapter.submitList(it!!.credentials)
         }
     }
 }

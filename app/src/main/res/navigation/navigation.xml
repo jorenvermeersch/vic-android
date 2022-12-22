@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/loginFragment">
 
@@ -18,6 +19,9 @@
         <action
             android:id="@+id/action_customerListFragment_to_createCustomerFragment"
             app:destination="@id/createCustomerFragment" />
+        <action
+            android:id="@+id/action_customerListFragment_to_internetfailure"
+            app:destination="@id/internetfailure" />
     </fragment>
     <fragment
         android:id="@+id/customerDetailsFragment"
@@ -77,5 +81,13 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/internetfailure"
+        android:name="com.example.vic.screens.internetconnectionfailure.InternetFailureFragment"
+        android:label="InternetFailureFragment">
+        <action
+            android:id="@+id/action_internetfailure_to_customerListFragment2"
+            app:destination="@id/customerListFragment" />
     </fragment>
 </navigation>

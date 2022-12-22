@@ -13,15 +13,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCustomerListBinding
+import com.example.vic.misc.Global
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
+import timber.log.Timber
 
 class CustomerListFragment : Fragment() {
 
     private lateinit var binding: FragmentCustomerListBinding
     private val viewModel: ApplicationViewModel by activityViewModels {
         val appContext = requireNotNull(this.activity).application
-        val dataSource = VicDatabase.getInstance(appContext).customerIndexDao
+        val dataSource = VicDatabase.getInstance(appContext).customerIndexDatabaseDao
         ApplicationViewModelFactory(dataSource, appContext)
     }
 
@@ -32,12 +34,12 @@ class CustomerListFragment : Fragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
+
         binding.viewModel = viewModel
+        binding.setLifecycleOwner(this)
 
         showToolbar()
-
         configureSearchView()
-
         setCustomerList()
 
         return binding.root
@@ -72,16 +74,19 @@ class CustomerListFragment : Fragment() {
     }
 
     private fun setCustomerList() {
-        // Binding adapter that sets chosenCustomer and navigates to the customer details page.
         val adapter = CustomerIndexAdapter(
             CustomerIndexListener { customerId ->
-                viewModel.onCustomerClicked(customerId)
-
-                findNavController().navigate(
-                    CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(
-                        customerId
+                try {
+                    viewModel.findCustomer(customerId)
+                    findNavController().navigate(
+                        when (Global.isOnline(requireActivity().application) && viewModel.allCustomers.value != null) {
+                            true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
+                            false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+                        }
                     )
-                )
+                } catch (e: Exception) {
+                    Timber.i("Error while fetching the customer details: ", e.message.toString())
+                }
             }
         )
 

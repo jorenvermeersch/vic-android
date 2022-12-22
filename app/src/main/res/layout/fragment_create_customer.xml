@@ -110,6 +110,8 @@
                     android:hint="@string/label_institution"
                     android:inputType="text" />
 
+
+
                 <TextView
                     style="@style/LabelStyle"
                     android:text="@string/label_department" />

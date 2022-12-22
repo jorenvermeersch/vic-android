@@ -4,8 +4,8 @@ import android.util.TypedValue
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.vic.R
-import com.example.vic.database.entities.VirtualMachineIndex
-import com.example.vic.database.enums.Status
+import com.example.vic.domain.entities.VirtualMachineIndex
+import com.example.vic.domain.enums.Status
 
 @BindingAdapter("name")
 fun TextView.setName(item: VirtualMachineIndex?) {

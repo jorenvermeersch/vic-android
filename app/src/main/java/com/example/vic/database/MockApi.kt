@@ -2,23 +2,21 @@ package com.example.vic.database
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.vic.database.entities.Account
-import com.example.vic.database.entities.ContactPerson
-import com.example.vic.database.entities.Credentials
-import com.example.vic.database.entities.Customer
-import com.example.vic.database.entities.CustomerIndex
-import com.example.vic.database.entities.Host
-import com.example.vic.database.entities.Port
-import com.example.vic.database.entities.Specifications
-import com.example.vic.database.entities.VirtualMachine
-import com.example.vic.database.entities.VirtualMachineIndex
-import com.example.vic.database.enums.Availability
-import com.example.vic.database.enums.BackupFrequency
-import com.example.vic.database.enums.CustomerType
-import com.example.vic.database.enums.Mode
-import com.example.vic.database.enums.Role
-import com.example.vic.database.enums.Status
-import com.example.vic.database.enums.Template
+import com.example.vic.domain.entities.Account
+import com.example.vic.domain.entities.ContactPerson
+import com.example.vic.domain.entities.Credentials
+import com.example.vic.domain.entities.Customer
+import com.example.vic.domain.entities.Host
+import com.example.vic.domain.entities.Port
+import com.example.vic.domain.entities.Specifications
+import com.example.vic.domain.entities.VirtualMachine
+import com.example.vic.domain.enums.Availability
+import com.example.vic.domain.enums.BackupFrequency
+import com.example.vic.domain.enums.CustomerType
+import com.example.vic.domain.enums.Mode
+import com.example.vic.domain.enums.Role
+import com.example.vic.domain.enums.Status
+import com.example.vic.domain.enums.Template
 import com.example.vic.getCurrentDateTime
 
 class MockApi {
@@ -35,16 +33,16 @@ class MockApi {
         val mockVirtualMachines = generateMockVirtualMachines()
 
         for (index in mockCustomers.indices) {
-            val mockCustomer = mockCustomers[index]
-            val machine1 = mockVirtualMachines[index]
-            val machine2 = mockVirtualMachines[index + 1]
-
-            mockCustomer.virtualMachines =
-                listOf(machine1, machine2).map { VirtualMachineIndex(it.id, it.name, it.status) }
-            machine1.requester = mockCustomer
-            machine1.user = mockCustomer
-            machine2.requester = mockCustomer
-            machine2.user = mockCustomer
+//            val mockCustomer = mockCustomers[index]
+//            val machine1 = mockVirtualMachines[index]
+//            val machine2 = mockVirtualMachines[index + 1]
+//
+//            mockCustomer.virtualMachines =
+//                listOf(machine1, machine2).map { VirtualMachineIndex(it.id, it.name, it.status) }
+//            machine1.requester = mockCustomer
+//            machine1.user = mockCustomer
+//            machine2.requester = mockCustomer
+//            machine2.user = mockCustomer
         }
 
         _customers.value = mockCustomers
@@ -58,6 +56,7 @@ class MockApi {
             val internal = id in 2..6
 
             val contact = ContactPerson(
+                id.toLong(),
                 "firstname-$id",
                 "lastname-$id",
                 "customer-$id.example@devops.com",
@@ -110,9 +109,9 @@ class MockApi {
                 "devops-vm-$id",
                 listOf(Availability.Monday, Availability.Wednesday),
                 BackupFrequency.Weekly,
-                today,
-                today,
-                today,
+                "today",
+                "today",
+                "today",
                 if (id % 2 == 0) Status.Deployed else Status.InProgress,
                 "reason-$id",
                 listOf(Port(22, "SSH"), Port(443, "HTTPS")),
@@ -131,13 +130,6 @@ class MockApi {
         }
 
         return mockVirtualMachines
-    }
-
-    fun getCustomers(): LiveData<List<CustomerIndex>> {
-        val customers = _customers.value?.map { c ->
-            CustomerIndex(c.id, c.contactPerson.firstName)
-        }
-        return MutableLiveData(customers)
     }
 
     fun getCustomerById(customerId: Long): LiveData<Customer> {

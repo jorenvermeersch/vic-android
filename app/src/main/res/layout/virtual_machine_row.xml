@@ -6,7 +6,7 @@
 
         <variable
             name="virtualMachineIndex"
-            type="com.example.vic.database.entities.VirtualMachineIndex" />
+            type="com.example.vic.domain.entities.VirtualMachineIndex" />
 
         <variable
             name="clickListener"

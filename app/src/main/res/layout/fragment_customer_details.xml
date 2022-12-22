@@ -101,7 +101,7 @@
 
                     <TextView
                         style="@style/TableRowItemStyle"
-                        android:text="@{viewModel.chosenCustomer.type}"
+                        android:text="@{viewModel.chosenCustomer.type.toString()}"
                         tools:text="@string/customer_name_placeholder" />
                 </TableRow>
 

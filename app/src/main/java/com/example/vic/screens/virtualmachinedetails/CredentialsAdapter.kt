@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vic.database.entities.Credentials
 import com.example.vic.databinding.CredentialsRowBinding
+import com.example.vic.domain.entities.Credentials
 
 class CredentialsAdapter :
     ListAdapter<Credentials, CredentialsAdapter.ViewHolder>(

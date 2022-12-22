@@ -3,7 +3,7 @@ package com.example.vic.screens.bindingutils
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.vic.R
-import com.example.vic.database.entities.ContactPerson
+import com.example.vic.domain.entities.ContactPerson
 
 // Binding adapter used in multiple fragments.
 @BindingAdapter("fullName")

@@ -12,9 +12,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
-import com.example.vic.database.entities.Customer
-import com.example.vic.database.enums.CustomerType
 import com.example.vic.databinding.FragmentCustomerDetailsBinding
+import com.example.vic.domain.entities.Customer
+import com.example.vic.domain.enums.CustomerType
+import com.example.vic.misc.Global
+import com.example.vic.screens.customerlist.CustomerListFragmentDirections
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
 import timber.log.Timber
@@ -24,7 +26,7 @@ class CustomerDetailsFragment : Fragment() {
     private lateinit var binding: FragmentCustomerDetailsBinding
     private val viewModel: ApplicationViewModel by activityViewModels {
         val appContext = requireNotNull(this.activity).application
-        val dataSource = VicDatabase.getInstance(appContext).customerIndexDao
+        val dataSource = VicDatabase.getInstance(appContext).customerIndexDatabaseDao
         ApplicationViewModelFactory(dataSource, appContext)
     }
 
@@ -79,14 +81,20 @@ class CustomerDetailsFragment : Fragment() {
     private fun setVirtualMachineList() {
         val adapter = VirtualMachineIndexAdapter(
             VirtualMachineIndexListener { machineId ->
-                viewModel.onVirtualMachineClicked(machineId)
-                findNavController().navigate(
-                    CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
-                        machineId
+                try {
+                    viewModel.findVirtualMachine(machineId)
+                    findNavController().navigate(
+                        when (Global.isOnline(requireActivity().application)) {
+                            true -> CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(machineId)
+                            false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+                        }
                     )
-                )
+                } catch (e: Exception) {
+                    Timber.i("Error while fetching the customer details: ", e.message.toString())
+                }
             }
         )
+
         binding.virtualMachineList.adapter = adapter
 
         viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
@@ -95,23 +103,51 @@ class CustomerDetailsFragment : Fragment() {
     }
 
     private fun updateLayout(customer: Customer) {
-        when (customer.customerType) {
-            CustomerType.Internal -> {
-                binding.let {
-                    it.institution.visibility = View.VISIBLE
-                    it.department.visibility = View.VISIBLE
-                    it.education.visibility = View.VISIBLE
-                    it.externalType.visibility = View.GONE
-                    it.companyName.visibility = View.GONE
-                }
+        if (!Global.isOnline(requireNotNull(this.activity).application)) {
+            binding.let {
+                it.institution.visibility = View.GONE
+                it.department.visibility = View.GONE
+                it.education.visibility = View.GONE
+                it.externalType.visibility = View.GONE
+                it.companyName.visibility = View.GONE
             }
-            CustomerType.External -> {
-                binding.let {
-                    it.institution.visibility = View.GONE
-                    it.department.visibility = View.GONE
-                    it.education.visibility = View.GONE
-                    it.externalType.visibility = View.VISIBLE
-                    it.companyName.visibility = View.VISIBLE
+        } else {
+            when (customer.customerType) {
+                CustomerType.Internal -> {
+                    binding.let {
+                        it.institution.visibility = View.VISIBLE
+                        it.department.visibility = View.VISIBLE
+                        it.education.visibility = View.VISIBLE
+                        it.externalType.visibility = View.GONE
+                        it.companyName.visibility = View.GONE
+                    }
+                }
+                CustomerType.External -> {
+                    binding.let {
+                        it.institution.visibility = View.GONE
+                        it.department.visibility = View.GONE
+                        it.education.visibility = View.GONE
+                        it.externalType.visibility = View.VISIBLE
+                        it.companyName.visibility = View.VISIBLE
+                    }
+                }
+                CustomerType.Unknown -> {
+                    binding.let {
+                        it.institution.visibility = View.GONE
+                        it.department.visibility = View.GONE
+                        it.education.visibility = View.GONE
+                        it.externalType.visibility = View.GONE
+                        it.companyName.visibility = View.GONE
+                    }
+                }
+                else -> {
+                    binding.let {
+                        it.institution.visibility = View.GONE
+                        it.department.visibility = View.GONE
+                        it.education.visibility = View.GONE
+                        it.externalType.visibility = View.GONE
+                        it.companyName.visibility = View.GONE
+                    }
                 }
             }
         }
