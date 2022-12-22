@@ -101,7 +101,6 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
                 var id: Long? = repository.createCustomer(customer)
                 Log.i("createcustomer", id.toString())
                 repository.refreshCustomerIndexes()
-                repository.refreshCustomerIndexes()
                 _allvirtualMachines.value = repository.fetchVirtualMachines()
                 _allcustomers.value = repository.fetchCustomers()
             } else {
