@@ -84,7 +84,6 @@ class CustomerListFragment : Fragment() {
                             false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
                         }
                     )
-
                 } catch (e: Exception) {
                     Timber.i("Error while fetching the customer details: ", e.message.toString())
                 }

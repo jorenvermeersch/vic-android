@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCreateCustomerBinding
-import com.example.vic.domain.entities.ContactPerson
 import com.example.vic.domain.enums.CustomerType
 import com.example.vic.misc.Global
 import com.example.vic.network.ApiContactPerson
