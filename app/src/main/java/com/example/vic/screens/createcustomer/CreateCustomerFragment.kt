@@ -67,12 +67,6 @@ class CreateCustomerFragment : Fragment() {
         return binding.root
     }
 
-    private fun configureInsitutionSpinner() {
-        binding.let {
-
-        }
-    }
-
     private fun configureCustomerTypeSelector() {
         // Fields are added or removed based on type of customer.
         binding.customerTypeRadioGroup.setOnCheckedChangeListener { _, itemId ->
