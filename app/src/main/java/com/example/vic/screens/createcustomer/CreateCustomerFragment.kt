@@ -15,7 +15,6 @@ import com.example.vic.domain.entities.ContactPerson
 import com.example.vic.domain.enums.CustomerType
 import com.example.vic.misc.Global
 import com.example.vic.network.ApiCustomer
-import com.example.vic.network.CustomerApi
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
 
@@ -63,7 +62,6 @@ class CreateCustomerFragment : Fragment() {
             }
         }
 
-
         return binding.root
     }
 
@@ -82,15 +80,13 @@ class CreateCustomerFragment : Fragment() {
             var contactPerson: ContactPerson
             var backupContactPerson: ContactPerson
 
-
-
             var type: Int? = null
             var customer: ApiCustomer
 
             binding.let {
                 type = if (it.optionInternalCustomer.isChecked) 0 else 1
 
-                if(type == 0) {
+                if (type == 0) {
                     customer = ApiCustomer(
                         id = 0,
                         companyName = null,
@@ -118,7 +114,6 @@ class CreateCustomerFragment : Fragment() {
                     )
                 }
             }
-
 
             binding.let {
                 contactPerson = ContactPerson(

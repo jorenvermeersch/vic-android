@@ -1,7 +1,6 @@
 package com.example.vic.repository
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.vic.database.VicDatabase
@@ -10,11 +9,9 @@ import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.misc.Global
-import com.example.vic.network.ApiCustomer
 import com.example.vic.network.ApiCustomersContainer
 import com.example.vic.network.ApiVirtualMachinesContainer
 import com.example.vic.network.CustomerApi
-import com.example.vic.network.PostAnswer
 import com.example.vic.network.VirtualMachineApi
 import com.example.vic.network.asDatabaseModel
 import com.example.vic.network.asDomainModel

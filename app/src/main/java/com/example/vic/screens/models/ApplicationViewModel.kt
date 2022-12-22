@@ -18,7 +18,6 @@ import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.misc.Global
 import com.example.vic.network.ApiCustomer
 import com.example.vic.network.CustomerApi
-import com.example.vic.network.PostAnswer
 import com.example.vic.repository.CustomerIndexRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -119,8 +118,6 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
                         Log.i("createcustomer", "failed")
                     }
                 })
-
-
 
                 repository.refreshCustomerIndexes()
             } else {
