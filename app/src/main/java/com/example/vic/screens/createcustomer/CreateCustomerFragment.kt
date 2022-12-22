@@ -77,11 +77,6 @@ class CreateCustomerFragment : Fragment() {
 
     private fun configureFormSubmit() {
         binding.addCustomerButton.setOnClickListener {
-            // TODO: Add Customer using ApplicationViewModel.
-
-            var contactPerson: ContactPerson
-            var backupContactPerson: ContactPerson
-
             var type: Int? = null
             var customer: ApiCustomerContainer
 

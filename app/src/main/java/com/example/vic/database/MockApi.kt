@@ -132,13 +132,6 @@ class MockApi {
         return mockVirtualMachines
     }
 
-//    fun getCustomers(): LiveData<List<CustomerIndex>> {
-//        val customers = _customers.value?.map { c ->
-//            CustomerIndex(c.id, c.contactPerson!!.firstName)
-//        }
-//        return MutableLiveData(customers)
-//    }
-
     fun getCustomerById(customerId: Long): LiveData<Customer> {
         val customer = _customers.value?.find { it -> it.id == customerId }
         return MutableLiveData(customer)

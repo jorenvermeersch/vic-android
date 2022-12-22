@@ -73,18 +73,4 @@ class CustomerIndexRepository(private val database: VicDatabase, private val con
         }
         return id
     }
-
-//    suspend fun createCustomer(customer: ApiCustomer): PostAnswer? {
-//        var results: PostAnswer? = null
-//        var customerlist: List<Customer>? = null
-//        if (Global.isOnline(context)) {
-//            withContext(Dispatchers.IO) {
-//                results = CustomerApi.retrofitService.createCustomer(customer).await()
-//            }
-//
-//            Log.i("createcustoimer", results!!.answer.toString())
-//        }
-//
-//        return results
-//    }
 }

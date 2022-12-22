@@ -1,7 +1,6 @@
 package com.example.vic.screens.customerlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +16,7 @@ import com.example.vic.databinding.FragmentCustomerListBinding
 import com.example.vic.misc.Global
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import timber.log.Timber
 
 class CustomerListFragment : Fragment() {
 
@@ -29,9 +26,6 @@ class CustomerListFragment : Fragment() {
         val dataSource = VicDatabase.getInstance(appContext).customerIndexDatabaseDao
         ApplicationViewModelFactory(dataSource, appContext)
     }
-
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,9 +84,9 @@ class CustomerListFragment : Fragment() {
                             false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
                         }
                     )
-                    Log.i("Fetch Success", "Data was fetched and will be shown")
+
                 } catch (e: Exception) {
-                    Log.i("Error while fetching the customer details: ", e.message.toString())
+                    Timber.i("Error while fetching the customer details: ", e.message.toString())
                 }
             }
         )
