@@ -9,6 +9,11 @@ data class ApiCustomerIndexContainer(
     val apiCustomerIndexes: List<ApiCustomerIndex>
 )
 
+data class ApiCustomerPostResponse(
+    @Json(name = "customerId")
+    var customerId: Long?
+)
+
 data class ApiCustomerIndex(
     @Json(name = "id")
     var id: Long,

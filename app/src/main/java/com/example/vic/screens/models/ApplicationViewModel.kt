@@ -100,26 +100,14 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
 
     fun createCustomer(customer: ApiCustomerContainer) {
         viewModelScope.launch {
+
             if (Global.isOnline(getApplication<Application>().applicationContext)) {
-//                var answer: PostAnswer? = repository.createCustomer(customer)
-                Log.i("createcustomer", "yeshereher")
-
-                val call = CustomerApi.retrofitService.createCustomer(customer)
-                call.enqueue(object : Callback<String> {
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
-                        if (response.isSuccessful) {
-                            val responseString = response.body()
-                            Log.i("createcustomer", responseString.toString())
-                        }
-                    }
-
-                    override fun onFailure(call: Call<String>, t: Throwable) {
-                        // network failure
-                        Log.i("createcustomer", "failed")
-                    }
-                })
-
+                var id: Long? = repository.createCustomer(customer)
+                Log.i("createcustomer", id.toString())
                 repository.refreshCustomerIndexes()
+                repository.refreshCustomerIndexes()
+                _allvirtualMachines.value = repository.fetchVirtualMachines()
+                _allcustomers.value = repository.fetchCustomers()
             } else {
                 val toast = Toast.makeText(getApplication(), "Error: customer is niet toegevoegd", Toast.LENGTH_LONG)
                 toast.show()

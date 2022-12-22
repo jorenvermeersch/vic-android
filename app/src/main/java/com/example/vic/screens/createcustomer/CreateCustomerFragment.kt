@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCreateCustomerBinding
@@ -57,13 +58,19 @@ class CreateCustomerFragment : Fragment() {
                 it.companyName.setText("Schouten BV")
 
                 // INTERNAL
-                it.institution.setPromptId(0) // setText("Hogent")
+                it.institution.setText("Hogent")
                 it.department.setText("Meer, Vries and Kok")
                 it.education.setText("Elektro-mechanica")
             }
         }
 
         return binding.root
+    }
+
+    private fun configureInsitutionSpinner() {
+        binding.let {
+
+        }
     }
 
     private fun configureCustomerTypeSelector() {
@@ -98,18 +105,18 @@ class CreateCustomerFragment : Fragment() {
                             edu = it.education.text.toString(),
                             customerType = 0,
                             apiContactPerson = ApiContactPerson(
-                                firstName = "Robin",
-                                lastName = "Vermeir",
-                                email = "robin@mail.com",
-                                phoneNumber = "(557) 568 4472"
+                                firstName = it.contactFirstname.text.toString(),
+                                lastName = it.contactLastname.text.toString(),
+                                email = it.contactEmail.text.toString(),
+                                phoneNumber = it.contactPhoneNumber.text.toString()
                             ),
                             apiBackupContactPerson = ApiContactPerson(
-                                firstName = "Angela",
-                                lastName = "Degryse",
-                                email = "angela@mail.com",
-                                phoneNumber = "(239) 448 3577"
+                                firstName = it.backupContactFirstname.text.toString(),
+                                lastName = it.backupContactLastname.text.toString(),
+                                email = it.backupContactEmail.text.toString(),
+                                phoneNumber = it.backupContactPhoneNumber.text.toString(),
                             ),
-                            virtualMachines = null
+                            virtualMachines = listOf()
                         )
                     )
                 } else {
@@ -122,36 +129,28 @@ class CreateCustomerFragment : Fragment() {
                             department = null,
                             edu = null,
                             customerType = 1,
-                            apiContactPerson = null,
-                            apiBackupContactPerson = null,
-                            virtualMachines = null
+                            apiContactPerson = ApiContactPerson(
+                                firstName = it.contactFirstname.text.toString(),
+                                lastName = it.contactLastname.text.toString(),
+                                email = it.contactEmail.text.toString(),
+                                phoneNumber = it.contactPhoneNumber.text.toString()
+                            ),
+                            apiBackupContactPerson = ApiContactPerson(
+                                firstName = it.backupContactFirstname.text.toString(),
+                                lastName = it.backupContactLastname.text.toString(),
+                                email = it.backupContactEmail.text.toString(),
+                                phoneNumber = it.backupContactPhoneNumber.text.toString(),
+                            ),
+                            virtualMachines = listOf()
                         )
                     )
                 }
             }
 
-//            binding.let {
-//                contactPerson = ContactPerson(
-//                    1,
-//                    it.contactFirstname.text.toString(),
-//                    it.contactLastname.text.toString(),
-//                    it.contactEmail.text.toString(),
-//                    it.contactPhoneNumber.text.toString(),
-//                )
-//
-//                backupContactPerson = ContactPerson(
-//                    1,
-//                    it.backupContactFirstname.text.toString(),
-//                    it.backupContactLastname.text.toString(),
-//                    it.backupContactEmail.text.toString(),
-//                    it.backupContactPhoneNumber.text.toString(),
-//                )
-//            }
-
-//            Log.i("customercreateoutput", type.toString())
-//            Log.i("customercreateoutput", contactPerson.toString())
-
             viewModel.createCustomer(customer)
+            findNavController().navigate(
+                CreateCustomerFragmentDirections.actionCreateCustomerFragmentToCustomerListFragment()
+            )
         }
     }
 

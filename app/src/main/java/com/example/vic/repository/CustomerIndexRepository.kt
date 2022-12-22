@@ -9,6 +9,8 @@ import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.misc.Global
+import com.example.vic.network.ApiCustomerContainer
+import com.example.vic.network.ApiCustomerPostResponse
 import com.example.vic.network.ApiCustomersContainer
 import com.example.vic.network.ApiVirtualMachinesContainer
 import com.example.vic.network.CustomerApi
@@ -58,6 +60,18 @@ class CustomerIndexRepository(private val database: VicDatabase, private val con
             }
         }
         return customerlist
+    }
+
+    suspend fun createCustomer(customer: ApiCustomerContainer): Long? {
+        var results: ApiCustomerPostResponse
+        var id: Long? = null
+        if (Global.isOnline(context)) {
+            withContext(Dispatchers.IO) {
+                results = CustomerApi.retrofitService.createCustomer(customer).await()
+                id = results.customerId
+            }
+        }
+        return id
     }
 
 //    suspend fun createCustomer(customer: ApiCustomer): PostAnswer? {
