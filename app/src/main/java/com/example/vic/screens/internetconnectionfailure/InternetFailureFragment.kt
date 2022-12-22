@@ -1,4 +1,4 @@
-package com.example.vic.screens.interntconnectionfailure
+package com.example.vic.screens.internetconnectionfailure
 
 import android.os.Bundle
 import android.view.LayoutInflater

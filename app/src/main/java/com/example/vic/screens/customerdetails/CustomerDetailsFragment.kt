@@ -14,7 +14,7 @@ import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCustomerDetailsBinding
 import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.enums.CustomerType
-import com.example.vic.misc.GlobalMethods
+import com.example.vic.misc.Global
 import com.example.vic.screens.customerlist.CustomerListFragmentDirections
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
@@ -58,7 +58,7 @@ class CustomerDetailsFragment : Fragment() {
                 try {
                     viewModel.findVirtualMachine(machineId)
                     findNavController().navigate(
-                        when (GlobalMethods.isOnline(requireActivity().application)) {
+                        when (Global.isOnline(requireActivity().application)) {
                             true -> CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(machineId)
                             false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
                         }
@@ -79,9 +79,9 @@ class CustomerDetailsFragment : Fragment() {
 
     private fun updateLayout(customer: Customer) {
 
-        Log.i("ONLINE?: " + GlobalMethods.isOnline(requireNotNull(this.activity).application), "test")
+        Log.i("ONLINE?: " + Global.isOnline(requireNotNull(this.activity).application), "test")
 
-        if (GlobalMethods.isOnline(requireNotNull(this.activity).application) == false) {
+        if (Global.isOnline(requireNotNull(this.activity).application) == false) {
             binding.let {
                 it.institution.visibility = View.GONE
                 it.department.visibility = View.GONE

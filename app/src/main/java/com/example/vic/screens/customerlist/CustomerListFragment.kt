@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCustomerListBinding
-import com.example.vic.misc.GlobalMethods
+import com.example.vic.misc.Global
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
 import kotlinx.coroutines.CoroutineScope
@@ -85,7 +85,7 @@ class CustomerListFragment : Fragment() {
                 try {
                     viewModel.findCustomer(customerId)
                     findNavController().navigate(
-                        when (GlobalMethods.isOnline(requireActivity().application) && viewModel.allcustomers.value != null) {
+                        when (Global.isOnline(requireActivity().application) && viewModel.allcustomers.value != null) {
                             true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
                             false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
                         }

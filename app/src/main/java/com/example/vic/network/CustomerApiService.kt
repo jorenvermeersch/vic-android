@@ -6,9 +6,12 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 private const val BASE_URL = NetworkConfig.BASE_URL
@@ -39,6 +42,9 @@ interface CustomerApiService {
 
     @GET("allCustomers/")
     fun getAllCustomers(): Deferred<ApiCustomersContainer>
+
+    @POST("customer")
+    fun createCustomer(@Body customer: ApiCustomer): Call<String>
 }
 
 object CustomerApi {

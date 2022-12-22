@@ -9,6 +9,12 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
+data class PostAnswer(
+    @Json(name = "answer")
+    var answer: String?
+)
+
+@JsonClass(generateAdapter = true)
 data class ApiCustomerContainer(
     @Json(name = "customer")
     var customer: ApiCustomer?,
@@ -91,6 +97,8 @@ fun ApiCustomer.asDomainModel(): Customer {
         }
     )
 }
+
+//fun ApiCustomer.asPostModel(): Customer
 
 fun ApiCustomerContainer.asDomainModel(): Customer {
     return customer.let {

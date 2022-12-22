@@ -82,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/internetfailure"
-        android:name="com.example.vic.screens.interntconnectionfailure.InternetFailureFragment"
+        android:name="com.example.vic.screens.internetconnectionfailure.InternetFailureFragment"
         android:label="InternetFailureFragment">
         <action
             android:id="@+id/action_internetfailure_to_customerListFragment2"

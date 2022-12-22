@@ -2,6 +2,7 @@ package com.example.vic.screens.models
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,12 +15,18 @@ import com.example.vic.database.VicDatabase.Companion.getInstance
 import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
-import com.example.vic.misc.GlobalMethods
+import com.example.vic.misc.Global
+import com.example.vic.network.ApiCustomer
+import com.example.vic.network.CustomerApi
+import com.example.vic.network.PostAnswer
 import com.example.vic.repository.CustomerIndexRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: Application) :
     AndroidViewModel(application) {
@@ -59,7 +66,7 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
         viewModelScope.launch {
             repository.refreshCustomerIndexes()
 
-            if (GlobalMethods.isOnline(getApplication<Application>().applicationContext)) {
+            if (Global.isOnline(getApplication<Application>().applicationContext)) {
                 _allvirtualMachines.value = repository.fetchVirtualMachines()
                 _allcustomers.value = repository.fetchCustomers()
 
@@ -89,6 +96,37 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     fun findVirtualMachine(machineId: Long?) {
         if (allvirtualMachines.value != null) {
             _chosenVirtualMachine.value = allvirtualMachines.value!!.find { it.id == machineId }
+        }
+    }
+
+    fun createCustomer(customer: ApiCustomer) {
+        viewModelScope.launch {
+            if (Global.isOnline(getApplication<Application>().applicationContext)) {
+//                var answer: PostAnswer? = repository.createCustomer(customer)
+                Log.i("createcustomer", "yeshereher")
+
+                val call = CustomerApi.retrofitService.createCustomer(customer)
+                call.enqueue(object : Callback<String> {
+                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                        if (response.isSuccessful) {
+                            val responseString = response.body()
+                            Log.i("createcustomer", responseString.toString())
+                        }
+                    }
+
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        // network failure
+                        Log.i("createcustomer", "failed")
+                    }
+                })
+
+
+
+                repository.refreshCustomerIndexes()
+            } else {
+                val toast = Toast.makeText(getApplication(), "Error: customer is niet toegevoegd", Toast.LENGTH_LONG)
+                toast.show()
+            }
         }
     }
 
