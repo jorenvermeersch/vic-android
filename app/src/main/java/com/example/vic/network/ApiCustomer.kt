@@ -98,8 +98,6 @@ fun ApiCustomer.asDomainModel(): Customer {
     )
 }
 
-// fun ApiCustomer.asPostModel(): Customer
-
 fun ApiCustomerContainer.asDomainModel(): Customer {
     return customer.let {
         return Customer(

@@ -44,7 +44,7 @@ interface CustomerApiService {
     fun getAllCustomers(): Deferred<ApiCustomersContainer>
 
     @POST("customer")
-    fun createCustomer(@Body customer: ApiCustomer): Call<String>
+    fun createCustomer(@Body customer: ApiCustomerContainer): Call<String>
 }
 
 object CustomerApi {

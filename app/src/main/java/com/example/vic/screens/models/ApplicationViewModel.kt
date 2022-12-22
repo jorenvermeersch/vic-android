@@ -17,6 +17,7 @@ import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.misc.Global
 import com.example.vic.network.ApiCustomer
+import com.example.vic.network.ApiCustomerContainer
 import com.example.vic.network.CustomerApi
 import com.example.vic.repository.CustomerIndexRepository
 import kotlinx.coroutines.CoroutineScope
@@ -98,7 +99,7 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
         }
     }
 
-    fun createCustomer(customer: ApiCustomer) {
+    fun createCustomer(customer: ApiCustomerContainer) {
         viewModelScope.launch {
             if (Global.isOnline(getApplication<Application>().applicationContext)) {
 //                var answer: PostAnswer? = repository.createCustomer(customer)

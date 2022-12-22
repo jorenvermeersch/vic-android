@@ -12,9 +12,12 @@ import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCreateCustomerBinding
 import com.example.vic.domain.entities.ContactPerson
+import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.enums.CustomerType
 import com.example.vic.misc.Global
+import com.example.vic.network.ApiContactPerson
 import com.example.vic.network.ApiCustomer
+import com.example.vic.network.ApiCustomerContainer
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
 
@@ -56,7 +59,7 @@ class CreateCustomerFragment : Fragment() {
                 it.companyName.setText("Schouten BV")
 
                 // INTERNAL
-                it.institution.setText("Hogent")
+                it.institution.setPromptId(0) // setText("Hogent")
                 it.department.setText("Meer, Vries and Kok")
                 it.education.setText("Elektro-mechanica")
             }
@@ -81,60 +84,74 @@ class CreateCustomerFragment : Fragment() {
             var backupContactPerson: ContactPerson
 
             var type: Int? = null
-            var customer: ApiCustomer
+            var customer: ApiCustomerContainer
 
             binding.let {
                 type = if (it.optionInternalCustomer.isChecked) 0 else 1
 
                 if (type == 0) {
-                    customer = ApiCustomer(
-                        id = 0,
-                        companyName = null,
-                        companyType = null,
-                        institution = 0, // TODO: institution is still static
-                        department = it.department.toString(),
-                        edu = it.education.toString(),
-                        customerType = 0,
-                        apiContactPerson = null,
-                        apiBackupContactPerson = null,
-                        virtualMachines = null
+                    customer = ApiCustomerContainer(
+                        customer = ApiCustomer(
+                            id = null,
+                            companyName = null,
+                            companyType = null,
+                            institution = 0, // TODO: institution is still static
+                            department = it.department.text.toString(),
+                            edu = it.education.text.toString(),
+                            customerType = 0,
+                            apiContactPerson = ApiContactPerson(
+                                firstName = "Robin",
+                                lastName = "Vermeir",
+                                email = "robin@mail.com",
+                                phoneNumber = "(557) 568 4472"
+                            ),
+                            apiBackupContactPerson = ApiContactPerson(
+                                firstName = "Angela",
+                                lastName = "Degryse",
+                                email = "angela@mail.com",
+                                phoneNumber = "(239) 448 3577"
+                            ),
+                            virtualMachines = null
+                        )
                     )
                 } else {
-                    customer = ApiCustomer(
-                        id = 0,
-                        companyName = it.companyName.toString(),
-                        companyType = it.externalType.toString(),
-                        institution = null,
-                        department = null,
-                        edu = null,
-                        customerType = 1,
-                        apiContactPerson = null,
-                        apiBackupContactPerson = null,
-                        virtualMachines = null
+                    customer = ApiCustomerContainer(
+                        customer = ApiCustomer(
+                            id = null,
+                            companyName = it.companyName.text.toString(),
+                            companyType = it.externalType.text.toString(),
+                            institution = null,
+                            department = null,
+                            edu = null,
+                            customerType = 1,
+                            apiContactPerson = null,
+                            apiBackupContactPerson = null,
+                            virtualMachines = null
+                        )
                     )
                 }
             }
 
-            binding.let {
-                contactPerson = ContactPerson(
-                    1,
-                    it.contactFirstname.text.toString(),
-                    it.contactLastname.text.toString(),
-                    it.contactEmail.text.toString(),
-                    it.contactPhoneNumber.text.toString(),
-                )
+//            binding.let {
+//                contactPerson = ContactPerson(
+//                    1,
+//                    it.contactFirstname.text.toString(),
+//                    it.contactLastname.text.toString(),
+//                    it.contactEmail.text.toString(),
+//                    it.contactPhoneNumber.text.toString(),
+//                )
+//
+//                backupContactPerson = ContactPerson(
+//                    1,
+//                    it.backupContactFirstname.text.toString(),
+//                    it.backupContactLastname.text.toString(),
+//                    it.backupContactEmail.text.toString(),
+//                    it.backupContactPhoneNumber.text.toString(),
+//                )
+//            }
 
-                backupContactPerson = ContactPerson(
-                    1,
-                    it.backupContactFirstname.text.toString(),
-                    it.backupContactLastname.text.toString(),
-                    it.backupContactEmail.text.toString(),
-                    it.backupContactPhoneNumber.text.toString(),
-                )
-            }
-
-            Log.i("customercreateoutput", type.toString())
-            Log.i("customercreateoutput", contactPerson.toString())
+//            Log.i("customercreateoutput", type.toString())
+//            Log.i("customercreateoutput", contactPerson.toString())
 
             viewModel.createCustomer(customer)
         }
