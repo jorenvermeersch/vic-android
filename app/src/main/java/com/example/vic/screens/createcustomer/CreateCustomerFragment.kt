@@ -76,7 +76,7 @@ class CreateCustomerFragment : Fragment() {
     private fun configureFormSubmit() {
         binding.addCustomerButton.setOnClickListener {
             var type: Int? = null
-            var institution : Int? = null
+            var institution: Int? = null
             var customer: ApiCustomerContainer
 
             binding.let {
