@@ -25,6 +25,12 @@ data class ApiVirtualMachineContainer(
 )
 
 @JsonClass(generateAdapter = true)
+data class ApiVirtualMachinesContainer(
+    @Json(name = "virtualMachines")
+    var virtualMachines: List<ApiVirtualMachine>
+)
+
+@JsonClass(generateAdapter = true)
 data class ApiVirtualMachine(
     @Json(name = "name")
     var name: String?,

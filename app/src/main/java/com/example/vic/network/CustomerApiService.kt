@@ -36,6 +36,9 @@ interface CustomerApiService {
 
     @GET("customer/{id}/")
     fun getCustomerById(@Path("id") id: Long?): Deferred<ApiCustomerContainer>
+
+    @GET("allCustomers/")
+    fun getAllCustomers(): Deferred<ApiCustomersContainer>
 }
 
 object CustomerApi {

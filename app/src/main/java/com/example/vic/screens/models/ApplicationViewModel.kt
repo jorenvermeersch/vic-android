@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.example.vic.database.CustomerIndexDatabaseDao
 import com.example.vic.database.MockApi
 import com.example.vic.database.VicDatabase
@@ -22,13 +21,11 @@ import com.example.vic.network.CustomerApi
 import com.example.vic.network.VirtualMachineApi
 import com.example.vic.network.asDomainModel
 import com.example.vic.repository.CustomerIndexRepository
-import com.example.vic.screens.customerlist.CustomerListFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: Application) :
     AndroidViewModel(application) {
@@ -48,10 +45,16 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     }
 
     // Customer selected by user.
+    private val _allcustomers = MutableLiveData<List<Customer>>(null)
+    val allcustomers: LiveData<List<Customer>> get() = _allcustomers
+
     private val _chosenCustomer = MutableLiveData<Customer?>()
     val chosenCustomer: LiveData<Customer?> get() = _chosenCustomer
 
     // Virtual machine selected by user.
+    private val _virtualMachines = MutableLiveData<List<VirtualMachine>>(null)
+    val virtualMachines: LiveData<List<VirtualMachine>> get() = _virtualMachines
+
     private val _chosenVirtualMachine = MutableLiveData<VirtualMachine?>(null)
     val chosenVirtualMachine: LiveData<VirtualMachine?> get() = _chosenVirtualMachine
 
@@ -61,6 +64,16 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     init {
         viewModelScope.launch {
             repository.refreshCustomerIndexes()
+
+            if(GlobalMethods.isOnline(getApplication<Application>().applicationContext)) {
+                _virtualMachines.value = repository.fetchVirtualMachines()
+                _allcustomers.value = repository.fetchCustomers()
+
+                Log.i("retrieved data vms output: ", virtualMachines.value!!.get(0).toString())
+                Log.i("retrieved data customers output: ", allcustomers.value!!.get(5).toString())
+            }
+
+
         }
     }
 
@@ -74,23 +87,33 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
         _searchQuery.value = null
     }
 
-    suspend fun findCustomer(customerId: Long?): Deferred<ApiCustomerContainer> {
-        var result: ApiCustomerContainer? = null;
-        var getCustomerDetails = CustomerApi.retrofitService.getCustomerById(customerId)
+//    suspend fun findCustomer(customerId: Long?): Deferred<ApiCustomerContainer> {
+//
+////        Log.i("vms output: ", virtualMachines.value!!.toString())
+//
+//        var result: ApiCustomerContainer? = null
+//        var getCustomerDetails = CustomerApi.retrofitService.getCustomerById(customerId)
+//
+//        coroutineScope.launch {
+//            try {
+//                result = getCustomerDetails.await()
+//                var customerDomainified = result!!.asDomainModel()
+//                _chosenCustomer.value = customerDomainified
+//            } catch (e: Exception) {
+//                Log.i("Error whot fetching the customer details: ", e.message.toString())
+//            }
+//        }
+//
+//        Log.i("vms available", chosenCustomer.value!!.virtualMachines.toString())
+//
+//        return getCustomerDetails
+//    }
 
-        coroutineScope.launch {
-            try {
-                result = getCustomerDetails.await()
-                var customerDomainified = result!!.asDomainModel()
-                _chosenCustomer.value = customerDomainified
-            } catch (e: Exception) {
-                Log.i("Error whot fetching the customer details: ", e.message.toString())
-            }
+    fun findCustomer(customerId: Long?) {
+//        _chosenCustomer.value = allcustomers.value!!.get(customerId!!.toInt())
+        if(allcustomers.value != null){
+            _chosenCustomer.value = allcustomers.value!!.find { it.id == customerId }
         }
-
-        Log.i("vms available", chosenCustomer.value!!.virtualMachines.toString())
-
-        return getCustomerDetails
     }
 
     fun setChosenCustomer(customer: Customer?) {
@@ -98,7 +121,7 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     }
 
     suspend fun findVirtualMachine(machineId: Long?): Deferred<ApiVirtualMachineContainer> {
-        var result: ApiVirtualMachineContainer? = null;
+        var result: ApiVirtualMachineContainer? = null
         var getVirtualMachine = VirtualMachineApi.retrofitService.getVirtualMachineById(machineId)
 
         coroutineScope.launch {

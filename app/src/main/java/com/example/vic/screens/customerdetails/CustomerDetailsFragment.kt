@@ -82,7 +82,6 @@ class CustomerDetailsFragment : Fragment() {
         }
     }
 
-
     private fun updateLayout(customer: Customer) {
 
         Log.i("ONLINE?: " + GlobalMethods.isOnline(requireNotNull(this.activity).application), "test")

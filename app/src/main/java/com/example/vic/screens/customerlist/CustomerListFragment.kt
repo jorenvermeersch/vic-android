@@ -88,14 +88,53 @@ class CustomerListFragment : Fragment() {
         }
     }
 
+//    private fun setCustomerList() {
+//        val adapter = CustomerIndexAdapter(
+//            CustomerIndexListener { customerId ->
+//                coroutineScope.launch {
+//                    try {
+//                        viewModel.findCustomer(customerId).await()
+//                        findNavController().navigate(
+//                            when (GlobalMethods.isOnline(requireActivity().application)) {
+//                                true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
+//                                false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+//                            }
+//                        )
+//                        Log.i("Fetch Success", "Data was fetched and will be shown")
+//                    } catch (e: Exception) {
+//                        Log.i("Error while fetching the customer details: ", e.message.toString())
+//                    }
+//                }
+//
+//                viewModel.chosenCustomer.observe(viewLifecycleOwner) {
+//                    findNavController().navigate(
+//                        when (GlobalMethods.isOnline(requireActivity().application)) {
+//                            true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
+//                            false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+//                        }
+//                    )
+//                }
+//            }
+//        )
+//
+//        binding.customerList.adapter = adapter
+//
+//        // Display customers in RecyclerView.
+//        viewModel.filteredCustomers.observe(viewLifecycleOwner) { customers ->
+//            customers?.let {
+//                adapter.submitList(customers)
+//            }
+//        }
+//    }
+
     private fun setCustomerList() {
         val adapter = CustomerIndexAdapter(
             CustomerIndexListener { customerId ->
-                coroutineScope.launch {
                     try {
-                        viewModel.findCustomer(customerId).await()
+                        Log.i("retrieved data", "yes it was here")
+                        viewModel.findCustomer(customerId)
                         findNavController().navigate(
-                            when (GlobalMethods.isOnline(requireActivity().application)) {
+                            when (GlobalMethods.isOnline(requireActivity().application) && viewModel.allcustomers.value != null) {
                                 true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
                                 false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
                             }
@@ -104,16 +143,15 @@ class CustomerListFragment : Fragment() {
                     } catch (e: Exception) {
                         Log.i("Error while fetching the customer details: ", e.message.toString())
                     }
-                }
 
-                viewModel.chosenCustomer.observe(viewLifecycleOwner) {
-                    findNavController().navigate(
-                        when (GlobalMethods.isOnline(requireActivity().application)) {
-                            true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
-                            false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
-                        }
-                    )
-                }
+//                viewModel.chosenCustomer.observe(viewLifecycleOwner) {
+//                    findNavController().navigate(
+//                        when (GlobalMethods.isOnline(requireActivity().application)) {
+//                            true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
+//                            false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+//                        }
+//                    )
+//                }
             }
         )
 

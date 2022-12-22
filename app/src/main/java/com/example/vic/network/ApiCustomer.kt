@@ -14,6 +14,11 @@ data class ApiCustomerContainer(
     var customer: ApiCustomer?,
 )
 
+data class ApiCustomersContainer(
+    @Json(name = "customers")
+    var customers: List<ApiCustomer>,
+)
+
 @JsonClass(generateAdapter = true)
 data class ApiCustomer(
     @Json(name = "id")
@@ -52,6 +57,40 @@ data class ApiVm(
     @Json(name = "fqdn") var fqdn: String = "",
     @Json(name = "status") var status: Int = -1,
 )
+
+fun ApiCustomer.asDomainModel(): Customer {
+    return Customer(
+        id = id,
+        customerType = when (customerType) {
+            0 -> CustomerType.Internal
+            1 -> CustomerType.External
+            else -> CustomerType.Unknown
+        },
+        contactPerson = ContactPerson(null, apiContactPerson!!.firstName, apiContactPerson!!.lastName, apiContactPerson!!.email, apiContactPerson!!.phoneNumber),
+        backupContactPerson = ContactPerson(null, apiBackupContactPerson!!.firstName, apiBackupContactPerson!!.lastName, apiBackupContactPerson!!.email, apiBackupContactPerson!!.phoneNumber),
+        institution = when (institution) {
+            0 -> "Hogent"
+            1 -> "Ehb"
+            else -> "Niet gekend"
+        },
+        department = department,
+        education = edu,
+        type = companyType,
+        companyName = companyName,
+        virtualMachines = virtualMachines!!.map {
+            VirtualMachineIndex(
+                it.id, it.fqdn,
+                when (it.status) {
+                    0 -> Status.Requested
+                    1 -> Status.InProgress
+                    2 -> Status.ReadyToDeploy
+                    3 -> Status.Deployed
+                    else -> Status.Requested
+                }
+            )
+        }
+    )
+}
 
 fun ApiCustomerContainer.asDomainModel(): Customer {
     return customer.let {
