@@ -16,7 +16,6 @@ import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.misc.Global
-import com.example.vic.network.ApiCustomer
 import com.example.vic.network.ApiCustomerContainer
 import com.example.vic.network.CustomerApi
 import com.example.vic.repository.CustomerIndexRepository

@@ -1,7 +1,6 @@
 package com.example.vic.screens.createcustomer
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCreateCustomerBinding
 import com.example.vic.domain.entities.ContactPerson
-import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.enums.CustomerType
 import com.example.vic.misc.Global
 import com.example.vic.network.ApiContactPerson
