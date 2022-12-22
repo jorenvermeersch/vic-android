@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vic.domain.entities.VirtualMachineIndex
 import com.example.vic.databinding.VirtualMachineRowBinding
+import com.example.vic.domain.entities.VirtualMachineIndex
 
 class VirtualMachineIndexAdapter(private val clickListener: VirtualMachineIndexListener) :
     ListAdapter<VirtualMachineIndex, VirtualMachineIndexAdapter.ViewHolder>(
