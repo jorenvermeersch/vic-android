@@ -31,14 +31,6 @@ class LoginFragment : Fragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-
-        // Use a factory to pass the database reference to the viewModel.
-//        val appContext = requireNotNull(this.activity).application
-//        val dataSource = VicDatabase.getInstance(appContext).customerIndexDao
-//        val viewModelFactory = ApplicationViewModelFactory(dataSource, appContext)
-//
-//        viewModel = ViewModelProvider(this, viewModelFactory)[ApplicationViewModel::class.java]
-
         binding.viewModel = viewModel
 
         hideToolbar()

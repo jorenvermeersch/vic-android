@@ -21,7 +21,6 @@ import com.example.vic.screens.models.ApplicationViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class CustomerDetailsFragment : Fragment() {
 
@@ -39,7 +38,7 @@ class CustomerDetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) : View {
+    ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_details, container, false)
         binding.viewModel = viewModel
@@ -77,36 +76,6 @@ class CustomerDetailsFragment : Fragment() {
             adapter.submitList(customer?.virtualMachines)
         }
     }
-
-
-//    private fun setVirtualMachineList() {
-//        val adapter = VirtualMachineIndexAdapter(
-//            VirtualMachineIndexListener { machineId ->
-//                coroutineScope.launch {
-//                    try {
-//                        viewModel.findVirtualMachine(machineId).await()
-//                        findNavController().navigate(
-//                            when (GlobalMethods.isOnline(requireActivity().application)) {
-//                                true -> CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
-//                                    machineId
-//                                )
-//                                false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
-//                            }
-//                        )
-//                        Log.i("Fetch Success", "Data was fetched and will be shown")
-//                    } catch (e: Exception) {
-//                        Log.i("Error while fetching the customer details: ", e.message.toString())
-//                    }
-//                }
-//            }
-//        )
-//
-//        binding.virtualMachineList.adapter = adapter
-//
-//        viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
-//            adapter.submitList(customer?.virtualMachines)
-//        }
-//    }
 
     private fun updateLayout(customer: Customer) {
 

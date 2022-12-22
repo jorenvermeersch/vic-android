@@ -6,9 +6,6 @@ import android.net.NetworkCapabilities
 
 class GlobalMethods {
     companion object {
-
-        var lastCutomerId: Long? = null
-
         fun isOnline(context: Context): Boolean {
             val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)

@@ -11,7 +11,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-private const val BASE_URL = NetworkConfig.BASE_URL // + "virtual-machines/"
+private const val BASE_URL = NetworkConfig.BASE_URL
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())

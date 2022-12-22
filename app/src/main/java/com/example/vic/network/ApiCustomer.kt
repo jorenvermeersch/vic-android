@@ -124,41 +124,6 @@ fun ApiCustomerContainer.asDomainModel(): Customer {
                     }
                 )
             }
-//            virtualMachines = null
         )
     }
 }
-
-// fun ApiCustomer.asDomainModel(): Customer {
-//    return Customer(
-//        id = 1,
-//        customerType = when (customerType) {
-//            0 -> CustomerType.Internal
-//            1 -> CustomerType.External
-//            else -> CustomerType.Unknown
-//        },
-//        contactPerson = ContactPerson(null, apiContactPerson!!.firstName, apiContactPerson!!.lastName, apiContactPerson!!.email, apiContactPerson!!.phoneNumber),
-//        backupContactPerson = ContactPerson(null, apiBackupContactPerson!!.firstName, apiBackupContactPerson!!.lastName, apiBackupContactPerson!!.email, apiBackupContactPerson!!.phoneNumber),
-//        institution = when (institution) {
-//            0 -> "Hogent"
-//            1 -> "Ehb"
-//            else -> "Niet gekend"
-//        },
-//        department = "DEPPE",
-//        education = edu,
-//        type = companyType,
-//        companyName = "tesrt",
-//        virtualMachines = virtualMachines!!.map {
-//            VirtualMachineIndex(
-//                it.id, it.fqdn,
-//                when (it.status) {
-//                    0 -> Status.Requested
-//                    1 -> Status.InProgress
-//                    2 -> Status.ReadyToDeploy
-//                    3 -> Status.Deployed
-//                    else -> Status.Requested
-//                }
-//            )
-//        }
-//    )
-// }

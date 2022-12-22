@@ -41,19 +41,11 @@ class CustomerListFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_customer_list, container, false)
 
-//        val application = requireNotNull(this.activity).application
-//        val datasource = VicDatabase.getInstance(application).customerIndexDatabaseDao
-//
-//        val viewModelFactory = CustomerListViewModelFactory(datasource, application)
-//        val viewModel = ViewModelProvider(this, viewModelFactory).get(CustomerListViewModel::class.java)
-
         binding.viewModel = viewModel
         binding.setLifecycleOwner(this)
 
         showToolbar()
-
         configureSearchView()
-
         setCustomerList()
 
         return binding.root
