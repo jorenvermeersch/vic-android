@@ -57,7 +57,6 @@ class CreateCustomerFragment : Fragment() {
                 it.companyName.setText("Schouten BV")
 
                 // INTERNAL
-                it.institution.setText("Hogent")
                 it.department.setText("Meer, Vries and Kok")
                 it.education.setText("Elektro-mechanica")
             }
@@ -77,10 +76,12 @@ class CreateCustomerFragment : Fragment() {
     private fun configureFormSubmit() {
         binding.addCustomerButton.setOnClickListener {
             var type: Int? = null
+            var institution : Int? = null
             var customer: ApiCustomerContainer
 
             binding.let {
                 type = if (it.optionInternalCustomer.isChecked) 0 else 1
+                institution = if (it.optionHogent.isChecked) 0 else 1
 
                 if (type == 0) {
                     customer = ApiCustomerContainer(
@@ -88,7 +89,7 @@ class CreateCustomerFragment : Fragment() {
                             id = null,
                             companyName = null,
                             companyType = null,
-                            institution = 0, // TODO: institution is still static
+                            institution = institution,
                             department = it.department.text.toString(),
                             edu = it.education.text.toString(),
                             customerType = 0,

@@ -103,14 +103,30 @@
                     style="@style/LabelStyle"
                     android:text="@string/label_institution" />
 
-                <EditText
-                    android:id="@+id/institution"
-                    style="@style/InputStyle"
-                    android:autofillHints="text"
-                    android:hint="@string/label_institution"
-                    android:inputType="text" />
 
+                <!-- Select type of Customer -->
+                <RadioGroup
+                    android:id="@+id/customer_institution_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <RadioButton
+                        android:id="@+id/option_hogent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/padding_md"
+                        android:checked="true"
+                        android:fontFamily="@font/graphik_semibold"
+                        android:text="@string/hogent" />
+
+                    <RadioButton
+                        android:id="@+id/option_ehb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/graphik_semibold"
+                        android:text="@string/ehb" />
+                </RadioGroup>
 
                 <TextView
                     style="@style/LabelStyle"
