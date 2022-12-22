@@ -9,7 +9,6 @@ import com.example.vic.domain.entities.Customer
 import com.example.vic.domain.entities.CustomerIndex
 import com.example.vic.domain.entities.VirtualMachine
 import com.example.vic.misc.GlobalMethods
-import com.example.vic.network.ApiCustomerContainer
 import com.example.vic.network.ApiCustomersContainer
 import com.example.vic.network.ApiVirtualMachinesContainer
 import com.example.vic.network.CustomerApi
@@ -37,8 +36,8 @@ class CustomerIndexRepository(private val database: VicDatabase, private val con
     }
 
     suspend fun fetchVirtualMachines(): List<VirtualMachine>? {
-        var results: Deferred<ApiVirtualMachinesContainer>? = null;
-        var vmlist: List<VirtualMachine>? = null;
+        var results: Deferred<ApiVirtualMachinesContainer>? = null
+        var vmlist: List<VirtualMachine>? = null
         if (GlobalMethods.isOnline(context)) {
             withContext(Dispatchers.IO) {
                 val results = VirtualMachineApi.retrofitService.getAllVirtualMachines().await()
@@ -49,8 +48,8 @@ class CustomerIndexRepository(private val database: VicDatabase, private val con
     }
 
     suspend fun fetchCustomers(): List<Customer>? {
-        var results: Deferred<ApiCustomersContainer>? = null;
-        var customerlist: List<Customer>? = null;
+        var results: Deferred<ApiCustomersContainer>? = null
+        var customerlist: List<Customer>? = null
         if (GlobalMethods.isOnline(context)) {
             withContext(Dispatchers.IO) {
                 val results = CustomerApi.retrofitService.getAllCustomers().await()

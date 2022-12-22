@@ -56,21 +56,17 @@ class CustomerDetailsFragment : Fragment() {
     private fun setVirtualMachineList() {
         val adapter = VirtualMachineIndexAdapter(
             VirtualMachineIndexListener { machineId ->
-                coroutineScope.launch {
-                    try {
-                        viewModel.findVirtualMachine(machineId).await()
-                        findNavController().navigate(
-                            when (GlobalMethods.isOnline(requireActivity().application)) {
-                                true -> CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
-                                    machineId
-                                )
-                                false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
-                            }
-                        )
-                        Log.i("Fetch Success", "Data was fetched and will be shown")
-                    } catch (e: Exception) {
-                        Log.i("Error while fetching the customer details: ", e.message.toString())
-                    }
+                try {
+                    viewModel.findVirtualMachine(machineId)
+                    findNavController().navigate(
+                        when (GlobalMethods.isOnline(requireActivity().application)) {
+                            true -> CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(machineId)
+                            false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+                        }
+                    )
+                    Log.i("Fetch Success", "Data was fetched and will be shown")
+                } catch (e: Exception) {
+                    Log.i("Error while fetching the customer details: ", e.message.toString())
                 }
             }
         )
@@ -81,6 +77,36 @@ class CustomerDetailsFragment : Fragment() {
             adapter.submitList(customer?.virtualMachines)
         }
     }
+
+
+//    private fun setVirtualMachineList() {
+//        val adapter = VirtualMachineIndexAdapter(
+//            VirtualMachineIndexListener { machineId ->
+//                coroutineScope.launch {
+//                    try {
+//                        viewModel.findVirtualMachine(machineId).await()
+//                        findNavController().navigate(
+//                            when (GlobalMethods.isOnline(requireActivity().application)) {
+//                                true -> CustomerDetailsFragmentDirections.actionCustomerDetailsFragmentToVirtualMachineDetailsFragment(
+//                                    machineId
+//                                )
+//                                false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+//                            }
+//                        )
+//                        Log.i("Fetch Success", "Data was fetched and will be shown")
+//                    } catch (e: Exception) {
+//                        Log.i("Error while fetching the customer details: ", e.message.toString())
+//                    }
+//                }
+//            }
+//        )
+//
+//        binding.virtualMachineList.adapter = adapter
+//
+//        viewModel.chosenCustomer.observe(viewLifecycleOwner) { customer ->
+//            adapter.submitList(customer?.virtualMachines)
+//        }
+//    }
 
     private fun updateLayout(customer: Customer) {
 

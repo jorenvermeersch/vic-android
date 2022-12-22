@@ -20,7 +20,6 @@ import com.example.vic.screens.models.ApplicationViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class CustomerListFragment : Fragment() {
 
@@ -88,70 +87,21 @@ class CustomerListFragment : Fragment() {
         }
     }
 
-//    private fun setCustomerList() {
-//        val adapter = CustomerIndexAdapter(
-//            CustomerIndexListener { customerId ->
-//                coroutineScope.launch {
-//                    try {
-//                        viewModel.findCustomer(customerId).await()
-//                        findNavController().navigate(
-//                            when (GlobalMethods.isOnline(requireActivity().application)) {
-//                                true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
-//                                false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
-//                            }
-//                        )
-//                        Log.i("Fetch Success", "Data was fetched and will be shown")
-//                    } catch (e: Exception) {
-//                        Log.i("Error while fetching the customer details: ", e.message.toString())
-//                    }
-//                }
-//
-//                viewModel.chosenCustomer.observe(viewLifecycleOwner) {
-//                    findNavController().navigate(
-//                        when (GlobalMethods.isOnline(requireActivity().application)) {
-//                            true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
-//                            false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
-//                        }
-//                    )
-//                }
-//            }
-//        )
-//
-//        binding.customerList.adapter = adapter
-//
-//        // Display customers in RecyclerView.
-//        viewModel.filteredCustomers.observe(viewLifecycleOwner) { customers ->
-//            customers?.let {
-//                adapter.submitList(customers)
-//            }
-//        }
-//    }
-
     private fun setCustomerList() {
         val adapter = CustomerIndexAdapter(
             CustomerIndexListener { customerId ->
-                    try {
-                        Log.i("retrieved data", "yes it was here")
-                        viewModel.findCustomer(customerId)
-                        findNavController().navigate(
-                            when (GlobalMethods.isOnline(requireActivity().application) && viewModel.allcustomers.value != null) {
-                                true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
-                                false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
-                            }
-                        )
-                        Log.i("Fetch Success", "Data was fetched and will be shown")
-                    } catch (e: Exception) {
-                        Log.i("Error while fetching the customer details: ", e.message.toString())
-                    }
-
-//                viewModel.chosenCustomer.observe(viewLifecycleOwner) {
-//                    findNavController().navigate(
-//                        when (GlobalMethods.isOnline(requireActivity().application)) {
-//                            true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
-//                            false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
-//                        }
-//                    )
-//                }
+                try {
+                    viewModel.findCustomer(customerId)
+                    findNavController().navigate(
+                        when (GlobalMethods.isOnline(requireActivity().application) && viewModel.allcustomers.value != null) {
+                            true -> CustomerListFragmentDirections.actionCustomerListFragmentToCustomerDetailsFragment(customerId)
+                            false -> CustomerListFragmentDirections.actionCustomerListFragmentToInternetfailure()
+                        }
+                    )
+                    Log.i("Fetch Success", "Data was fetched and will be shown")
+                } catch (e: Exception) {
+                    Log.i("Error while fetching the customer details: ", e.message.toString())
+                }
             }
         )
 
