@@ -76,7 +76,7 @@ fun ApiCustomer.asDomainModel(): Customer {
         backupContactPerson = if (apiBackupContactPerson == null) null else ContactPerson(null, apiBackupContactPerson?.firstName, apiBackupContactPerson?.lastName, apiBackupContactPerson?.email, apiBackupContactPerson?.phoneNumber),
         institution = when (institution) {
             0 -> "Hogent"
-            1 -> "Ehb"
+            1 -> "EhB"
             else -> "Niet gekend"
         },
         department = department,
