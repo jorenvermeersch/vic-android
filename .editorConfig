@@ -1,3 +1,2 @@
 [*.{kt,kts}]
-max_line_length = 165
 disabled_rules = import-ordering # Added because IDEA does not respect alphabetical ordering (https://github.com/JetBrains/kotlin/pull/3336)
