@@ -36,13 +36,13 @@ interface CustomerApiService {
     @GET("customers/")
     fun getCustomerIndexes(): Deferred<ApiCustomerIndexContainer>
 
-    @GET("customer/{id}/")
+    @GET("customers/{id}/")
     fun getCustomerById(@Path("id") id: Long?): Deferred<ApiCustomerContainer>
 
-    @GET("allCustomers/")
+    @GET("customers/alldetails")
     fun getAllCustomers(): Deferred<ApiCustomersContainer>
 
-    @POST("customer")
+    @POST("customers")
     fun createCustomer(@Body customer: ApiCustomerContainer): Deferred<ApiCustomerPostResponse>
 }
 
