@@ -72,15 +72,25 @@
     <string name="customer_type_external">External</string>
     <string name="locally_stored_customers">Locally stored customers</string>
     <string name="upload">Upload</string>
-    <string name="client_id">NX6EQdmambgHSfFkN2a4b04YESJu6r94</string>
-    <string name="com_auth0_domain">dev-ashmgrzh4gfnfa18.us.auth0.com</string>
+    <string name="client_id" translatable="false">NX6EQdmambgHSfFkN2a4b04YESJu6r94</string>
+    <string name="com_auth0_domain" translatable="false">dev-ashmgrzh4gfnfa18.us.auth0.com</string>
     <string name="send_email">Send Email</string>
     <string name="call_customer">Call Customer</string>
     <string name="call_backup">Call Backup</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="no_internet_connection_sting">Geen internetverbinding</string>
-    <string name="backbutton">Terug</string>
+    <string name="no_internet_connection_sting">No internet connection</string>
+    <string name="backbutton">Back</string>
     <string name="hogent">HoGent</string>
     <string name="ehb">EhB</string>
+    <string name="contactpersonFirstname">Firstname of contact</string>
+    <string name="contactpersonLastname">Lastname of contact</string>
+    <string name="contactpersonEmail">E-mail address of contact</string>
+    <string name="contactpersonPhoneNumber">Phone number of contact</string>
+    <string name="backupContactFirstname">Firstname of backup contact</string>
+    <string name="backupContactLastname">Lastname of backup contact</string>
+    <string name="backupContactEmail">E-mail address of backup contact</string>
+    <string name="backupContactPhoneNumber">Phone number of backup contact</string>
+    <string name="cannotBeEmpty">cannot be empty</string>
+    <string name="cannotBeTheSameAsContactPerson">cannot be the same as contact person</string>
+    <string name="contactPersonRequired">Contact is required</string>
 </resources>

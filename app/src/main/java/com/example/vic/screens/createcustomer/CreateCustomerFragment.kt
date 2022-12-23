@@ -1,7 +1,6 @@
 package com.example.vic.screens.createcustomer
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCreateCustomerBinding
-import com.example.vic.domain.entities.ContactPerson
 import com.example.vic.domain.enums.CustomerType
 import com.example.vic.misc.Global
 import com.example.vic.network.ApiContactPerson
@@ -42,6 +40,7 @@ class CreateCustomerFragment : Fragment() {
         configureCustomerTypeSelector()
         configureFormSubmit()
 
+        // Mock data for creation.
         if (Global.isDevelopment) {
             binding.let {
                 it.contactFirstname.setText("Robin")
@@ -54,11 +53,11 @@ class CreateCustomerFragment : Fragment() {
                 it.backupContactEmail.setText("kevinvermeire827_2@gmail.com")
                 it.backupContactPhoneNumber.setText("(985) 386-4011")
 
-                // EXTERNAL
+                // Internal customer.
                 it.externalType.setText("Unizo")
                 it.companyName.setText("Schouten BV")
 
-                // INTERNAL
+                // External customer.
                 it.department.setText("Meer, Vries and Kok")
                 it.education.setText("Elektro-mechanica")
             }
@@ -80,9 +79,9 @@ class CreateCustomerFragment : Fragment() {
             var type: Int? = null
             var customer: ApiCustomerContainer
 
-            var valid: Boolean = validateData()
+            val valid: Boolean = validateData()
 
-            if(valid){
+            if (valid) {
                 binding.let {
                     type = if (it.optionInternalCustomer.isChecked) 0 else 1
 
@@ -92,9 +91,6 @@ class CreateCustomerFragment : Fragment() {
                         email = it.contactEmail.text.toString(),
                         phoneNumber = it.contactPhoneNumber.text.toString()
                     )
-
-                    Log.i("testhere", backupContactPersonContainsValues().toString())
-
 
                     if (type == 0) {
                         customer = ApiCustomerContainer(
@@ -139,8 +135,6 @@ class CreateCustomerFragment : Fragment() {
                     }
                 }
 
-                Log.i("testhere2", customer.toString())
-
                 viewModel.createCustomer(customer)
                 findNavController().navigate(
                     CreateCustomerFragmentDirections.actionCreateCustomerFragmentToCustomerListFragment()
@@ -153,53 +147,64 @@ class CreateCustomerFragment : Fragment() {
 
         var valid: Boolean = true
 
+        R.string.mode_paas
+
         binding.let {
-            for (item in listOf(
-                linkedSetOf(it.contactFirstname.text, "Voornaam van de contact persoon"),
-                linkedSetOf(it.contactLastname.text, "Achternaam van de contact persoon"),
-                linkedSetOf(it.contactEmail.text, "Email van de contact persoon"),
-                linkedSetOf(it.contactPhoneNumber.text, "Telefoonnummer van de contact persoon"),
-            )) {
+            for (
+                item in listOf(
+                    linkedSetOf(it.contactFirstname.text, getString(R.string.contactpersonFirstname)),
+                    linkedSetOf(it.contactLastname.text, getString(R.string.contactpersonLastname)),
+                    linkedSetOf(it.contactEmail.text, getString(R.string.contactpersonEmail)),
+                    linkedSetOf(it.contactPhoneNumber.text, getString(R.string.contactpersonPhoneNumber)),
+                )
+            ) {
                 val content: String = item.elementAt(0).toString()
                 val nameItem: String = item.elementAt(1).toString()
-                if(content.length == 0){
-                    Global.showToast(requireNotNull(this.activity).application, nameItem + ": Mag niet leeg zijn")
+
+                if (content.isEmpty()) {
+                    Global.showToast(
+                        requireNotNull(this.activity).application,
+                        "$nameItem ${getString(R.string.cannotBeEmpty)}"
+                    )
                     valid = false
-                    break;
+                    break
                 }
             }
 
-            if(!valid)
+            if (!valid)
                 return valid
 
-            for (item in listOf(
-                linkedSetOf(it.contactEmail.text, it.backupContactEmail.text, "Email van de backup contact persoon"),
-                linkedSetOf(it.contactPhoneNumber.text, it.backupContactPhoneNumber.text, "Telefoonnummer van de backup contact persoon"),
-            )) {
+            for (
+                item in listOf(
+                    linkedSetOf(it.contactEmail.text, it.backupContactEmail.text, getString(R.string.backupContactEmail)),
+                    linkedSetOf(it.contactPhoneNumber.text, it.backupContactPhoneNumber.text, getString(R.string.backupContactPhoneNumber)),
+                )
+            ) {
                 val contentContactPerson: String = item.elementAt(0).toString()
                 val contentBackupContactPerson: String = item.elementAt(1).toString()
                 val preMessage: String = item.elementAt(2).toString()
 
-                Log.i("match email", contentContactPerson.equals(contentBackupContactPerson).toString() + " " + (contentContactPerson == contentBackupContactPerson).toString())
-
-                if(contentContactPerson.equals(contentBackupContactPerson)){
-                    Global.showToast(requireNotNull(this.activity).application, preMessage + " mag niet dezelfde zijn als die van de contact persoon")
+                if (contentContactPerson == contentBackupContactPerson) {
+                    Global.showToast(
+                        requireNotNull(this.activity).application,
+                        "$preMessage ${getString(R.string.cannotBeTheSameAsContactPerson)}"
+                    )
                     valid = false
-                    break;
+                    break
                 }
             }
 
-            if(!valid)
+            if (!valid)
                 return valid
 
-            var allMustBeFilledIn: Boolean = backupContactPersonContainsValues()
+            val allMustBeFilledIn: Boolean = backupContactPersonContainsValues()
 
             if (allMustBeFilledIn) {
-                Global.showToast(requireNotNull(this.activity).application, "Vul backup contact persoon in")
+                Global.showToast(requireNotNull(this.activity).application, getString(R.string.contactPersonRequired))
                 valid = false
             }
 
-            if(!valid)
+            if (!valid)
                 return valid
         }
 
@@ -209,9 +214,9 @@ class CreateCustomerFragment : Fragment() {
     private fun backupContactPersonContainsValues(): Boolean {
         var allMustBeFilledIn: Boolean = false
         binding.let {
-            val a: Boolean = it.backupContactEmail.text.length > 0
-            val b: Boolean = it.backupContactLastname.text.length > 0
-            val c: Boolean = it.backupContactFirstname.text.length > 0
+            val a: Boolean = it.backupContactEmail.text.isNotEmpty()
+            val b: Boolean = it.backupContactLastname.text.isNotEmpty()
+            val c: Boolean = it.backupContactFirstname.text.isNotEmpty()
             if (a || b || c) allMustBeFilledIn = true
             if (a && b && c) allMustBeFilledIn = false
         }
@@ -221,13 +226,11 @@ class CreateCustomerFragment : Fragment() {
     private fun backUpFilledIn(): Boolean {
         var allFilledIn: Boolean = false
         binding.let {
-            val a: Boolean = it.backupContactEmail.text.length > 0
-            val b: Boolean = it.backupContactLastname.text.length > 0
-            val c: Boolean = it.backupContactFirstname.text.length > 0
+            val a: Boolean = it.backupContactEmail.text.isNotEmpty()
+            val b: Boolean = it.backupContactLastname.text.isNotEmpty()
+            val c: Boolean = it.backupContactFirstname.text.isNotEmpty()
             if (a && b && c) allFilledIn = true
         }
-
-        Log.i("testhere method", allFilledIn.toString())
         return allFilledIn
     }
 
