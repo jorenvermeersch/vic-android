@@ -70,7 +70,7 @@ class LoginFragment : Fragment() {
                 object : Callback<Credentials, AuthenticationException> {
                     // Called when there is an authentication failure
                     override fun onFailure(error: AuthenticationException) {
-                        Toast.makeText(context, "Login failed.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "${getString(R.string.loginFailed)}.", Toast.LENGTH_SHORT).show()
                     }
 
                     // Called when authentication completed successfully
@@ -78,7 +78,7 @@ class LoginFragment : Fragment() {
                         // Get the access token from the credentials object.
                         // This can be used to call APIs
                         CredentialsManager.saveCredentials(requireContext(), result)
-                        Toast.makeText(context, "Login successful.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "${getString(R.string.loginSuccessful)}.", Toast.LENGTH_SHORT).show()
                         viewModel.fetchAllData()
                         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCustomerListFragment())
                     }

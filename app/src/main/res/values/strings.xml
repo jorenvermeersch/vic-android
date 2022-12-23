@@ -93,4 +93,6 @@
     <string name="cannotBeEmpty">cannot be empty</string>
     <string name="cannotBeTheSameAsContactPerson">cannot be the same as contact person</string>
     <string name="contactPersonRequired">Contact is required</string>
+    <string name="loginSuccessful">Login successful</string>
+    <string name="loginFailed">Login failed</string>
 </resources>
