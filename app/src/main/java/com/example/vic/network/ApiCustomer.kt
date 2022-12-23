@@ -51,9 +51,9 @@ data class ApiCustomer(
 
 @JsonClass(generateAdapter = true)
 data class ApiContactPerson(
-    @Json(name = "firstname") var firstName: String,
-    @Json(name = "lastname") var lastName: String,
-    @Json(name = "email") var email: String,
+    @Json(name = "firstname") var firstName: String?,
+    @Json(name = "lastname") var lastName: String?,
+    @Json(name = "email") var email: String?,
     @Json(name = "phonenumber") var phoneNumber: String?,
 )
 

@@ -1,6 +1,7 @@
 package com.example.vic.screens.createcustomer
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentCreateCustomerBinding
+import com.example.vic.domain.entities.ContactPerson
 import com.example.vic.domain.enums.CustomerType
 import com.example.vic.misc.Global
 import com.example.vic.network.ApiContactPerson
@@ -76,71 +78,157 @@ class CreateCustomerFragment : Fragment() {
     private fun configureFormSubmit() {
         binding.addCustomerButton.setOnClickListener {
             var type: Int? = null
-            var institution: Int? = null
             var customer: ApiCustomerContainer
 
-            binding.let {
-                type = if (it.optionInternalCustomer.isChecked) 0 else 1
-                institution = if (it.optionHogent.isChecked) 0 else 1
+            var valid: Boolean = validateData()
 
-                if (type == 0) {
-                    customer = ApiCustomerContainer(
-                        customer = ApiCustomer(
-                            id = null,
-                            companyName = null,
-                            companyType = null,
-                            institution = institution,
-                            department = it.department.text.toString(),
-                            edu = it.education.text.toString(),
-                            customerType = 0,
-                            apiContactPerson = ApiContactPerson(
-                                firstName = it.contactFirstname.text.toString(),
-                                lastName = it.contactLastname.text.toString(),
-                                email = it.contactEmail.text.toString(),
-                                phoneNumber = it.contactPhoneNumber.text.toString()
-                            ),
-                            apiBackupContactPerson = ApiContactPerson(
-                                firstName = it.backupContactFirstname.text.toString(),
-                                lastName = it.backupContactLastname.text.toString(),
-                                email = it.backupContactEmail.text.toString(),
-                                phoneNumber = it.backupContactPhoneNumber.text.toString(),
-                            ),
-                            virtualMachines = listOf()
-                        )
+            if(valid){
+                binding.let {
+                    type = if (it.optionInternalCustomer.isChecked) 0 else 1
+
+                    val contactPerson: ApiContactPerson? = ApiContactPerson(
+                        firstName = it.contactFirstname.text.toString(),
+                        lastName = it.contactLastname.text.toString(),
+                        email = it.contactEmail.text.toString(),
+                        phoneNumber = it.contactPhoneNumber.text.toString()
                     )
-                } else {
-                    customer = ApiCustomerContainer(
-                        customer = ApiCustomer(
-                            id = null,
-                            companyName = it.companyName.text.toString(),
-                            companyType = it.externalType.text.toString(),
-                            institution = null,
-                            department = null,
-                            edu = null,
-                            customerType = 1,
-                            apiContactPerson = ApiContactPerson(
-                                firstName = it.contactFirstname.text.toString(),
-                                lastName = it.contactLastname.text.toString(),
-                                email = it.contactEmail.text.toString(),
-                                phoneNumber = it.contactPhoneNumber.text.toString()
-                            ),
-                            apiBackupContactPerson = ApiContactPerson(
-                                firstName = it.backupContactFirstname.text.toString(),
-                                lastName = it.backupContactLastname.text.toString(),
-                                email = it.backupContactEmail.text.toString(),
-                                phoneNumber = it.backupContactPhoneNumber.text.toString(),
-                            ),
-                            virtualMachines = listOf()
+
+                    Log.i("testhere", backupContactPersonContainsValues().toString())
+
+
+                    if (type == 0) {
+                        customer = ApiCustomerContainer(
+                            customer = ApiCustomer(
+                                id = null,
+                                companyName = null,
+                                companyType = null,
+                                institution = 0, // TODO: institution is still static
+                                department = it.department.text.toString(),
+                                edu = it.education.text.toString(),
+                                customerType = 0,
+                                apiContactPerson = contactPerson,
+                                apiBackupContactPerson = if (!backUpFilledIn()) null else ApiContactPerson(
+                                    firstName = it.backupContactFirstname.text.toString(),
+                                    lastName = it.backupContactLastname.text.toString(),
+                                    email = it.backupContactEmail.text.toString(),
+                                    phoneNumber = it.backupContactPhoneNumber.text.toString(),
+                                ),
+                                virtualMachines = listOf()
+                            )
                         )
-                    )
+                    } else {
+                        customer = ApiCustomerContainer(
+                            customer = ApiCustomer(
+                                id = null,
+                                companyName = it.companyName.text.toString(),
+                                companyType = it.externalType.text.toString(),
+                                institution = null,
+                                department = null,
+                                edu = null,
+                                customerType = 1,
+                                apiContactPerson = contactPerson,
+                                apiBackupContactPerson = if (!backUpFilledIn()) null else ApiContactPerson(
+                                    firstName = it.backupContactFirstname.text.toString(),
+                                    lastName = it.backupContactLastname.text.toString(),
+                                    email = it.backupContactEmail.text.toString(),
+                                    phoneNumber = it.backupContactPhoneNumber.text.toString(),
+                                ),
+                                virtualMachines = listOf()
+                            )
+                        )
+                    }
+                }
+
+                Log.i("testhere2", customer.toString())
+
+                viewModel.createCustomer(customer)
+                findNavController().navigate(
+                    CreateCustomerFragmentDirections.actionCreateCustomerFragmentToCustomerListFragment()
+                )
+            }
+        }
+    }
+
+    private fun validateData(): Boolean {
+
+        var valid: Boolean = true
+
+        binding.let {
+            for (item in listOf(
+                linkedSetOf(it.contactFirstname.text, "Voornaam van de contact persoon"),
+                linkedSetOf(it.contactLastname.text, "Achternaam van de contact persoon"),
+                linkedSetOf(it.contactEmail.text, "Email van de contact persoon"),
+                linkedSetOf(it.contactPhoneNumber.text, "Telefoonnummer van de contact persoon"),
+            )) {
+                val content: String = item.elementAt(0).toString()
+                val nameItem: String = item.elementAt(1).toString()
+                if(content.length == 0){
+                    Global.showToast(requireNotNull(this.activity).application, nameItem + ": Mag niet leeg zijn")
+                    valid = false
+                    break;
                 }
             }
 
-            viewModel.createCustomer(customer)
-            findNavController().navigate(
-                CreateCustomerFragmentDirections.actionCreateCustomerFragmentToCustomerListFragment()
-            )
+            if(!valid)
+                return valid
+
+            for (item in listOf(
+                linkedSetOf(it.contactEmail.text, it.backupContactEmail.text, "Email van de backup contact persoon"),
+                linkedSetOf(it.contactPhoneNumber.text, it.backupContactPhoneNumber.text, "Telefoonnummer van de backup contact persoon"),
+            )) {
+                val contentContactPerson: String = item.elementAt(0).toString()
+                val contentBackupContactPerson: String = item.elementAt(1).toString()
+                val preMessage: String = item.elementAt(2).toString()
+
+                Log.i("match email", contentContactPerson.equals(contentBackupContactPerson).toString() + " " + (contentContactPerson == contentBackupContactPerson).toString())
+
+                if(contentContactPerson.equals(contentBackupContactPerson)){
+                    Global.showToast(requireNotNull(this.activity).application, preMessage + " mag niet dezelfde zijn als die van de contact persoon")
+                    valid = false
+                    break;
+                }
+            }
+
+            if(!valid)
+                return valid
+
+            var allMustBeFilledIn: Boolean = backupContactPersonContainsValues()
+
+            if (allMustBeFilledIn) {
+                Global.showToast(requireNotNull(this.activity).application, "Vul backup contact persoon in")
+                valid = false
+            }
+
+            if(!valid)
+                return valid
         }
+
+        return valid
+    }
+
+    private fun backupContactPersonContainsValues(): Boolean {
+        var allMustBeFilledIn: Boolean = false
+        binding.let {
+            val a: Boolean = it.backupContactEmail.text.length > 0
+            val b: Boolean = it.backupContactLastname.text.length > 0
+            val c: Boolean = it.backupContactFirstname.text.length > 0
+            if (a || b || c) allMustBeFilledIn = true
+            if (a && b && c) allMustBeFilledIn = false
+        }
+        return allMustBeFilledIn
+    }
+
+    private fun backUpFilledIn(): Boolean {
+        var allFilledIn: Boolean = false
+        binding.let {
+            val a: Boolean = it.backupContactEmail.text.length > 0
+            val b: Boolean = it.backupContactLastname.text.length > 0
+            val c: Boolean = it.backupContactFirstname.text.length > 0
+            if (a && b && c) allFilledIn = true
+        }
+
+        Log.i("testhere method", allFilledIn.toString())
+        return allFilledIn
     }
 
     private fun determineCustomerType(itemId: Int): CustomerType {
