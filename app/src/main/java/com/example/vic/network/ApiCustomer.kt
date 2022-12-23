@@ -73,7 +73,7 @@ fun ApiCustomer.asDomainModel(): Customer {
             else -> CustomerType.Unknown
         },
         contactPerson = ContactPerson(null, apiContactPerson!!.firstName, apiContactPerson!!.lastName, apiContactPerson!!.email, apiContactPerson!!.phoneNumber),
-        backupContactPerson = ContactPerson(null, apiBackupContactPerson!!.firstName, apiBackupContactPerson!!.lastName, apiBackupContactPerson!!.email, apiBackupContactPerson!!.phoneNumber),
+        backupContactPerson = if (apiBackupContactPerson == null) null else ContactPerson(null, apiBackupContactPerson?.firstName, apiBackupContactPerson?.lastName, apiBackupContactPerson?.email, apiBackupContactPerson?.phoneNumber),
         institution = when (institution) {
             0 -> "Hogent"
             1 -> "Ehb"
