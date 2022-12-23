@@ -76,7 +76,8 @@ class CreateCustomerFragment : Fragment() {
 
     private fun configureFormSubmit() {
         binding.addCustomerButton.setOnClickListener {
-            var type: Int? = null
+            var type: Int?
+            var institution: Int?
             var customer: ApiCustomerContainer
 
             val valid: Boolean = validateData()
@@ -84,6 +85,7 @@ class CreateCustomerFragment : Fragment() {
             if (valid) {
                 binding.let {
                     type = if (it.optionInternalCustomer.isChecked) 0 else 1
+                    institution = if (it.optionHogent.isChecked) 0 else 1
 
                     val contactPerson: ApiContactPerson? = ApiContactPerson(
                         firstName = it.contactFirstname.text.toString(),
@@ -98,7 +100,7 @@ class CreateCustomerFragment : Fragment() {
                                 id = null,
                                 companyName = null,
                                 companyType = null,
-                                institution = 0, // TODO: institution is still static
+                                institution = institution,
                                 department = it.department.text.toString(),
                                 edu = it.education.text.toString(),
                                 customerType = 0,
@@ -144,8 +146,7 @@ class CreateCustomerFragment : Fragment() {
     }
 
     private fun validateData(): Boolean {
-
-        var valid: Boolean = true
+        var valid = true
 
         R.string.mode_paas
 
