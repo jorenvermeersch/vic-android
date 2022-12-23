@@ -79,6 +79,7 @@ class LoginFragment : Fragment() {
                         // This can be used to call APIs
                         CredentialsManager.saveCredentials(requireContext(), result)
                         Toast.makeText(context, "Login successful.", Toast.LENGTH_SHORT).show()
+                        viewModel.fetchAllData()
                         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCustomerListFragment())
                     }
                 }

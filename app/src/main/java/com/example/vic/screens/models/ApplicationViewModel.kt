@@ -46,7 +46,9 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
     private val vicDatabase: VicDatabase = getInstance(application)
     private val repository = CustomerIndexRepository(vicDatabase, application)
 
-    init {
+    val customers = repository.customerIndexes
+
+    fun fetchAllData() {
         viewModelScope.launch {
             repository.refreshCustomerIndexes()
 
@@ -56,8 +58,6 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
             }
         }
     }
-
-    val customers = repository.customerIndexes
 
     fun onCustomerSearch(query: String) {
         _searchQuery.value = query
