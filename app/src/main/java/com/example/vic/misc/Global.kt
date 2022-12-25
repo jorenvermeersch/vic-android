@@ -8,6 +8,8 @@ import android.widget.Toast
 class Global {
     companion object {
 
+        var bearer_token: String = ""
+
         val isDevelopment: Boolean = false
 
         fun isOnline(context: Context): Boolean {

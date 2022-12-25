@@ -1,6 +1,7 @@
 package com.example.vic.screens.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.auth0.android.result.Credentials
 import com.example.vic.R
 import com.example.vic.database.VicDatabase
 import com.example.vic.databinding.FragmentLoginBinding
+import com.example.vic.misc.Global
 import com.example.vic.screens.models.ApplicationViewModel
 import com.example.vic.screens.models.ApplicationViewModelFactory
 
@@ -78,6 +80,9 @@ class LoginFragment : Fragment() {
                         // Get the access token from the credentials object.
                         // This can be used to call APIs
                         CredentialsManager.saveCredentials(requireContext(), result)
+                        Global.bearer_token = "Bearer " + CredentialsManager.getAccessToken(requireContext()).toString()
+                        Log.i("bearertokenreceived", Global.bearer_token)
+//                        val accesstoken: String? = CredentialsManager.getAccessToken(requireContext())
                         Toast.makeText(context, "${getString(R.string.loginSuccessful)}.", Toast.LENGTH_SHORT).show()
                         viewModel.fetchAllData()
                         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCustomerListFragment())
