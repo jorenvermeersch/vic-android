@@ -15,7 +15,6 @@ object CredentialsManager {
 
     fun saveCredentials(context: Context, credentials: Credentials) {
 
-
         Log.i("outcomereq one", credentials.accessToken)
 
         val masterKeyAlias: MasterKey = MasterKey.Builder(context)
@@ -44,7 +43,6 @@ object CredentialsManager {
         Log.i("outcomereq signature", signature)
 
         Log.i("userloggedin", "name: " + credentials.user.name.toString() + " " + credentials.user.email + " " + signature)
-
     }
 
     fun getAccessToken(context: Context): String? {
