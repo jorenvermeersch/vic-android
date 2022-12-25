@@ -21,6 +21,7 @@ private val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterce
 
 private val client = OkHttpClient.Builder()
     .addInterceptor(logger)
+    .authenticator(JwtAuthenticator())
     .build()
 
 private val retrofit = Retrofit.Builder()
@@ -31,10 +32,10 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface VirtualMachineApiService {
-    @GET("virtualmachine/{id}/")
+    @GET("virtual-machine/{id}/")
     fun getVirtualMachineById(@Path("id") id: Long?): Deferred<ApiVirtualMachineContainer>
 
-    @GET("virtualmachines")
+    @GET("virtual-machines/alldetails")
     fun getAllVirtualMachines(): Deferred<ApiVirtualMachinesContainer>
 }
 

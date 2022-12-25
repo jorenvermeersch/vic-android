@@ -8,10 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 private const val BASE_URL = NetworkConfig.BASE_URL
 
@@ -23,6 +20,7 @@ private val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterce
 
 private val client = OkHttpClient.Builder()
     .addInterceptor(logger)
+    .authenticator(JwtAuthenticator())
     .build()
 
 private val retrofit = Retrofit.Builder()
@@ -33,6 +31,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface CustomerApiService {
+
     @GET("customers/")
     fun getCustomerIndexes(): Deferred<ApiCustomerIndexContainer>
 
