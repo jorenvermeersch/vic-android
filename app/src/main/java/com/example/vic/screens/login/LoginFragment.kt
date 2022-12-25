@@ -66,6 +66,7 @@ class LoginFragment : Fragment() {
         WebAuthProvider.login(account)
             .withScheme("demo")
             .withScope("openid profile email")
+            .withAudience("https://api.vic.com")
             // Launch the authentication passing the callback where the results will be received
             .start(
                 requireContext(),

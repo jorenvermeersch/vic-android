@@ -15,6 +15,9 @@ object CredentialsManager {
 
     fun saveCredentials(context: Context, credentials: Credentials) {
 
+
+        Log.i("outcomereq one", credentials.accessToken)
+
         val masterKeyAlias: MasterKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
 
@@ -35,7 +38,13 @@ object CredentialsManager {
         val payload = jwtParts[1]
         val signature = jwtParts[2]
 
+        Log.i("outcomereq full", credentials.accessToken)
+        Log.i("outcomereq header", header)
+        Log.i("outcomereq payload", payload)
+        Log.i("outcomereq signature", signature)
+
         Log.i("userloggedin", "name: " + credentials.user.name.toString() + " " + credentials.user.email + " " + signature)
+
     }
 
     fun getAccessToken(context: Context): String? {

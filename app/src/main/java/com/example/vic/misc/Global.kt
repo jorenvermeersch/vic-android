@@ -10,7 +10,7 @@ class Global {
 
         var bearer_token: String = ""
 
-        val isDevelopment: Boolean = false
+        val isDevelopment: Boolean = true
 
         fun isOnline(context: Context): Boolean {
             val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
