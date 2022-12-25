@@ -88,7 +88,7 @@ class ApplicationViewModel(val database: CustomerIndexDatabaseDao, application: 
                 _allVirtualMachines.value = repository.fetchVirtualMachines()
                 _allCustomers.value = repository.fetchCustomers()
             } else {
-                val toast = Toast.makeText(getApplication(), "Error: Klant is niet toegevoegd", Toast.LENGTH_LONG)
+                val toast = Toast.makeText(getApplication(), "Error : Klant is niet toegevoegd", Toast.LENGTH_LONG)
                 toast.show()
             }
         }
