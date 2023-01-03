@@ -37,10 +37,10 @@ private val retrofit = Retrofit.Builder()
 
 interface CustomerApiService {
 
-    @GET("customers/")
+    @GET("customers")
     fun getCustomerIndexes(): Deferred<ApiCustomerIndexContainer>
 
-    @GET("customers/{id}/")
+    @GET("customers/{id}")
     fun getCustomerById(@Path("id") id: Long?): Deferred<ApiCustomerContainer>
 
     @GET("customers/alldetails")
